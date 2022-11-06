@@ -43,10 +43,10 @@ Beschreibung der Projektphasen und deren überprüfbarer Zwischenergebnisse.
 |===
 | Phase | Meilenstein / Ergebnis | Soll-Termin
 
-| Projektdefinition | Fertigstellung | 24.10.2022
-| Systemplanung | Datenmodell | 14.11.2022
-| Grafische Umsetzung | Design | 12.12.2022
-| Prototyp | Erstentwurf | 06.02.2023
+| Projektdefinition | Fertigstellung | 05.12.2022
+| Systemplanung | Datenmodell | 16.01.2022
+| Grafische Umsetzung | Design | 06.03.2022
+| Prototyp | Erstentwurf | 10.04.2023
 | Implementierung | Platzbörse fertig | 05.06.2023
 | Einschulung | Benutzer sind eingeschult | 26.06.2023
 |===
