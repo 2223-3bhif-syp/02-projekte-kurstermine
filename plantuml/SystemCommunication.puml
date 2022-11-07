@@ -5,10 +5,8 @@ object Database
 object Userview
 object Adminview
 
-Client --> Userview
-Client --> Adminview
-Client --> Server
-Client <-- Server
-Database <-- Server
-Database --> Server
+Client *-- Userview
+Client *-- Adminview
+Client <--> Server: Communicates with
+Database <--> Server
 @enduml
