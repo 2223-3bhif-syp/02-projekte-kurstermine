@@ -53,6 +53,16 @@ Beschreibung der Projektphasen und deren überprüfbarer Zwischenergebnisse.
 
 [cols="h, s"]
 |===
-| Projektstart | 10.10.2022 Projektbesprechung
+| Projektstart | 07.11.2022 Projektbesprechung
 | Projektende | 26.06.2023 Offizieller Release
 |===
+
+== Projekt Risiken
+* Nicht Fertigstellung des Projekts
+* Ausfall eines Teammitglieds
+* Verspätete Fertigstellung eines Meilensteins
+
+[plantuml,cld,png]
+----
+include::plantuml/SystemCommunication.puml[]
+----
