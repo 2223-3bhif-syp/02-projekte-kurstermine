@@ -1,0 +1,14 @@
+@startuml
+object Client
+object Server
+object Database
+object Userview
+object Adminview
+
+Client --> Userview
+Client --> Adminview
+Client --> Server
+Client <-- Server
+Database <-- Server
+Database --> Server
+@enduml
