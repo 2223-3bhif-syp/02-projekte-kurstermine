@@ -1,5 +1,5 @@
 = Kurstermine
-Winnie Ilming <w.ilming@students.htl-leonding.ac.at>
+Winnie Ilming, Schludermann Julian, Schnalzenberger Arwed, Sonnleitner Lukas
 :description: Projektantrag Kurstermine
 :sectanchors: 
 :url-repo: https://github.com/2223-3bhif-syp/02-projekte-kurstermine 
@@ -17,12 +17,12 @@ Winnie Ilming <w.ilming@students.htl-leonding.ac.at>
 [cols="h,s"]
 |===
 | Projektleiter | Ilming Winnie
-| Projektteam |
+| Projektteam (in alphabetischer Reihenfolge)|
 Schludermann Julian
 
-Sonnleitner Lukas
-
 Schnalzenberger Arwed
+
+Sonnleitner Lukas
 |===
 
 == Projektbeschreibung
