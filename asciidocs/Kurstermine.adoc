@@ -1,4 +1,8 @@
 = Kurstermine
+Winnie Ilming <w.ilming@students.htl-leonding.ac.at>
+:description: Projektantrag Kurstermine
+:sectanchors: 
+:url-repo: https://github.com/2223-3bhif-syp/02-projekte-kurstermine 
 
 [cols="h, s"]
 |===
@@ -61,8 +65,3 @@ Beschreibung der Projektphasen und deren überprüfbarer Zwischenergebnisse.
 * Nicht Fertigstellung des Projekts
 * Ausfall eines Teammitglieds
 * Verspätete Fertigstellung eines Meilensteins
-
-[plantuml,cld,png]
-----
-include::plantuml/SystemCommunication.puml[]
-----
