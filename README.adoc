@@ -1,12 +1,13 @@
-# Kurstermine
+= Kurstermine
 
-## Beschreibung
+== Beschreibung
 Da es seit einiger Zeit immer häufiger zu Ausfällen von einigen Personen bei den Kursen kommt, was letztendlich zu 
 vergebenen, aber ungenutzten Plätzen führt, wird nun ein System gebraucht, welches den Kursteilnehmern die Möglichkeit 
 bietet sich selbständig in Kurse einzutragen bzw. sich wieder auszutragen, wenn der Teilnehmer aus irgendeinem Grund zum
 festgelegten Termin doch nicht erscheinen kann. So kann eine Person ohne Platz im Falle eines Ausfalls, sich noch in den
 Kurs eintragen, um ihn wieder zu füllen.
   
-## Links  
-[Index](https://github.com/2223-3bhif-syp/02-projekte-kurstermine/blob/main/asciidocs/index.adoc)  
-[Projektantrag](https://github.com/2223-3bhif-syp/02-projekte-kurstermine/blob/main/asciidocs/kurstermine.adoc)
+== Links
+https://github.com/2223-3bhif-syp/02-projekte-kurstermine/blob/main/asciidocs/index.adoc[Index]
+
+https://github.com/2223-3bhif-syp/02-projekte-kurstermine/blob/main/asciidocs/kurstermine.adoc[Projektantrag]
