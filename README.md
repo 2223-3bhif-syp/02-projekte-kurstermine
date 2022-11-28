@@ -8,4 +8,5 @@ festgelegten Termin doch nicht erscheinen kann. So kann eine Person ohne Platz i
 Kurs eintragen, um ihn wieder zu füllen.
   
 ## Links  
-[Projektantrag](https://github.com/2223-3bhif-syp/02-projekte-kurstermine/blob/main/asciidocs/kurstermine.adoc) 
+[Index](https://github.com/2223-3bhif-syp/02-projekte-kurstermine/blob/main/asciidocs/index.adoc)  
+[Projektantrag](https://github.com/2223-3bhif-syp/02-projekte-kurstermine/blob/main/asciidocs/kurstermine.adoc)
