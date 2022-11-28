@@ -1,0 +1,11 @@
+= Kurstermine
+Ilming Winnie, Schludermann Julian, Schnalzenberger Arwed, Sonnleitner Lukas
+:description: Index
+:sectanchors:
+:url-repo: https://github.com/2223-3bhif-syp/02-projekte-kurstermine
+
+== Beschreibung
+Teilnehmer, die krankheitsbedingt bei Kursen nicht teilnehmen können, sollen durch andere Teilnehmer ersetzt werden.
+
+== Links
+Zum xref:kurstermine.adoc[Projektantrag].
