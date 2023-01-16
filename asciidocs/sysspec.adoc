@@ -8,7 +8,7 @@ Ilming Winnie, Schludermann Julian, Schnalzenberger Arwed, Sonnleitner Lukas
 Die `Akademie für körperliches Wohlbefinden` bietet Schwimmkurse an, in denen sich Personen einschreiben können.
 
 == Ist-Zustand
-Teilnemhmer die sich zu einem Termin angemeldet haben können ausfallen.
+Teilnehmer die sich zu einem Termin angemeldet haben können ausfallen.
 
 == Problemstellung
 * Ausgefallene Teilnehmer können nicht zeitgerecht ersetzt werden daher belegen sie freie Plätze.
@@ -29,5 +29,5 @@ Teilnemhmer die sich zu einem Termin angemeldet haben können ausfallen.
 * Sicherheit
 
 == Ziele
-* Teilnehmer die zu einem Termin nicht erscheinen können, werden durch einenen anderen ersetzt.
+* Teilnehmer die zu einem Termin nicht erscheinen können, werden durch einen anderen ersetzt.
 * Umsatz steigern.
