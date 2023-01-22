@@ -9,7 +9,7 @@ Ilming Winnie, Schludermann Julian, Schnalzenberger Arwed, Sonnleitner Lukas
 | Projektauftraggeber | Ing. Mag. Elvira Ilming (Akademie für körperliches Wohlbefinden)
 | Projekthintergrund | Seit März 2022 gibt es viele, vor allem krankheitsbedingte, Abwesenheiten in Kursen
 | Projektendergebnis | Kurstermine, die nicht wahrgenommen werden können, sollen auf einer digitalen Börse eingestellt, und von einem Ersatzteilnehmer heruntergenommen werden können
-| Projektziel(e) | Teilnehmer die zu einem Termin nicht erscheinen können, werden durch einenen anderen ersetzt |
+| Projektziel(e) | Teilnehmer, die zu einem Termin nicht erscheinen können, werden durch einenen anderen ersetzt |
 |===
 
 == Projektorganisation

@@ -8,4 +8,6 @@ Ilming Winnie, Schludermann Julian, Schnalzenberger Arwed, Sonnleitner Lukas
 Teilnehmer, die krankheitsbedingt bei Kursen nicht teilnehmen können, sollen durch andere Teilnehmer ersetzt werden.
 
 == Links
-Zum xref:kurstermine.adoc[Projektauftrag].
+Zum xref:projektauftrag.adoc[Projektauftrag].
+
+Zum xref:sysspec.adoc[Pflichtenheft].

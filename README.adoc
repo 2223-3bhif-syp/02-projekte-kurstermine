@@ -10,4 +10,6 @@ Kurs eintragen, um ihn wieder zu füllen.
 == Links
 https://github.com/2223-3bhif-syp/02-projekte-kurstermine/blob/main/asciidocs/index.adoc[Index]
 
-https://github.com/2223-3bhif-syp/02-projekte-kurstermine/blob/main/asciidocs/kurstermine.adoc[Projektauftrag]
+https://github.com/2223-3bhif-syp/02-projekte-kurstermine/blob/main/asciidocs/projektauftrag.adoc[Projektauftrag]
+
+https://github.com/2223-3bhif-syp/02-projekte-kurstermine/blob/main/asciidocs/sysspec.adoc[Pflichtenheft]

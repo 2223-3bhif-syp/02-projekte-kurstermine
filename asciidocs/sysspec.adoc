@@ -1,33 +1,74 @@
-= Pflichtenhelft
+= Pflichtenheft Kurstermine
 Ilming Winnie, Schludermann Julian, Schnalzenberger Arwed, Sonnleitner Lukas
 :description: Projektantrag Kurstermine
 :sectanchors:
+:sectnums:
 :url-repo: https://github.com/2223-3bhif-syp/02-projekte-kurstermine
+
+Version: 1.0
+
+Version Date: 22-01-2022
+
+Authors:
+
+* Ilming Winnie w.ilming@students.htl-leonding.ac.at
+* Schludermann Julian j.schludermann@students.htl-leonding.ac.at
+* Schnalzenberger Arwed a.schnalzenberger@students.htl-leonding.ac.at
+* Sonnleitner Lukas l.sonnleitner@students.htl-leonding.ac.at
 
 == Ausgangssituation
 Die `Akademie für körperliches Wohlbefinden` bietet Schwimmkurse an, in denen sich Personen einschreiben können.
 
 == Ist-Zustand
-Teilnehmer die sich zu einem Termin angemeldet haben können ausfallen.
+Teilnehmer, die sich zu einem Termin angemeldet haben können ausfallen.
 
 == Problemstellung
-* Ausgefallene Teilnehmer können nicht zeitgerecht ersetzt werden daher belegen sie freie Plätze.
+* Ausgefallene Teilnehmer können nicht zeitgerecht ersetzt werden, wodurch sie freie Plätze belegen.
 * Umsätze können nicht maximiert werden.
 
-== Aufgabenstellung
-=== Funktional
-* Funktionstüchtiges Loginsystem
-* Graphische Oberfläche für
-** Kunden
-** Administratoren
-* Datenbank für Termine
-* In Kurs eintragen
-* Aus Kurs austragen
+== Datenmodell
+[plantuml, cld, png]
+----
+include::plantuml/class-diagram.puml[]
+----
 
-=== Nicht-Funktional
-* Schutz der Nutzerdaten
-* Sicherheit
+== Aufgabenstellung
+=== Funktionale Anforderungen
+==== Use-case Diagramm
+[plantuml,ucd,png]
+----
+include::plantuml/use-case-diagram.puml[]
+----
+
+* In Kurs einschreiben
+** Teilnehmer können sich selbständig in einen Kurs einschreiben
+* Aus Kurs Austragen
+** Teilnehmer können sich selbständig von einem Kurs abmelden
+* Kurse Verwalten
+** Kurs anlegen
+*** Der Administrator kann einen neuen Kurs anlegen, in den sich die Teilnehmer selbstständig einschreiben können
+** Kurs entfernen
+*** Der Administrator kann einen Kurs löschen sollte dieser nicht stattfinden
+
+=== Nicht-Funktionale Anforderungen
+* Benutzbarkeitsanforderung
+** Die Software soll für Personen aller altersgruppen leicht bedienbar sein.
+* Sicherheitsanforderung
+** Die Daten der Nutzer müssen so gut wie möglich vor Dritten geschützt werden.
 
 == Ziele
-* Teilnehmer die zu einem Termin nicht erscheinen können, werden durch einen anderen ersetzt.
+* Teilnehmer, die zu einem Termin nicht erscheinen können, werden durch einen anderen ersetzt.
 * Umsatz steigern.
+
+== Mengengerüst
+* Anzahl der Datensätze
+** ca. 1000 Stück
+* Gleichzeitig aktive Nutzer
+** 50
+
+== Rahmenbedingungen
+* Programmiersprache: Java
+
+== Lieferumfang
+* Dokumentation
+* Quellcode

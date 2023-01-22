@@ -1,0 +1,24 @@
+@startuml
+skinparam actorstyle awesome
+left to right direction
+
+actor "Teilnehmer" as tn
+actor "Administrator" as adm
+
+rectangle Kursterminverwaltung {
+    usecase "Aus Kurs austragen" as at
+    usecase "In Kurs einschreiben" as et
+    usecase "Kurse verwalten" as kv
+    usecase "Kurs anlegen" as ka
+    usecase "Kurs entfernen" as ke
+
+    tn -- et
+    tn -- at
+    adm -- kv
+    ka .> kv : extends
+    ke .> kv : extends
+}
+
+
+@enduml
+
