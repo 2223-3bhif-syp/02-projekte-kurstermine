@@ -8,7 +8,7 @@
 <meta name="description" content="Projektantrag Kurstermine">
 <meta name="author" content="Ilming Winnie, Schludermann Julian, Schnalzenberger Arwed, Sonnleitner Lukas">
 <link rel="icon" type="image/png" href="themes/favicon.png">
-<title>Pflichtenhelft</title>
+<title>Pflichtenheft Kurstermine</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
 <style>
 /*! Asciidoctor default stylesheet | MIT License | https://asciidoctor.org */
@@ -442,7 +442,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </head>
 <body class="article toc2 toc-left">
 <div id="header">
-<h1>Pflichtenhelft</h1>
+<h1>Pflichtenheft Kurstermine</h1>
 <div class="details">
 <span id="author" class="author">Ilming Winnie, Schludermann Julian, Schnalzenberger Arwed, Sonnleitner Lukas</span><br>
 </div>
@@ -452,17 +452,50 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#_ausgangssituation">1. Ausgangssituation</a></li>
 <li><a href="#_ist_zustand">2. Ist-Zustand</a></li>
 <li><a href="#_problemstellung">3. Problemstellung</a></li>
-<li><a href="#_aufgabenstellung">4. Aufgabenstellung</a>
+<li><a href="#_datenmodell">4. Datenmodell</a></li>
+<li><a href="#_aufgabenstellung">5. Aufgabenstellung</a>
 <ul class="sectlevel2">
-<li><a href="#_funktional">4.1. Funktional</a></li>
-<li><a href="#_nicht_funktional">4.2. Nicht-Funktional</a></li>
+<li><a href="#_funktionale_anforderungen">5.1. Funktionale Anforderungen</a></li>
+<li><a href="#_nicht_funktionale_anforderungen">5.2. Nicht-Funktionale Anforderungen</a></li>
 </ul>
 </li>
-<li><a href="#_ziele">5. Ziele</a></li>
+<li><a href="#_ziele">6. Ziele</a></li>
+<li><a href="#_mengengerüst">7. Mengengerüst</a></li>
+<li><a href="#_rahmenbedingungen">8. Rahmenbedingungen</a></li>
+<li><a href="#_lieferumfang">9. Lieferumfang</a></li>
 </ul>
 </div>
 </div>
 <div id="content">
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>Version: 1.0</p>
+</div>
+<div class="paragraph">
+<p>Version Date: 22-01-2022</p>
+</div>
+<div class="paragraph">
+<p>Authors:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Ilming Winnie <a href="mailto:w.ilming@students.htl-leonding.ac.at">w.ilming@students.htl-leonding.ac.at</a></p>
+</li>
+<li>
+<p>Schludermann Julian <a href="mailto:j.schludermann@students.htl-leonding.ac.at">j.schludermann@students.htl-leonding.ac.at</a></p>
+</li>
+<li>
+<p>Schnalzenberger Arwed <a href="mailto:a.schnalzenberger@students.htl-leonding.ac.at">a.schnalzenberger@students.htl-leonding.ac.at</a></p>
+</li>
+<li>
+<p>Sonnleitner Lukas <a href="mailto:l.sonnleitner@students.htl-leonding.ac.at">l.sonnleitner@students.htl-leonding.ac.at</a></p>
+</li>
+</ul>
+</div>
+</div>
+</div>
 <div class="sect1">
 <h2 id="_ausgangssituation"><a class="anchor" href="#_ausgangssituation"></a>1. Ausgangssituation</h2>
 <div class="sectionbody">
@@ -475,7 +508,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <h2 id="_ist_zustand"><a class="anchor" href="#_ist_zustand"></a>2. Ist-Zustand</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Teilnehmer die sich zu einem Termin angemeldet haben können ausfallen.</p>
+<p>Teilnehmer, die sich zu einem Termin angemeldet haben können ausfallen.</p>
 </div>
 </div>
 </div>
@@ -485,7 +518,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="ulist">
 <ul>
 <li>
-<p>Ausgefallene Teilnehmer können nicht zeitgerecht ersetzt werden daher belegen sie freie Plätze.</p>
+<p>Ausgefallene Teilnehmer können nicht zeitgerecht ersetzt werden, wodurch sie freie Plätze belegen.</p>
 </li>
 <li>
 <p>Umsätze können nicht maximiert werden.</p>
@@ -495,49 +528,103 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </div>
 </div>
 <div class="sect1">
-<h2 id="_aufgabenstellung"><a class="anchor" href="#_aufgabenstellung"></a>4. Aufgabenstellung</h2>
+<h2 id="_datenmodell"><a class="anchor" href="#_datenmodell"></a>4. Datenmodell</h2>
+<div class="sectionbody">
+<div class="imageblock">
+<div class="content">
+<img src="images/cld.png" alt="cld" width="618" height="304">
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_aufgabenstellung"><a class="anchor" href="#_aufgabenstellung"></a>5. Aufgabenstellung</h2>
 <div class="sectionbody">
 <div class="sect2">
-<h3 id="_funktional"><a class="anchor" href="#_funktional"></a>4.1. Funktional</h3>
+<h3 id="_funktionale_anforderungen"><a class="anchor" href="#_funktionale_anforderungen"></a>5.1. Funktionale Anforderungen</h3>
+<div class="sect3">
+<h4 id="_use_case_diagramm"><a class="anchor" href="#_use_case_diagramm"></a>5.1.1. Use-case Diagramm</h4>
+<div class="imageblock">
+<div class="content">
+<img src="images/ucd.png" alt="ucd" width="412" height="392">
+</div>
+</div>
 <div class="ulist">
 <ul>
 <li>
-<p>Funktionstüchtiges Loginsystem</p>
-</li>
-<li>
-<p>Graphische Oberfläche für</p>
+<p>In Kurs einschreiben</p>
 <div class="ulist">
 <ul>
 <li>
-<p>Kunden</p>
-</li>
-<li>
-<p>Administratoren</p>
+<p>Teilnehmer können sich selbständig in einen Kurs einschreiben</p>
 </li>
 </ul>
 </div>
 </li>
 <li>
-<p>Datenbank für Termine</p>
-</li>
+<p>Aus Kurs Austragen</p>
+<div class="ulist">
+<ul>
 <li>
-<p>In Kurs eintragen</p>
-</li>
-<li>
-<p>Aus Kurs austragen</p>
+<p>Teilnehmer können sich selbständig von einem Kurs abmelden</p>
 </li>
 </ul>
+</div>
+</li>
+<li>
+<p>Kurse Verwalten</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Kurs anlegen</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Der Administrator kann einen neuen Kurs anlegen, in den sich die Teilnehmer selbstständig einschreiben können</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Kurs entfernen</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Der Administrator kann einen Kurs löschen sollte dieser nicht stattfinden</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_nicht_funktional"><a class="anchor" href="#_nicht_funktional"></a>4.2. Nicht-Funktional</h3>
+<h3 id="_nicht_funktionale_anforderungen"><a class="anchor" href="#_nicht_funktionale_anforderungen"></a>5.2. Nicht-Funktionale Anforderungen</h3>
 <div class="ulist">
 <ul>
 <li>
-<p>Schutz der Nutzerdaten</p>
+<p>Benutzbarkeitsanforderung</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Die Software soll für Personen aller altersgruppen leicht bedienbar sein.</p>
+</li>
+</ul>
+</div>
 </li>
 <li>
-<p>Sicherheit</p>
+<p>Sicherheitsanforderung</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Die Daten der Nutzer müssen so gut wie möglich vor Dritten geschützt werden.</p>
+</li>
+</ul>
+</div>
 </li>
 </ul>
 </div>
@@ -545,12 +632,12 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </div>
 </div>
 <div class="sect1">
-<h2 id="_ziele"><a class="anchor" href="#_ziele"></a>5. Ziele</h2>
+<h2 id="_ziele"><a class="anchor" href="#_ziele"></a>6. Ziele</h2>
 <div class="sectionbody">
 <div class="ulist">
 <ul>
 <li>
-<p>Teilnehmer die zu einem Termin nicht erscheinen können, werden durch einen anderen ersetzt.</p>
+<p>Teilnehmer, die zu einem Termin nicht erscheinen können, werden durch einen anderen ersetzt.</p>
 </li>
 <li>
 <p>Umsatz steigern.</p>
@@ -559,10 +646,66 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </div>
 </div>
 </div>
+<div class="sect1">
+<h2 id="_mengengerüst"><a class="anchor" href="#_mengengerüst"></a>7. Mengengerüst</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p>Anzahl der Datensätze</p>
+<div class="ulist">
+<ul>
+<li>
+<p>ca. 1000 Stück</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Gleichzeitig aktive Nutzer</p>
+<div class="ulist">
+<ul>
+<li>
+<p>50</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_rahmenbedingungen"><a class="anchor" href="#_rahmenbedingungen"></a>8. Rahmenbedingungen</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p>Programmiersprache: Java</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_lieferumfang"><a class="anchor" href="#_lieferumfang"></a>9. Lieferumfang</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p>Dokumentation</p>
+</li>
+<li>
+<p>Quellcode</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2023-01-16 08:05:46 UTC
+Last updated 2023-01-22 16:46:25 UTC
 </div>
 </div>
 </body>

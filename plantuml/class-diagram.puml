@@ -1,0 +1,34 @@
+@startuml
+left to right direction
+
+abstract class Person {
+    vorName: String
+    nachName: String
+}
+
+class Teilnehmer {
+    geburtsjahr: Integer
+}
+
+class Veranstalter {
+    telefonNr: String
+    email: String
+}
+
+class Kurs {
+    typ: Kurstyp
+    dauer: Duration
+}
+
+class Termin  {
+    datum: Date
+}
+
+Teilnehmer --|> Person
+Veranstalter --|> Person
+
+Teilnehmer "*" -- "*" Kurs : > nimmt teil
+Veranstalter "1" -- "*" Kurs : > haelt ab
+
+(Teilnehmer, Kurs) .. Termin
+@enduml
