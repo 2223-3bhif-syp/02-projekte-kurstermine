@@ -16,29 +16,50 @@ https://github.com/2223-3bhif-syp/02-projekte-kurstermine/blob/main/asciidocs/sy
 
 == Wireframes
 
-=== Anmeldeseite
+.Anmeldeseite
+[%collapsible]
+====
 image:asciidocs/images/KurstermineLoginPage.jpg[]
+====
 
-=== Registrierungsseite
+.Registrierungsseite
+[%collapsible]
+====
 image:asciidocs/images/KurstermineRegisterPage.jpg[]
+====
 
-=== Admin-Ansicht
-==== Basic
+.Admin-Ansicht - Basic
+[%collapsible]
+====
 image:asciidocs/images/KurstermineBasicLayoutAdmin.jpg[]
+====
 
-==== Kurserstellung
+.Admin-Ansicht - Kurserstellung
+[%collapsible]
+====
 image:asciidocs/images/KurstermineAdminKursansichtCreate.jpg[]
+====
 
-==== Kursbearbeitung
+.Admin-Ansicht - Kursbearbeitung
+[%collapsible]
+====
 image:asciidocs/images/KurstermineAdminKursansichtEdit.jpg[]
+====
 
-=== User-Ansicht
-==== Basic
+.User-Ansicht - Basic
+[%collapsible]
+====
 image:asciidocs/images/KurstermineBasicLayoutUser.jpg[]
+====
 
-==== Kursanmeldung
+.User-Ansicht - Kursanmeldung
+[%collapsible]
+====
 image:asciidocs/images/KurstermineUserKursansichtRegister.jpg[]
+====
 
-==== Kursabmeldung
+.User-Ansicht - Kursabmeldung
+[%collapsible]
+====
 image:asciidocs/images/KurstermineUserKursansichtUnregister.jpg[]
-
+====
