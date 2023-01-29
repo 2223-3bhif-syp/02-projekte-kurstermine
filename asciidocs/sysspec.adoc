@@ -50,6 +50,71 @@ include::plantuml/use-case-diagram.puml[]
 ** Kurs entfernen
 *** Der Administrator kann einen Kurs löschen sollte dieser nicht stattfinden
 
+=== GUI
+* GUI für das Anmelden
+
+.Anmeldeseite
+[%collapsible]
+====
+image:images/KurstermineLoginPage.jpg[]
+====
+
+* GUI für das Registrieren
+
+.Registrierungsseite
+[%collapsible]
+====
+image:images/KurstermineRegisterPage.jpg[]
+====
+
+* Basic GUI für die Sicht des Admins
+
+.Admin-Ansicht - Basic
+[%collapsible]
+====
+image:images/KurstermineBasicLayoutAdmin.jpg[]
+====
+
+* GUI für das Erstellen eines Kurses als Admin
+
+.Admin-Ansicht - Kurserstellung
+[%collapsible]
+====
+image:images/KurstermineAdminKursansichtCreate.jpg[]
+====
+
+* GUI für das Bearbeiten eines Kurses als Admin
+
+.Admin-Ansicht - Kursbearbeitung
+[%collapsible]
+====
+image:images/KurstermineAdminKursansichtEdit.jpg[]
+====
+
+* Basic GUI für die Sicht des Users
+
+.User-Ansicht - Basic
+[%collapsible]
+====
+image:images/KurstermineBasicLayoutUser.jpg[]
+====
+
+* GUI zum Anmelden für einen Kurs als User
+
+.User-Ansicht - Kursanmeldung
+[%collapsible]
+====
+image:images/KurstermineUserKursansichtRegister.jpg[]
+====
+
+* GUI zum Abmelden für einen Kurs als User
+
+.User-Ansicht - Kursabmeldung
+[%collapsible]
+====
+image:images/KurstermineUserKursansichtUnregister.jpg[]
+====
+
 === Nicht-Funktionale Anforderungen
 * Benutzbarkeitsanforderung
 ** Die Software soll für Personen aller altersgruppen leicht bedienbar sein.
