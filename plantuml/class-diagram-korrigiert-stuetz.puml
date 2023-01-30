@@ -8,6 +8,11 @@ class Teilnehmer {
     email: String
 }
 
+class Kurstyp {
+  id: number
+  bezeichnung: String
+}
+
 class Kurs {
     typ: Kurstyp
     dauer: Duration
@@ -22,6 +27,8 @@ class Termin  {
     von: LocalDateTime
     bis: LocalDateTime
 }
+
+Kurstyp "1" <-- "*" Kurs
 
 'Teilnehmer --|> Person
 'Veranstalter --|> Person
