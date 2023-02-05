@@ -452,18 +452,17 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#_ausgangssituation">1. Ausgangssituation</a></li>
 <li><a href="#_ist_zustand">2. Ist-Zustand</a></li>
 <li><a href="#_problemstellung">3. Problemstellung</a></li>
-<li><a href="#_datenmodell">4. Datenmodell</a></li>
-<li><a href="#_aufgabenstellung">5. Aufgabenstellung</a>
+<li><a href="#_aufgabenstellung">4. Aufgabenstellung</a>
 <ul class="sectlevel2">
-<li><a href="#_funktionale_anforderungen">5.1. Funktionale Anforderungen</a></li>
-<li><a href="#_gui">5.2. GUI</a></li>
-<li><a href="#_nicht_funktionale_anforderungen">5.3. Nicht-Funktionale Anforderungen</a></li>
+<li><a href="#_funktionale_anforderungen">4.1. Funktionale Anforderungen</a></li>
+<li><a href="#_gui">4.2. GUI</a></li>
+<li><a href="#_nicht_funktionale_anforderungen">4.3. Nicht-Funktionale Anforderungen</a></li>
 </ul>
 </li>
-<li><a href="#_ziele">6. Ziele</a></li>
-<li><a href="#_mengengerüst">7. Mengengerüst</a></li>
-<li><a href="#_rahmenbedingungen">8. Rahmenbedingungen</a></li>
-<li><a href="#_lieferumfang">9. Lieferumfang</a></li>
+<li><a href="#_ziele">5. Ziele</a></li>
+<li><a href="#_mengengerüst">6. Mengengerüst</a></li>
+<li><a href="#_rahmenbedingungen">7. Rahmenbedingungen</a></li>
+<li><a href="#_lieferumfang">8. Lieferumfang</a></li>
 </ul>
 </div>
 </div>
@@ -471,7 +470,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>Version: 1.0</p>
+<p>Version: 1.1</p>
 </div>
 <div class="paragraph">
 <p>Version Date: 22-01-2022</p>
@@ -501,7 +500,8 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <h2 id="_ausgangssituation"><a class="anchor" href="#_ausgangssituation"></a>1. Ausgangssituation</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Die <code>Akademie für körperliches Wohlbefinden</code> bietet Schwimmkurse an, in denen sich Personen einschreiben können.</p>
+<p>Die Akademie für körperliches Wohlbefinden bietet im Rahmen des Projekts "Sicherheit im Wasser" Baby, Kinder- und Erwachsenenschwimmkurse an.
+Diese Kurse werden von Interessenten gebucht und sollen ihre Kenntnisse, um sich im Wasser adäquat bewegen zu können durch den häufigen Besuch der Einheiten erweitern.</p>
 </div>
 </div>
 </div>
@@ -509,65 +509,63 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <h2 id="_ist_zustand"><a class="anchor" href="#_ist_zustand"></a>2. Ist-Zustand</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Teilnehmer, die sich zu einem Termin angemeldet haben können ausfallen.</p>
+<p>Ein wichtiger Teil der Akademie für körperliches Wohlbefinden ist die Verwaltung von Teilnehmern.
+Momentan wird diese größtenteils von einem externen Unternehmen übernommen.
+So können sich Teilnehmer selbstständig in bestimmte Kurse einschreiben und sich auch wieder austragen.</p>
 </div>
 </div>
 </div>
 <div class="sect1">
 <h2 id="_problemstellung"><a class="anchor" href="#_problemstellung"></a>3. Problemstellung</h2>
 <div class="sectionbody">
-<div class="ulist">
-<ul>
-<li>
-<p>Ausgefallene Teilnehmer können nicht zeitgerecht ersetzt werden, wodurch sie freie Plätze belegen.</p>
-</li>
-<li>
-<p>Umsätze können nicht maximiert werden.</p>
-</li>
-</ul>
+<div class="paragraph">
+<p>Die Teilnehmer können nur auf Kursebene selbst agieren (In Kurs Einschreiben/Aus Kurs austragen).
+Das an- und abmelden von einzelnen Terminen ist den Teilnehmern zurzeit nicht möglich.
+So kann das Ziel, möglichst häufig zum Schwimmen in die Kurse zu kommen nur teilweise erreicht werden,
+da durch diverse Abwesenheiten wie zum Beispiel Krankheiten oder sonstige Verhinderungen einige Plätze eines Termins ungenutzt bleiben.</p>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_datenmodell"><a class="anchor" href="#_datenmodell"></a>4. Datenmodell</h2>
-<div class="sectionbody">
-<div class="imageblock">
-<div class="content">
-<img src="images/cld.png" alt="cld" width="618" height="304">
-</div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_aufgabenstellung"><a class="anchor" href="#_aufgabenstellung"></a>5. Aufgabenstellung</h2>
+<h2 id="_aufgabenstellung"><a class="anchor" href="#_aufgabenstellung"></a>4. Aufgabenstellung</h2>
 <div class="sectionbody">
 <div class="sect2">
-<h3 id="_funktionale_anforderungen"><a class="anchor" href="#_funktionale_anforderungen"></a>5.1. Funktionale Anforderungen</h3>
+<h3 id="_funktionale_anforderungen"><a class="anchor" href="#_funktionale_anforderungen"></a>4.1. Funktionale Anforderungen</h3>
 <div class="sect3">
-<h4 id="_use_case_diagramm"><a class="anchor" href="#_use_case_diagramm"></a>5.1.1. Use-case Diagramm</h4>
+<h4 id="_use_case_diagramm"><a class="anchor" href="#_use_case_diagramm"></a>4.1.1. Use-case Diagramm</h4>
 <div class="imageblock">
 <div class="content">
-<img src="images/ucd.png" alt="ucd" width="412" height="392">
+<img src="images/ucd.png" alt="ucd" width="430" height="511">
 </div>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>In Kurs einschreiben</p>
+<p>Termine eines Kurses einsehen</p>
 <div class="ulist">
 <ul>
 <li>
-<p>Teilnehmer können sich selbständig in einen Kurs einschreiben</p>
+<p>Ein Teilnehmer eines Kurses kann alle Termine des Kurses in einer Übersicht einsehen</p>
 </li>
 </ul>
 </div>
 </li>
 <li>
-<p>Aus Kurs Austragen</p>
+<p>Für einen Termin abmelden</p>
 <div class="ulist">
 <ul>
 <li>
-<p>Teilnehmer können sich selbständig von einem Kurs abmelden</p>
+<p>Ein Teilnehmer kann sich jederzeit von einem Termin eines Kurses abmelden. z.B. Teilnehmer ist krank</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Für einen Termin anmelden</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Ein Teilnehmer kann sich jederzeit für einen Termin eines Kurses anmelden.</p>
 </li>
 </ul>
 </div>
@@ -602,9 +600,17 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </ul>
 </div>
 </div>
+<div class="sect3">
+<h4 id="_domain_object_model_des_systems"><a class="anchor" href="#_domain_object_model_des_systems"></a>4.1.2. Domain Object Model des Systems</h4>
+<div class="imageblock">
+<div class="content">
+<img src="images/cld.png" alt="cld" width="394" height="612">
+</div>
+</div>
+</div>
 </div>
 <div class="sect2">
-<h3 id="_gui"><a class="anchor" href="#_gui"></a>5.2. GUI</h3>
+<h3 id="_gui"><a class="anchor" href="#_gui"></a>4.2. GUI</h3>
 <div class="ulist">
 <ul>
 <li>
@@ -727,7 +733,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </details>
 </div>
 <div class="sect2">
-<h3 id="_nicht_funktionale_anforderungen"><a class="anchor" href="#_nicht_funktionale_anforderungen"></a>5.3. Nicht-Funktionale Anforderungen</h3>
+<h3 id="_nicht_funktionale_anforderungen"><a class="anchor" href="#_nicht_funktionale_anforderungen"></a>4.3. Nicht-Funktionale Anforderungen</h3>
 <div class="ulist">
 <ul>
 <li>
@@ -736,6 +742,29 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <ul>
 <li>
 <p>Die Software soll für Personen aller altersgruppen leicht bedienbar sein.</p>
+</li>
+<li>
+<p>Jeglicher Text in der Applikation ist in einfacher und verständlicher Sprache geschrieben.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Effizienzanforderung</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Das System soll innerhalb von 200ms einen neuen Kurs und dessen Termine angelegt haben.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Wartbarkeits- und Portierbarkeitsanforderung</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Das System muss von den Entwicklern später nicht weiter bearbeitet werden.</p>
 </li>
 </ul>
 </div>
@@ -750,18 +779,45 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </ul>
 </div>
 </li>
+<li>
+<p>Gesetzliche Anforderung</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Bei der bearbeitung des Projekts muss keine spezielle Norm beachtet werden.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Zuverlässigkeit</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Robustheit / Fehlertoleranz</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Auch bei der Eingabe von ungültigen Werten und falschen Benutzung stützt das Programm nicht ab.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</li>
 </ul>
 </div>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_ziele"><a class="anchor" href="#_ziele"></a>6. Ziele</h2>
+<h2 id="_ziele"><a class="anchor" href="#_ziele"></a>5. Ziele</h2>
 <div class="sectionbody">
 <div class="ulist">
 <ul>
 <li>
-<p>Teilnehmer, die zu einem Termin nicht erscheinen können, werden durch einen anderen ersetzt.</p>
+<p>Plätze der Termine vollständig nutzten.</p>
 </li>
 <li>
 <p>Umsatz steigern.</p>
@@ -771,16 +827,16 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </div>
 </div>
 <div class="sect1">
-<h2 id="_mengengerüst"><a class="anchor" href="#_mengengerüst"></a>7. Mengengerüst</h2>
+<h2 id="_mengengerüst"><a class="anchor" href="#_mengengerüst"></a>6. Mengengerüst</h2>
 <div class="sectionbody">
 <div class="ulist">
 <ul>
 <li>
-<p>Anzahl der Datensätze</p>
+<p>Benutzer (insgesamt)</p>
 <div class="ulist">
 <ul>
 <li>
-<p>ca. 1000 Stück</p>
+<p>ca. 1000</p>
 </li>
 </ul>
 </div>
@@ -800,7 +856,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </div>
 </div>
 <div class="sect1">
-<h2 id="_rahmenbedingungen"><a class="anchor" href="#_rahmenbedingungen"></a>8. Rahmenbedingungen</h2>
+<h2 id="_rahmenbedingungen"><a class="anchor" href="#_rahmenbedingungen"></a>7. Rahmenbedingungen</h2>
 <div class="sectionbody">
 <div class="ulist">
 <ul>
@@ -812,7 +868,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </div>
 </div>
 <div class="sect1">
-<h2 id="_lieferumfang"><a class="anchor" href="#_lieferumfang"></a>9. Lieferumfang</h2>
+<h2 id="_lieferumfang"><a class="anchor" href="#_lieferumfang"></a>8. Lieferumfang</h2>
 <div class="sectionbody">
 <div class="ulist">
 <ul>
@@ -829,7 +885,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2023-01-30 08:45:24 UTC
+Last updated 2023-02-05 17:40:07 UTC
 </div>
 </div>
 </body>

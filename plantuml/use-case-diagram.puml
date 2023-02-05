@@ -6,17 +6,19 @@ actor "Teilnehmer" as tn
 actor "Administrator" as adm
 
 rectangle Kursterminverwaltung {
-    usecase "Aus Kurs austragen" as at
-    usecase "In Kurs einschreiben" as et
+    usecase "Termine eines Kurses einsehen" as te
+    usecase "Für einen Termin anmelden" as an
+    usecase "Von einem Termin abmelden" as ab
     usecase "Kurse verwalten" as kv
-    usecase "Kurs anlegen" as ka
-    usecase "Kurs entfernen" as ke
+    usecase "Termine verwalten" as tv
+    usecase "Teilnehmer verwalten" as tw
 
-    tn -- et
-    tn -- at
+    tn -- te
+    tn -- an
+    tn -- ab
     adm -- kv
-    ka .> kv : extends
-    ke .> kv : extends
+    adm -- tw
+    adm -- tv
 }
 
 
