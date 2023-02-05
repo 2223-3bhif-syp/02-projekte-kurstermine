@@ -1,34 +1,37 @@
 @startuml
-left to right direction
+skinparam linetype ortho
 
-abstract class Person {
-    vorName: String
-    nachName: String
-}
-
-class Teilnehmer {
-    geburtsjahr: Integer
-}
-
-class Veranstalter {
-    telefonNr: String
+class Participant {
+    fName: String
+    lName: String
+    yearOfBirth: Integer
+    phoneNr: String
     email: String
 }
 
-class Kurs {
-    typ: Kurstyp
-    dauer: Duration
+class Course {
+    name: String
+    description: String
+    durationOfAppointment: Integer
+    amountOfAppointments: Integer
 }
 
-class Termin  {
-    datum: Date
+class Appointment  {
+    start: LocalDateTime
 }
 
-Teilnehmer --|> Person
-Veranstalter --|> Person
+class Instructor {
+    fName: String
+    lName: String
+    phoneNr: String
+    email: String
+}
 
-Teilnehmer "*" -- "*" Kurs : > nimmt teil
-Veranstalter "1" -- "*" Kurs : > haelt ab
+Appointment "*" -- "1" Instructor
 
-(Teilnehmer, Kurs) .. Termin
+Course "1" <-- "*" Appointment
+Appointment "*" -- "*" Participant
+(Appointment,Participant) . Registration
+
+
 @enduml
