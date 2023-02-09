@@ -1,17 +1,17 @@
 CREATE TABLE COURSE (
     COURSE_NR                   INT NOT NULL CONSTRAINT COURSE_PK PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
-    NAME                        VARCHAR(15),
-    DESCRIPTION                 VARCHAR(20),
-    DURATION_OF_APPOINTMENT     INT,
+    NAME                        VARCHAR(50),
+    DESCRIPTION                 VARCHAR(150),
+    DURATION_OF_APPOINTMENT     DOUBLE,
     AMOUNT_OF_APPOINTMENTS      INT
 );
 
 CREATE TABLE INSTRUCTOR (
     INSTRUCTOR_NR               INT NOT NULL CONSTRAINT INSTRUCTOR_PK PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
-    FIRST_NAME                  VARCHAR(15),
-    LAST_NAME                   VARCHAR(25),
-    PHONE_NR                    VARCHAR(15),
-    EMAIL                       VARCHAR(20)
+    FIRST_NAME                  VARCHAR(50),
+    LAST_NAME                   VARCHAR(50),
+    PHONE_NR                    VARCHAR(20),
+    EMAIL                       VARCHAR(75)
 );
 
 CREATE TABLE APPOINTMENT (
@@ -23,11 +23,11 @@ CREATE TABLE APPOINTMENT (
 
 CREATE TABLE PARTICIPANT (
      PARTICIPANT_NR             INT NOT NULL CONSTRAINT PARTICIPANT_PK PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
-     FIRST_NAME                 VARCHAR(15),
+     FIRST_NAME                 VARCHAR(50),
+     LAST_NAME                  VARCHAR(50),
      YEAR_OF_BIRTH              INT,
-     LAST_NAME                  VARCHAR(25),
-     PHONE_NR                   VARCHAR(15),
-     EMAIL                      VARCHAR(20)
+     PHONE_NR                   VARCHAR(20),
+     EMAIL                      VARCHAR(75)
 );
 
 CREATE TABLE REGISTRATION (
