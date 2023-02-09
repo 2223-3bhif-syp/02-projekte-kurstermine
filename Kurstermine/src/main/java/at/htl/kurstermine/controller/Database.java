@@ -13,7 +13,6 @@ public class Database {
     static final String PASSWORD = "app";
     public static final String URL = "jdbc:derby://localhost:1527/" + DATABASE + ";create=true";
 
-
     public static DataSource getDataSource(){
         ClientDataSource dataSource = new ClientDataSource();
         dataSource.setDatabaseName(DATABASE);
