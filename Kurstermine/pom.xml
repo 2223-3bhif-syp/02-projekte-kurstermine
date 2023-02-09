@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>at.htl.kurstermine</groupId>
-    <artifactId>Kurstermine</artifactId>
+    <artifactId>kurstermine</artifactId>
     <version>1.0-SNAPSHOT</version>
 
     <properties>
@@ -44,6 +44,28 @@
             <artifactId>derbytools</artifactId>
             <version>10.16.1.1</version>
         </dependency>
+
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter</artifactId>
+            <version>5.9.2</version>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.assertj</groupId>
+            <artifactId>assertj-core</artifactId>
+            <version>3.24.2</version>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.assertj</groupId>
+            <artifactId>assertj-db</artifactId>
+            <version>2.0.2</version>
+            <scope>test</scope>
+        </dependency>
+
 
     </dependencies>
 
