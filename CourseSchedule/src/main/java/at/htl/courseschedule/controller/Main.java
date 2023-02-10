@@ -1,7 +1,6 @@
-package at.htl.kurstermine.controller;
+package at.htl.courseschedule.controller;
 
-import at.htl.kurstermine.database.SqlRunner;
-import at.htl.kurstermine.database.SqlScript;
+import at.htl.courseschedule.database.SqlRunner;
 
 public class Main {
     public static void main(String[] args) {

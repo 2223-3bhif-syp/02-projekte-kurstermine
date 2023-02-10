@@ -1,6 +1,6 @@
-package at.htl.kurstermine.controller;
+package at.htl.courseschedule.controller;
 
-import at.htl.kurstermine.entity.Instructor;
+import at.htl.courseschedule.entity.Instructor;
 
 public class InstructorRepository {
     public Instructor save(Instructor instructor) {
