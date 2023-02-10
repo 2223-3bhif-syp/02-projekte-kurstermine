@@ -1,4 +1,4 @@
-package at.htl.kurstermine.database;
+package at.htl.courseschedule.database;
 
 public enum SqlScript {
     DROP,

@@ -1,6 +1,6 @@
-package at.htl.kurstermine.database;
+package at.htl.courseschedule.database;
 
-import at.htl.kurstermine.controller.Database;
+import at.htl.courseschedule.controller.Database;
 import org.apache.ibatis.jdbc.ScriptRunner;
 
 import javax.sql.DataSource;

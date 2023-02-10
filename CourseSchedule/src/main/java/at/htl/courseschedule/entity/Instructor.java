@@ -1,4 +1,4 @@
-package at.htl.kurstermine.entity;
+package at.htl.courseschedule.entity;
 
 public class Instructor {
     private Long id;

@@ -1,4 +1,4 @@
-package at.htl.kurstermine.controller;
+package at.htl.courseschedule.controller;
 
 import org.apache.derby.jdbc.ClientDataSource;
 

@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>at.htl.kurstermine</groupId>
-    <artifactId>kurstermine</artifactId>
+    <artifactId>courseschedule</artifactId>
     <version>1.0-SNAPSHOT</version>
 
     <properties>
