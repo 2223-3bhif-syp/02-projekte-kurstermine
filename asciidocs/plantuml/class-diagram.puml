@@ -12,7 +12,7 @@ class Participant {
 class Course {
     name: String
     description: String
-    durationOfAppointment: Integer
+    minutesPerAppointment: Integer
     amountOfAppointments: Integer
 }
 
