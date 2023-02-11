@@ -2,20 +2,20 @@
 --    Course    --
 ------------------
 -- id = 1
-INSERT INTO COURSE (NAME, DESCRIPTION, DURATION_OF_APPOINTMENT, AMOUNT_OF_APPOINTMENTS)
-    VALUES ('Kinderschwimmen', 'Schwimmkurs fuer junge Personen', 1.0, 7);
+INSERT INTO COURSE (NAME, DESCRIPTION, MINUTES_PER_APPOINTMENT, AMOUNT_OF_APPOINTMENTS)
+    VALUES ('Kinderschwimmen', 'Schwimmkurs fuer junge Personen', 60, 7);
 
 -- id = 2
-INSERT INTO COURSE (NAME, DESCRIPTION, DURATION_OF_APPOINTMENT, AMOUNT_OF_APPOINTMENTS)
-    VALUES ('Seniorenschwimmen', 'Schwimmkurs fuer die aelteren unter uns', 2.0, 1);
+INSERT INTO COURSE (NAME, DESCRIPTION, MINUTES_PER_APPOINTMENT, AMOUNT_OF_APPOINTMENTS)
+    VALUES ('Seniorenschwimmen', 'Schwimmkurs fuer die aelteren unter uns', 120, 1);
 
 -- id = 3
-INSERT INTO COURSE (NAME, DESCRIPTION, DURATION_OF_APPOINTMENT, AMOUNT_OF_APPOINTMENTS)
-    VALUES ('Einsteigerschwimmen', 'Schwimmkurs fuer Erwachsene', 1.5, 2);
+INSERT INTO COURSE (NAME, DESCRIPTION, MINUTES_PER_APPOINTMENT, AMOUNT_OF_APPOINTMENTS)
+    VALUES ('Einsteigerschwimmen', 'Schwimmkurs fuer Erwachsene', 90, 2);
 
 -- id = 4
-INSERT INTO COURSE (NAME, DESCRIPTION, DURATION_OF_APPOINTMENT, AMOUNT_OF_APPOINTMENTS)
-    VALUES ('Babyschwimmen', 'Schwimmkurs fuer Neugeborene', 0.5, 4);
+INSERT INTO COURSE (NAME, DESCRIPTION, MINUTES_PER_APPOINTMENT, AMOUNT_OF_APPOINTMENTS)
+    VALUES ('Babyschwimmen', 'Schwimmkurs fuer Neugeborene', 30, 4);
 
 
 ----------------------
