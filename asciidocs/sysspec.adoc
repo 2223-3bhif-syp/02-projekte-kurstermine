@@ -52,10 +52,7 @@ include::plantuml/use-case-diagram.puml[]
 *** Der Administrator kann einen Kurs löschen sollte dieser nicht stattfinden
 
 ==== Domain Object Model des Systems
-[plantuml, cld, png]
-----
-include::plantuml/class-diagram.puml[]
-----
+image:images/ClassDiagram_generated.jpg[]
 
 === GUI
 * GUI für das Anmelden
