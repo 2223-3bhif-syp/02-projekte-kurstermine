@@ -44,11 +44,11 @@ public class Appointment {
         this.instructor = instructor;
     }
 
-    public Course getCourseId() {
+    public Course getCourse() {
         return course;
     }
 
-    public void setCourseId(Course course) {
+    public void setCourse(Course course) {
         this.course = course;
     }
     //endregion
