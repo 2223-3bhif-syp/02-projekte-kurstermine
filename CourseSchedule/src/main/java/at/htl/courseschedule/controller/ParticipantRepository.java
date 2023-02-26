@@ -70,16 +70,17 @@ public class ParticipantRepository implements Persistent<Participant> {
     }
 
     @Override
-    public void delete(long id) {
+    public void delete(Participant participant) {
         try (Connection connection = dataSource.getConnection()) {
             String sql = "DELETE FROM CS_PARTICIPANT WHERE P_ID=?";
 
             PreparedStatement statement = connection.prepareStatement(sql);
-            statement.setLong(1, id);
+            statement.setLong(1, participant.getId());
 
             if (statement.executeUpdate() == 0) {
                 throw new SQLException("Update of CS_PARTICIPANT failed, no rows affected");
             }
+            participant.setId(null);
         } catch (SQLException e) {
             e.printStackTrace();
         }

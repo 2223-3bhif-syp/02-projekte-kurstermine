@@ -1,6 +1,7 @@
 package at.htl.courseschedule.controller;
 
 import at.htl.courseschedule.entity.Appointment;
+import at.htl.courseschedule.entity.Instructor;
 
 import javax.sql.DataSource;
 import java.sql.*;
@@ -66,16 +67,17 @@ public class AppointmentRepository implements Persistent<Appointment> {
     }
 
     @Override
-    public void delete(long id) {
+    public void delete(Appointment appointment) {
         try (Connection connection = dataSource.getConnection()) {
             String sql = "DELETE FROM CS_APPOINTMENT WHERE A_ID=?";
 
             PreparedStatement statement = connection.prepareStatement(sql);
-            statement.setLong(1, id);
+            statement.setLong(1, appointment.getId());
 
             if (statement.executeUpdate() == 0) {
                 throw new SQLException("Update of CS_APPOINTMENT failed, no rows affected");
             }
+            appointment.setId(null);
         } catch (SQLException e) {
             e.printStackTrace();
         }

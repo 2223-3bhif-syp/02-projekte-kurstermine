@@ -68,16 +68,18 @@ public class InstructorRepository implements Persistent<Instructor> {
     }
 
     @Override
-    public void delete(long id) {
+    public void delete(Instructor instructor) {
         try (Connection connection = dataSource.getConnection()) {
             String sql = "DELETE FROM CS_INSTRUCTOR WHERE I_ID=?";
 
             PreparedStatement statement = connection.prepareStatement(sql);
-            statement.setLong(1, id);
+            statement.setLong(1, instructor.getId());
 
             if (statement.executeUpdate() == 0) {
                 throw new SQLException("Update of CS_INSTRUCTOR failed, no rows affected");
             }
+
+            instructor.setId(null);
         } catch (SQLException e) {
             e.printStackTrace();
         }
