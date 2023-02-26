@@ -61,6 +61,15 @@ public class Participant {
     public void setPhoneNr(String phoneNr) {
         this.phoneNr = phoneNr;
     }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
     //endregion
     @Override
     public String toString() {
