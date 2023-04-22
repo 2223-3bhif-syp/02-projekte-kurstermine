@@ -1,8 +1,7 @@
 package at.htl.courseschedule.entity;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
 
-import static org.assertj.db.api.Assertions.assertThat;
 import org.assertj.db.type.DateValue;
 import org.assertj.db.type.Source;
 import org.assertj.db.type.Table;
@@ -12,8 +11,21 @@ import org.junit.jupiter.api.Test;
 import java.time.LocalDateTime;
 
 class RegistrationTest {
+    Participant participant;
+    Appointment appointment;
+    LocalDateTime localDateTime;
+
     @BeforeEach
     public void setUp() {
+        localDateTime = LocalDateTime.now();
+        Instructor instructor = new Instructor("InstructorName", "Leitner", "+43 6704070789",
+                "LeiterName@speedmail.com");
+        Course course = new Course("Amselarbeit", "Die Arbeit, sie ruft", 180,
+                45);
+
+        participant = new Participant("Michael", "Blauberg", 2010,
+                "+43 323 2314809", "blaubergMich@gmail.com");
+        appointment = new Appointment(localDateTime, instructor, course);
     }
 
     @AfterEach
@@ -21,20 +33,75 @@ class RegistrationTest {
     }
 
     @Test
-    void testToString() {
+    void test_ToString_SimpleCtor_ShouldResultInStringWithCtorValues() {
         // arrange
-        Participant participant = new Participant("firstName", "lastName", 2000, "+43 6704070789", "lastName@gmail.com");
-
-        LocalDateTime dateTime = LocalDateTime.now();
-        Instructor instructor = new Instructor("firstName", "lastName", "+43 6704070789", "lastName@gmail.com");
-        Course course = new Course("Course1", "Test Course", 90, 1);
-        Appointment appointment = new Appointment(dateTime, instructor, course);
-
         Registration registration = new Registration(participant, appointment);
 
-        // modify
+        // act
 
-        // test
-        assertEquals("Registration{participantId=Participant{id=null, firstName='firstName', lastName='lastName', yearOfBirth=2000, phoneNr='+43 6704070789', email='lastName@gmail.com'}, appointmentId=Appointment{id=null, start=" + dateTime.toString() + ", instructorId=Instructor{id=null, firstName='firstName', lastName='lastName', phoneNr='+43 6704070789', email='lastName@gmail.com'}, courseId=Course{id=null, name='Course1', description='Test Course', minutesPerAppointment=90, amountOfAppointments=1}}}", registration.toString());
+        // assert
+        assertThat(registration.toString())
+                .isEqualTo("Registration{participantId=Participant{id=null, firstName='Michael', lastName='Blauberg', yearOfBirth=2010, phoneNr='+43 323 2314809', email='blaubergMich@gmail.com'}, appointmentId=Appointment{id=null, start=" + localDateTime.toString() + ", instructorId=Instructor{id=null, firstName='InstructorName', lastName='Leitner', phoneNr='+43 6704070789', email='LeiterName@speedmail.com'}, courseId=Course{id=null, name='Amselarbeit', description='Die Arbeit, sie ruft', minutesPerAppointment=180, amountOfAppointments=45}}}");
+    }
+
+    @Test
+    void test_Getters_SimpleCtor_ShouldResultInEnteredValues() {
+        // arrange
+        Registration registration = new Registration(participant, appointment);
+
+        // act
+
+        // assert
+        assertThat(registration.getAppointment()).usingRecursiveComparison().isEqualTo(appointment);
+        assertThat(registration.getParticipant()).usingRecursiveComparison().isEqualTo(participant);
+    }
+
+    @Test
+    void test_Getters_DefaultCtor_ShouldResultInDefaultValues() {
+        // arrange
+        Registration registration = new Registration();
+
+        // act
+
+        // assert
+        assertThat(registration.getAppointment()).isNull();
+        assertThat(registration.getParticipant()).isNull();
+    }
+
+    @Test
+    void test_Setters_SimpleCtor_ShouldChangeValuesAccordingly() {
+        // arrange
+        Registration registration = new Registration(participant, appointment);
+
+        LocalDateTime newLocalDateTime = LocalDateTime.now().plusDays(18);
+        Instructor newInstructor = new Instructor("I am new", "New", "+43 2342343245",
+                "newmail@speedmail.com");
+        Course newCourse = new Course("Speedster", "Wer bremst verliert", 200,
+                85);
+        Participant newParticipant = new Participant("Winnie", "Ilming", 2006,
+                "+43 234 234243", "subbortyesyes@gmail.com");
+        Appointment newAppointment = new Appointment(newLocalDateTime, newInstructor, newCourse);
+
+        // act
+        registration.setAppointment(newAppointment);
+        registration.setParticipant(newParticipant);
+
+        // assert
+        assertThat(registration.getAppointment()).usingRecursiveComparison().isEqualTo(newAppointment);
+        assertThat(registration.getParticipant()).usingRecursiveComparison().isEqualTo(newParticipant);
+    }
+
+    @Test
+    void test_Setters_DefaultCtor_ShouldResultInNewValues() {
+        // arrange
+        Registration registration = new Registration();
+
+        // act
+        registration.setParticipant(participant);
+        registration.setAppointment(appointment);
+
+        // assert
+        assertThat(registration.getAppointment()).usingRecursiveComparison().isEqualTo(appointment);
+        assertThat(registration.getParticipant()).usingRecursiveComparison().isEqualTo(participant);
     }
 }
