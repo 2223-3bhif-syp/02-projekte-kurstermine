@@ -21,7 +21,7 @@ class ParticipantTest {
     }
 
     @Test
-    void test_ToString_AfterNormalCtor_ShouldResultEnteredValuesAndIdNull() {
+    void test_ToString_AfterNormalCtor_ShouldResultInEnteredValuesAndIdNull() {
         // arrange
         Participant participant = new Participant("firstName", "lastName", 2000,
                 "+43 6704070789", "lastName@gmail.com");
@@ -34,7 +34,7 @@ class ParticipantTest {
     }
 
     @Test
-    void test_Getters_AfterNormalCtor_ShouldResultEnteredValuesAndIdNull() {
+    void test_Getters_AfterNormalCtor_ShouldResultInEnteredValuesAndIdNull() {
         // arrange
         Participant participant = new Participant("firstName", "lastName", 2000,
                 "+43 6704070789", "lastName@gmail.com");
