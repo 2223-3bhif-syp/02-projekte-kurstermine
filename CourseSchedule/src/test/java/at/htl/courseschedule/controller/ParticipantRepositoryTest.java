@@ -140,6 +140,21 @@ class ParticipantRepositoryTest {
     }
 
     @Test
+    void test_delete_DeleteFakeParticipant_ShouldThrowError() {
+        // arrange
+        ParticipantRepository participantRepository = new ParticipantRepository();
+        Participant fakeParticipant = new Participant();
+        fakeParticipant.setId(-1L);
+
+        // act
+        participantRepository.delete(fakeParticipant);
+
+        // assert
+        // if an error gets thrown the id does not reset to null and therefor should still be -1
+        assertThat(fakeParticipant.getId()).isEqualTo(-1);
+    }
+
+    @Test
     void test_findAll_SimpleInsertAndFind_ShouldFindInsertedValues() {
         // arrange
         ParticipantRepository parRep = new ParticipantRepository();

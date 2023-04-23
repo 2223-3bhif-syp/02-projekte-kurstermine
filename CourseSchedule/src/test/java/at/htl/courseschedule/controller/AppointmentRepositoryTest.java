@@ -29,7 +29,7 @@ class AppointmentRepositoryTest {
     @AfterEach
     public void tearDown() {
         // to clear the tables again of all the test values
-        SqlRunner.dropTablesAndCreateEmptyTables();
+        //SqlRunner.dropTablesAndCreateEmptyTables();
     }
 
     @Test
@@ -186,6 +186,21 @@ class AppointmentRepositoryTest {
         assertThat(appointment.getId()).isNull();
 
         assertThat(table).hasNumberOfRows(0);
+    }
+
+    @Test
+    void test_delete_DeleteFakeAppointment_ShouldThrowError() {
+        // arrange
+        AppointmentRepository appointmentRepository = new AppointmentRepository();
+        Appointment fakeAppointment = new Appointment();
+        fakeAppointment.setId(-1L);
+
+        // act
+        appointmentRepository.delete(fakeAppointment);
+
+        // assert
+        // if an error gets thrown the id does not reset to null and therefor should still be -1
+        assertThat(fakeAppointment.getId()).isEqualTo(-1);
     }
 
     @Test
