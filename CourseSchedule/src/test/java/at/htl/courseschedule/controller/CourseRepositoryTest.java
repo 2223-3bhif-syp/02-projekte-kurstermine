@@ -173,4 +173,15 @@ class CourseRepositoryTest {
         assertEquals(course2.toString(), courseRepository.findById(course2.getId()).toString());
         assertEquals(course3.toString(), courseRepository.findById(course3.getId()).toString());
     }
+
+    @Test
+    void test_findById_whenNotInTables() {
+        // arrange
+        CourseRepository courseRepository = new CourseRepository();
+
+        // act
+
+        // assert
+        assertNull(courseRepository.findById(1));
+    }
 }

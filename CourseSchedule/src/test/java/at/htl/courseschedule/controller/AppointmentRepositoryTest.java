@@ -255,4 +255,15 @@ class AppointmentRepositoryTest {
         assertEquals(appointment2.toString(), appointmentRepository.findById(appointment2.getId()).toString());
         assertEquals(appointment3.toString(), appointmentRepository.findById(appointment3.getId()).toString());
     }
+
+    @Test
+    void test_findById_whenNotInTables() {
+        // arrange
+        AppointmentRepository appointmentRepository = new AppointmentRepository();
+
+        // act
+
+        // assert
+        assertNull(appointmentRepository.findById(1));
+    }
 }

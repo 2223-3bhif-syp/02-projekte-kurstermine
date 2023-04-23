@@ -181,4 +181,15 @@ class ParticipantRepositoryTest {
         assertEquals(participant2.toString(), parRep.findById(participant2.getId()).toString());
         assertEquals(participant3.toString(), parRep.findById(participant3.getId()).toString());
     }
+
+    @Test
+    void test_findById_whenNotInTables() {
+        // arrange
+        ParticipantRepository parRep = new ParticipantRepository();
+
+        // act
+
+        // assert
+        assertNull(parRep.findById(1));
+    }
 }

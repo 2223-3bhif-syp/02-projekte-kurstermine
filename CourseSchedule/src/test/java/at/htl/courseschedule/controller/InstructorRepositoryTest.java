@@ -174,4 +174,15 @@ class InstructorRepositoryTest {
         assertEquals(instructor2.toString(), insRep.findById(instructor2.getId()).toString());
         assertEquals(instructor3.toString(), insRep.findById(instructor3.getId()).toString());
     }
+
+    @Test
+    void test_findById_whenNotInTables() {
+        // arrange
+        InstructorRepository insRep = new InstructorRepository();
+
+        // act
+
+        // assert
+        assertNull(insRep.findById(1));
+    }
 }
