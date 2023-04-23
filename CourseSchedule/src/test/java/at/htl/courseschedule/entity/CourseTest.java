@@ -1,14 +1,10 @@
 package at.htl.courseschedule.entity;
 
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
-
-import org.assertj.db.type.DateValue;
-import org.assertj.db.type.Source;
-import org.assertj.db.type.Table;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
 
 class CourseTest {
 

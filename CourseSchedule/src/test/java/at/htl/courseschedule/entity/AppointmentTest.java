@@ -1,19 +1,12 @@
 package at.htl.courseschedule.entity;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.in;
-
-import net.bytebuddy.asm.Advice;
-import org.assertj.db.type.DateValue;
-import org.assertj.db.type.Source;
-import org.assertj.db.type.Table;
 import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.engine.descriptor.TestInstanceLifecycleUtils;
 
 import java.time.LocalDateTime;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 class AppointmentTest {
     Instructor instructor;
@@ -26,7 +19,7 @@ class AppointmentTest {
                 "lastName@gmail.com");
         localDateTime = LocalDateTime.now();
         course = new Course("Course1", "Test Course", 90,
-            1);
+                1);
     }
 
     @AfterEach

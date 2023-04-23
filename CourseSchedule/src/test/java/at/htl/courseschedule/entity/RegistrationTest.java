@@ -1,14 +1,12 @@
 package at.htl.courseschedule.entity;
 
-import static org.assertj.core.api.Assertions.assertThat;
-
-import org.assertj.db.type.DateValue;
-import org.assertj.db.type.Source;
-import org.assertj.db.type.Table;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
 import java.time.LocalDateTime;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 class RegistrationTest {
     Participant participant;
@@ -18,8 +16,8 @@ class RegistrationTest {
     @BeforeEach
     public void setUp() {
         localDateTime = LocalDateTime.now();
-        Instructor instructor = new Instructor("InstructorName", "Leitner", "+43 6704070789",
-                "LeiterName@speedmail.com");
+        Instructor instructor = new Instructor("InstructorName", "Leitner",
+                "+43 6704070789", "LeiterName@speedmail.com");
         Course course = new Course("Amselarbeit", "Die Arbeit, sie ruft", 180,
                 45);
 

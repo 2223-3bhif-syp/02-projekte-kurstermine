@@ -2,22 +2,19 @@ package at.htl.courseschedule.controller;
 
 import at.htl.courseschedule.database.SqlRunner;
 import at.htl.courseschedule.entity.Course;
-import at.htl.courseschedule.entity.Instructor;
-import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.*;
-
-import static org.assertj.db.api.Assertions.assertThat;
-import org.assertj.db.type.DateValue;
-import org.assertj.db.type.Source;
 import org.assertj.db.type.Table;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
-import java.sql.SQLException;
+import org.junit.jupiter.api.Test;
+
 import java.util.List;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.db.api.Assertions.assertThat;
+
 class CourseRepositoryTest {
-    private static String tableName = "CS_COURSE";
+    private static final String tableName = "CS_COURSE";
+
     @BeforeEach
     public void setUp() {
         // to make sure every Table is empty and set up right
@@ -31,21 +28,22 @@ class CourseRepositoryTest {
     }
 
     @Test
-    void save() {
+    void test_save_SaveSimpleCourse_ShouldResultInDatabaseRowWithValues() {
         // arrange
         Table table = new Table(Database.getDataSource(), tableName);
 
         CourseRepository courseRepository = new CourseRepository();
-        Course course = new Course("Course1", "Test Course", 90, 1);
+        Course course = new Course("Course1", "Test Course", 90,
+                1);
 
-        // modify
+        // act
         courseRepository.save(course);
 
         course.setMinutesPerAppointment(60);
         courseRepository.save(course);
 
-        // test
-        assertEquals(course.getId(), 1);
+        // assert
+        assertThat(course.getId()).isEqualTo(1);
 
         assertThat(table).column("C_ID")
                 .value().isEqualTo(course.getId());
@@ -60,21 +58,22 @@ class CourseRepositoryTest {
     }
 
     @Test
-    void update() {
+    void test_update_SimpleUpdate_ShouldUpdateValues() {
         // arrange
         Table table = new Table(Database.getDataSource(), tableName);
 
         CourseRepository courseRepository = new CourseRepository();
-        Course course = new Course("Course1", "Test Course", 90, 1);
+        Course course = new Course("Course1", "Test Course", 90,
+                1);
 
-        // modify
+        // act
         courseRepository.insert(course);
 
         course.setMinutesPerAppointment(60);
         courseRepository.update(course);
 
-        // test
-        assertEquals(course.getId(), 1);
+        // assert
+        assertThat(course.getId()).isEqualTo(1);
 
         assertThat(table).column("C_ID")
                 .value().isEqualTo(course.getId());
@@ -89,18 +88,19 @@ class CourseRepositoryTest {
     }
 
     @Test
-    void insert() {
+    void test_insert_SimpleInsert_ShouldAddValuesToDatabase() {
         // arrange
         Table table = new Table(Database.getDataSource(), tableName);
 
         CourseRepository courseRepository = new CourseRepository();
-        Course course = new Course("Course1", "Test Course", 90, 1);
+        Course course = new Course("Course1", "Test Course", 90,
+                1);
 
-        // modify
+        // act
         courseRepository.insert(course);
 
-        // test
-        assertEquals(course.getId(), 1);
+        // assert
+        assertThat(course.getId()).isEqualTo(1);
 
         assertThat(table).column("C_ID")
                 .value().isEqualTo(course.getId());
@@ -115,63 +115,68 @@ class CourseRepositoryTest {
     }
 
     @Test
-    void delete() {
+    void test_delete_SimpleDelete_ShouldRemoveValues() {
         // arrange
         Table table = new Table(Database.getDataSource(), tableName);
 
         CourseRepository courseRepository = new CourseRepository();
-        Course course = new Course("Course1", "Test Course", 90, 1);
+        Course course = new Course("Course1", "Test Course", 90,
+                1);
 
-        // modify
+        // act
         courseRepository.insert(course);
         courseRepository.delete(course);
 
-        // test
-        assertEquals(null, course.getId());
+        // assert
+        assertThat(course.getId()).isNull();
 
         assertThat(table).hasNumberOfRows(0);
     }
 
     @Test
-    void findAll() {
+    void test_findAll_SimpleInsertAndFind_ShouldFindInsertedValues() {
         // arrange
         CourseRepository courseRepository = new CourseRepository();
-        Course course1 = new Course("Course1", "Test Course", 90, 1);
-        Course course2 = new Course("Course2", "Test Course", 90, 1);
-        Course course3 = new Course("Course3", "Test Course", 90, 1);
+        Course course1 = new Course("Course1", "Test Course", 90,
+                1);
+        Course course2 = new Course("Course2", "Test Course", 90,
+                1);
+        Course course3 = new Course("Course3", "Test Course", 90,
+                1);
 
-        // modify
+        // act
         courseRepository.save(course1);
         courseRepository.save(course2);
         courseRepository.save(course3);
 
         List<Course> courseList = courseRepository.findAll();
 
-        // test
-        assertEquals(3, courseList.size());
-
-        assertTrue(courseList.stream().anyMatch(instructor -> course1.toString().equals(instructor.toString())));
-        assertTrue(courseList.stream().anyMatch(instructor -> course2.toString().equals(instructor.toString())));
-        assertTrue(courseList.stream().anyMatch(instructor -> course3.toString().equals(instructor.toString())));
+        // assert
+        assertThat(courseList).hasSize(3)
+                        .usingRecursiveFieldByFieldElementComparator()
+                        .contains(course1, course2, course3);
     }
 
     @Test
-    void findById() {
+    void test_findById_SimpleInsertAndFind_ShouldFindValues() {
         // arrange
         CourseRepository courseRepository = new CourseRepository();
-        Course course1 = new Course("Course1", "Test Course", 90, 1);
-        Course course2 = new Course("Course2", "Test Course", 90, 1);
-        Course course3 = new Course("Course3", "Test Course", 90, 1);
+        Course course1 = new Course("Course1", "Test Course", 90,
+                1);
+        Course course2 = new Course("Course2", "Test Course", 90,
+                1);
+        Course course3 = new Course("Course3", "Test Course", 90,
+                1);
 
-        // modify
+        // act
         courseRepository.save(course1);
         courseRepository.save(course2);
         courseRepository.save(course3);
 
-        // test
-        assertEquals(course1.toString(), courseRepository.findById(course1.getId()).toString());
-        assertEquals(course2.toString(), courseRepository.findById(course2.getId()).toString());
-        assertEquals(course3.toString(), courseRepository.findById(course3.getId()).toString());
+        // assert
+        assertThat(courseRepository.findById(course1.getId())).usingRecursiveComparison().isEqualTo(course1);
+        assertThat(courseRepository.findById(course2.getId())).usingRecursiveComparison().isEqualTo(course2);
+        assertThat(courseRepository.findById(course3.getId())).usingRecursiveComparison().isEqualTo(course3);
     }
 
     @Test
@@ -182,6 +187,6 @@ class CourseRepositoryTest {
         // act
 
         // assert
-        assertNull(courseRepository.findById(1));
+        assertThat(courseRepository.findById(1)).isNull();
     }
 }

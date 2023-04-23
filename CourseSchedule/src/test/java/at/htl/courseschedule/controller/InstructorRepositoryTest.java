@@ -2,21 +2,19 @@ package at.htl.courseschedule.controller;
 
 import at.htl.courseschedule.database.SqlRunner;
 import at.htl.courseschedule.entity.Instructor;
-import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.*;
-
-import static org.assertj.db.api.Assertions.assertThat;
-import org.assertj.db.type.DateValue;
-import org.assertj.db.type.Source;
 import org.assertj.db.type.Table;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
-import java.sql.SQLException;
+import org.junit.jupiter.api.Test;
+
 import java.util.List;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.db.api.Assertions.assertThat;
+
 class InstructorRepositoryTest {
-    private static String tableName = "CS_INSTRUCTOR";
+    private static final String tableName = "CS_INSTRUCTOR";
+
     @BeforeEach
     public void setUp() {
         // to make sure every Table is empty and set up right
@@ -30,149 +28,140 @@ class InstructorRepositoryTest {
     }
 
     @Test
-    void save() {
+    void test_save_SaveSimpleInstructor_ShouldResultInDatabaseRowWithValues() {
         // arrange
         Table table = new Table(Database.getDataSource(), tableName);
 
         InstructorRepository insRep = new InstructorRepository();
-        Instructor instructor = new Instructor("firstName", "lastName", "+43 6704070789", "lastName@gmail.com");
+        Instructor instructor = new Instructor("firstName", "lastName", "+43 6704070789",
+                "lastName@gmail.com");
 
-        // modify
+        // act
         insRep.save(instructor);
 
         instructor.setEmail("newEmail@gmail.com");
         insRep.save(instructor);
 
-        // test
-        assertEquals(instructor.getId(), 1);
+        // assert
+        assertThat(instructor.getId()).isEqualTo(1);
 
-        assertThat(table).column("I_ID")
-                .value().isEqualTo(instructor.getId());
-        assertThat(table).column("I_FIRST_NAME")
-                .value().isEqualTo(instructor.getFirstName());
-        assertThat(table).column("I_LAST_NAME")
-                .value().isEqualTo(instructor.getLastName());
-        assertThat(table).column("I_PHONE_NR")
-                .value().isEqualTo(instructor.getPhoneNr());
-        assertThat(table).column("I_EMAIL")
-                .value().isEqualTo(instructor.getEmail());
+        assertThat(table).column("I_ID").value().isEqualTo(instructor.getId());
+        assertThat(table).column("I_FIRST_NAME").value().isEqualTo(instructor.getFirstName());
+        assertThat(table).column("I_LAST_NAME").value().isEqualTo(instructor.getLastName());
+        assertThat(table).column("I_PHONE_NR").value().isEqualTo(instructor.getPhoneNr());
+        assertThat(table).column("I_EMAIL").value().isEqualTo(instructor.getEmail());
     }
 
     @Test
-    void update() {
+    void test_update_SimpleUpdate_ShouldUpdateValues() {
         // arrange
         Table table = new Table(Database.getDataSource(), tableName);
 
         InstructorRepository insRep = new InstructorRepository();
-        Instructor instructor = new Instructor("firstName", "lastName", "+43 6704070789", "lastName@gmail.com");
+        Instructor instructor = new Instructor("firstName", "lastName", "+43 6704070789",
+                "lastName@gmail.com");
 
-        // modify
+        // act
         insRep.insert(instructor);
 
         instructor.setEmail("newEmail@gmail.com");
         insRep.update(instructor);
 
-        // test
-        assertEquals(instructor.getId(), 1);
+        // assert
+        assertThat(instructor.getId()).isEqualTo(1);
 
-        assertThat(table).column("I_ID")
-                .value().isEqualTo(instructor.getId());
-        assertThat(table).column("I_FIRST_NAME")
-                .value().isEqualTo(instructor.getFirstName());
-        assertThat(table).column("I_LAST_NAME")
-                .value().isEqualTo(instructor.getLastName());
-        assertThat(table).column("I_PHONE_NR")
-                .value().isEqualTo(instructor.getPhoneNr());
-        assertThat(table).column("I_EMAIL")
-                .value().isEqualTo(instructor.getEmail());
+        assertThat(table).column("I_ID").value().isEqualTo(instructor.getId());
+        assertThat(table).column("I_FIRST_NAME").value().isEqualTo(instructor.getFirstName());
+        assertThat(table).column("I_LAST_NAME").value().isEqualTo(instructor.getLastName());
+        assertThat(table).column("I_PHONE_NR").value().isEqualTo(instructor.getPhoneNr());
+        assertThat(table).column("I_EMAIL").value().isEqualTo(instructor.getEmail());
     }
 
     @Test
-    void insert() {
+    void test_insert_SimpleInsert_ShouldAddValuesToDatabase() {
         // arrange
         Table table = new Table(Database.getDataSource(), tableName);
 
         InstructorRepository insRep = new InstructorRepository();
-        Instructor instructor = new Instructor("firstName", "lastName", "+43 6704070789", "lastName@gmail.com");
+        Instructor instructor = new Instructor("firstName", "lastName", "+43 6704070789",
+                "lastName@gmail.com");
 
-        // modify
+        // act
         insRep.insert(instructor);
 
-        // test
-        assertEquals(instructor.getId(), 1);
+        // assert
+        assertThat(instructor.getId()).isEqualTo(1);
 
-        assertThat(table).column("I_ID")
-                .value().isEqualTo(instructor.getId());
-        assertThat(table).column("I_FIRST_NAME")
-                .value().isEqualTo(instructor.getFirstName());
-        assertThat(table).column("I_LAST_NAME")
-                .value().isEqualTo(instructor.getLastName());
-        assertThat(table).column("I_PHONE_NR")
-                .value().isEqualTo(instructor.getPhoneNr());
-        assertThat(table).column("I_EMAIL")
-                .value().isEqualTo(instructor.getEmail());
+        assertThat(table).column("I_ID").value().isEqualTo(instructor.getId());
+        assertThat(table).column("I_FIRST_NAME").value().isEqualTo(instructor.getFirstName());
+        assertThat(table).column("I_LAST_NAME").value().isEqualTo(instructor.getLastName());
+        assertThat(table).column("I_PHONE_NR").value().isEqualTo(instructor.getPhoneNr());
+        assertThat(table).column("I_EMAIL").value().isEqualTo(instructor.getEmail());
     }
 
     @Test
-    void delete() {
+    void test_delete_SimpleDelete_ShouldRemoveValues() {
         // arrange
         Table table = new Table(Database.getDataSource(), tableName);
 
         InstructorRepository insRep = new InstructorRepository();
-        Instructor instructor = new Instructor("firstName", "lastName", "+43 6704070789", "lastName@gmail.com");
+        Instructor instructor = new Instructor("firstName", "lastName", "+43 6704070789",
+                "lastName@gmail.com");
 
-        // modify
+        // act
         insRep.insert(instructor);
         insRep.delete(instructor);
 
-        // test
-        assertEquals(null, instructor.getId());
+        // assert
+        assertThat(instructor.getId()).isNull();
 
         assertThat(table).hasNumberOfRows(0);
     }
 
     @Test
-    void findAll() {
+    void test_findAll_SimpleInsertAndFind_ShouldFindInsertedValues() {
         // arrange
         InstructorRepository insRep = new InstructorRepository();
-        Instructor instructor1 = new Instructor("1", "lastName", "+43 6704070789", "lastName@gmail.com");
-        Instructor instructor2 = new Instructor("2", "lastName", "+43 6704070789", "lastName@gmail.com");
-        Instructor instructor3 = new Instructor("3", "lastName", "+43 6704070789", "lastName@gmail.com");
+        Instructor instructor1 = new Instructor("1", "lastName", "+43 6704070789",
+                "lastName@gmail.com");
+        Instructor instructor2 = new Instructor("2", "lastName", "+43 6704070789",
+                "lastName@gmail.com");
+        Instructor instructor3 = new Instructor("3", "lastName", "+43 6704070789",
+                "lastName@gmail.com");
 
-        // modify
+        // act
         insRep.save(instructor1);
         insRep.save(instructor2);
         insRep.save(instructor3);
 
         List<Instructor> instructorList = insRep.findAll();
 
-        // test
-        assertEquals(3, instructorList.size());
-
-        assertTrue(instructorList.stream().anyMatch(instructor -> instructor1.toString().equals(instructor.toString())));
-        assertTrue(instructorList.stream().anyMatch(instructor -> instructor2.toString().equals(instructor.toString())));
-        assertTrue(instructorList.stream().anyMatch(instructor -> instructor3.toString().equals(instructor.toString())));
+        // assert
+        assertThat(instructorList).hasSize(3)
+                .usingRecursiveFieldByFieldElementComparator()
+                .contains(instructor1, instructor2, instructor3);
     }
 
     @Test
-    void findById() {
+    void test_findById_SimpleInsertAndFind_ShouldFindValues() {
         // arrange
-        Table table = new Table(Database.getDataSource(), tableName);
-
         InstructorRepository insRep = new InstructorRepository();
-        Instructor instructor1 = new Instructor("1", "lastName", "+43 6704070789", "lastName@gmail.com");
-        Instructor instructor2 = new Instructor("2", "lastName", "+43 6704070789", "lastName@gmail.com");
-        Instructor instructor3 = new Instructor("3", "lastName", "+43 6704070789", "lastName@gmail.com");
+        Instructor instructor1 = new Instructor("1", "lastName", "+43 6704070789",
+                "lastName@gmail.com");
+        Instructor instructor2 = new Instructor("2", "lastName", "+43 6704070789",
+                "lastName@gmail.com");
+        Instructor instructor3 = new Instructor("3", "lastName", "+43 6704070789",
+                "lastName@gmail.com");
 
-        // modify
+        // act
         insRep.save(instructor1);
         insRep.save(instructor2);
         insRep.save(instructor3);
 
-        // test
-        assertEquals(instructor1.toString(), insRep.findById(instructor1.getId()).toString());
-        assertEquals(instructor2.toString(), insRep.findById(instructor2.getId()).toString());
-        assertEquals(instructor3.toString(), insRep.findById(instructor3.getId()).toString());
+        // assert
+        assertThat(insRep.findById(instructor1.getId())).usingRecursiveComparison().isEqualTo(instructor1);
+        assertThat(insRep.findById(instructor2.getId())).usingRecursiveComparison().isEqualTo(instructor2);
+        assertThat(insRep.findById(instructor3.getId())).usingRecursiveComparison().isEqualTo(instructor3);
     }
 
     @Test
@@ -183,6 +172,6 @@ class InstructorRepositoryTest {
         // act
 
         // assert
-        assertNull(insRep.findById(1));
+        assertThat(insRep.findById(1)).isNull();
     }
 }

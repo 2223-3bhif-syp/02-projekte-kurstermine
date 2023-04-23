@@ -1,7 +1,6 @@
 package at.htl.courseschedule.controller;
 
 import at.htl.courseschedule.entity.Appointment;
-import at.htl.courseschedule.entity.Instructor;
 
 import javax.sql.DataSource;
 import java.sql.*;
@@ -15,8 +14,7 @@ public class AppointmentRepository implements Persistent<Appointment> {
     public void save(Appointment appointment) {
         if (appointment.getId() == null) {
             insert(appointment);
-        }
-        else {
+        } else {
             update(appointment);
         }
     }
@@ -92,10 +90,10 @@ public class AppointmentRepository implements Persistent<Appointment> {
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             ResultSet result = preparedStatement.executeQuery();
 
-            while(result.next()) {
+            while (result.next()) {
                 Appointment appointment = new Appointment();
                 appointment.setStart(result.getTimestamp("A_START").toLocalDateTime());
-                appointment.setId((long)result.getInt("A_ID"));
+                appointment.setId((long) result.getInt("A_ID"));
 
                 InstructorRepository instructorRepository = new InstructorRepository();
                 CourseRepository courseRepository = new CourseRepository();
@@ -125,7 +123,7 @@ public class AppointmentRepository implements Persistent<Appointment> {
 
             if (result.next()) {
                 appointment = new Appointment();
-                appointment.setId((long)result.getInt("A_ID"));
+                appointment.setId((long) result.getInt("A_ID"));
                 appointment.setStart(result.getTimestamp("A_START").toLocalDateTime());
 
                 InstructorRepository instructorRepository = new InstructorRepository();

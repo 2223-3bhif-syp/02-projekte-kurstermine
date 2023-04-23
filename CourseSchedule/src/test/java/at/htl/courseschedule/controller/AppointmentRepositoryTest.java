@@ -4,24 +4,22 @@ import at.htl.courseschedule.database.SqlRunner;
 import at.htl.courseschedule.entity.Appointment;
 import at.htl.courseschedule.entity.Course;
 import at.htl.courseschedule.entity.Instructor;
-import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.*;
-
-import static org.assertj.db.api.Assertions.assertThat;
-import org.assertj.db.type.DateValue;
-import org.assertj.db.type.Source;
 import org.assertj.db.type.Table;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
-import java.sql.SQLException;
+import org.junit.jupiter.api.Test;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Locale;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.db.api.Assertions.assertThat;
+
 class AppointmentRepositoryTest {
-    private static String tableName = "CS_APPOINTMENT";
+    private static final String tableName = "CS_APPOINTMENT";
+
     @BeforeEach
     public void setUp() {
         // to make sure every Table is empty and set up right
@@ -35,7 +33,7 @@ class AppointmentRepositoryTest {
     }
 
     @Test
-    void save() {
+    void test_save_SaveSimpleAppointment_ShouldResultInDatabaseRowWithValues() {
         // arrange
         Table table = new Table(Database.getDataSource(), tableName);
 
@@ -44,17 +42,19 @@ class AppointmentRepositoryTest {
         String dateString = "07-08-2023 00:00:00";
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss", Locale.ROOT);
         LocalDateTime dateTime = LocalDateTime.parse(dateString, formatter);
-        Instructor instructor = new Instructor("firstName", "lastName", "+43 6704070789", "lastName@gmail.com");
+        Instructor instructor = new Instructor("firstName", "lastName", "+43 6704070789",
+                "lastName@gmail.com");
         InstructorRepository instructorRepository = new InstructorRepository();
         instructorRepository.save(instructor);
 
-        Course course = new Course("Course1", "Test Course", 90, 1);
+        Course course = new Course("Course1", "Test Course", 90,
+                1);
         CourseRepository courseRepository = new CourseRepository();
         courseRepository.save(course);
 
         Appointment appointment = new Appointment(dateTime, instructor, course);
 
-        // modify
+        // act
         appointmentRepository.save(appointment);
 
         String dateString2 = "16-08-2023 00:00:00";
@@ -62,8 +62,8 @@ class AppointmentRepositoryTest {
         appointment.setStart(dateTime2);
         appointmentRepository.save(appointment);
 
-        // test
-        assertEquals(appointment.getId(), 1);
+        // assert
+        assertThat(appointment.getId()).isEqualTo(1);
 
         assertThat(table).column("A_ID")
                 .value().isEqualTo(appointment.getId());
@@ -76,7 +76,7 @@ class AppointmentRepositoryTest {
     }
 
     @Test
-    void update() {
+    void test_update_SimpleUpdate_ShouldUpdateValues() {
         // arrange
         Table table = new Table(Database.getDataSource(), tableName);
 
@@ -85,17 +85,19 @@ class AppointmentRepositoryTest {
         String dateString = "07-08-2023 00:00:00";
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss", Locale.ROOT);
         LocalDateTime dateTime = LocalDateTime.parse(dateString, formatter);
-        Instructor instructor = new Instructor("firstName", "lastName", "+43 6704070789", "lastName@gmail.com");
+        Instructor instructor = new Instructor("firstName", "lastName", "+43 6704070789",
+                "lastName@gmail.com");
         InstructorRepository instructorRepository = new InstructorRepository();
         instructorRepository.save(instructor);
 
-        Course course = new Course("Course1", "Test Course", 90, 1);
+        Course course = new Course("Course1", "Test Course", 90,
+                1);
         CourseRepository courseRepository = new CourseRepository();
         courseRepository.save(course);
 
         Appointment appointment = new Appointment(dateTime, instructor, course);
 
-        // modify
+        // act
         appointmentRepository.insert(appointment);
 
         String dateString2 = "17-09-2023 00:00:00";
@@ -103,8 +105,8 @@ class AppointmentRepositoryTest {
         appointment.setStart(dateTime2);
         appointmentRepository.update(appointment);
 
-        // test
-        assertEquals(appointment.getId(), 1);
+        // assert
+        assertThat(appointment.getId()).isEqualTo(1);
 
         assertThat(table).column("A_ID")
                 .value().isEqualTo(appointment.getId());
@@ -117,7 +119,7 @@ class AppointmentRepositoryTest {
     }
 
     @Test
-    void insert() {
+    void test_insert_SimpleInsert_ShouldAddValuesToDatabase() {
         // arrange
         Table table = new Table(Database.getDataSource(), tableName);
 
@@ -126,21 +128,23 @@ class AppointmentRepositoryTest {
         String dateString = "07-08-2023 00:00:00";
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss", Locale.ROOT);
         LocalDateTime dateTime = LocalDateTime.parse(dateString, formatter);
-        Instructor instructor = new Instructor("firstName", "lastName", "+43 6704070789", "lastName@gmail.com");
+        Instructor instructor = new Instructor("firstName", "lastName", "+43 6704070789",
+                "lastName@gmail.com");
         InstructorRepository instructorRepository = new InstructorRepository();
         instructorRepository.save(instructor);
 
-        Course course = new Course("Course1", "Test Course", 90, 1);
+        Course course = new Course("Course1", "Test Course", 90,
+                1);
         CourseRepository courseRepository = new CourseRepository();
         courseRepository.save(course);
 
         Appointment appointment = new Appointment(dateTime, instructor, course);
 
-        // modify
+        // act
         appointmentRepository.insert(appointment);
 
-        // test
-        assertEquals(appointment.getId(), 1);
+        // assert
+        assertThat(appointment.getId()).isEqualTo(1);
 
         assertThat(table).column("A_ID")
                 .value().isEqualTo(appointment.getId());
@@ -153,7 +157,7 @@ class AppointmentRepositoryTest {
     }
 
     @Test
-    void delete() {
+    void test_delete_SimpleDelete_ShouldRemoveValues() {
         // arrange
         Table table = new Table(Database.getDataSource(), tableName);
 
@@ -162,98 +166,109 @@ class AppointmentRepositoryTest {
         String dateString = "07-08-2023 00:00:00";
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss", Locale.ROOT);
         LocalDateTime dateTime = LocalDateTime.parse(dateString, formatter);
-        Instructor instructor = new Instructor("firstName", "lastName", "+43 6704070789", "lastName@gmail.com");
+        Instructor instructor = new Instructor("firstName", "lastName", "+43 6704070789",
+                "lastName@gmail.com");
         InstructorRepository instructorRepository = new InstructorRepository();
         instructorRepository.save(instructor);
 
-        Course course = new Course("Course1", "Test Course", 90, 1);
+        Course course = new Course("Course1", "Test Course", 90,
+                1);
         CourseRepository courseRepository = new CourseRepository();
         courseRepository.save(course);
 
         Appointment appointment = new Appointment(dateTime, instructor, course);
 
-        // modify
+        // act
         appointmentRepository.save(appointment);
         appointmentRepository.delete(appointment);
 
-        // test
-        assertEquals(null, appointment.getId());
+        // assert
+        assertThat(appointment.getId()).isNull();
 
         assertThat(table).hasNumberOfRows(0);
     }
 
     @Test
-    void findAll() {
+    void test_findAll_SimpleInsertAndFind_ShouldFindInsertedValues() {
         // arrange
         AppointmentRepository appointmentRepository = new AppointmentRepository();
 
         String dateString = "07-08-2023 00:00:00";
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss", Locale.ROOT);
         LocalDateTime dateTime = LocalDateTime.parse(dateString, formatter);
-        Instructor instructor = new Instructor("firstName", "lastName", "+43 6704070789", "lastName@gmail.com");
+        Instructor instructor = new Instructor("firstName", "lastName", "+43 6704070789",
+                "lastName@gmail.com");
         InstructorRepository instructorRepository = new InstructorRepository();
         instructorRepository.save(instructor);
 
         CourseRepository courseRepository = new CourseRepository();
-        Course course1 = new Course("Course1", "Test Course", 90, 1);
+        Course course1 = new Course("Course1", "Test Course", 90,
+                1);
         courseRepository.save(course1);
-        Course course2 = new Course("Course2", "Test Course", 90, 1);
+        Course course2 = new Course("Course2", "Test Course", 90,
+                1);
         courseRepository.save(course2);
-        Course course3 = new Course("Course3", "Test Course", 90, 1);
+        Course course3 = new Course("Course3", "Test Course", 90,
+                1);
         courseRepository.save(course3);
 
         Appointment appointment1 = new Appointment(dateTime, instructor, course1);
         Appointment appointment2 = new Appointment(dateTime, instructor, course2);
         Appointment appointment3 = new Appointment(dateTime, instructor, course3);
 
-        // modify
+        // act
         appointmentRepository.save(appointment1);
         appointmentRepository.save(appointment2);
         appointmentRepository.save(appointment3);
 
         List<Appointment> appointmentList = appointmentRepository.findAll();
 
-        // test
-        assertEquals(3, appointmentList.size());
-
-        assertTrue(appointmentList.stream().anyMatch(appointment -> appointment1.toString().equals(appointment.toString())));
-        assertTrue(appointmentList.stream().anyMatch(appointment -> appointment2.toString().equals(appointment.toString())));
-        assertTrue(appointmentList.stream().anyMatch(appointment -> appointment3.toString().equals(appointment.toString())));
+        // assert
+        assertThat(appointmentList).hasSize(3)
+                .usingRecursiveFieldByFieldElementComparator()
+                .contains(appointment1, appointment2, appointment3);
     }
 
     @Test
-    void findById() {
+    void test_findById_SimpleInsertAndFind_ShouldFindValues() {
         // arrange
         AppointmentRepository appointmentRepository = new AppointmentRepository();
 
         String dateString = "07-08-2023 00:00:00";
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss", Locale.ROOT);
         LocalDateTime dateTime = LocalDateTime.parse(dateString, formatter);
-        Instructor instructor = new Instructor("firstName", "lastName", "+43 6704070789", "lastName@gmail.com");
+        Instructor instructor = new Instructor("firstName", "lastName", "+43 6704070789",
+                "lastName@gmail.com");
         InstructorRepository instructorRepository = new InstructorRepository();
         instructorRepository.save(instructor);
 
         CourseRepository courseRepository = new CourseRepository();
-        Course course1 = new Course("Course1", "Test Course", 90, 1);
+        Course course1 = new Course("Course1", "Test Course", 90,
+                1);
         courseRepository.save(course1);
-        Course course2 = new Course("Course2", "Test Course", 90, 1);
+        Course course2 = new Course("Course2", "Test Course", 90,
+                1);
         courseRepository.save(course2);
-        Course course3 = new Course("Course3", "Test Course", 90, 1);
+        Course course3 = new Course("Course3", "Test Course", 90,
+                1);
         courseRepository.save(course3);
 
         Appointment appointment1 = new Appointment(dateTime, instructor, course1);
         Appointment appointment2 = new Appointment(dateTime, instructor, course2);
         Appointment appointment3 = new Appointment(dateTime, instructor, course3);
 
-        // modify
+        // act
         appointmentRepository.save(appointment1);
         appointmentRepository.save(appointment2);
         appointmentRepository.save(appointment3);
 
-        // test
-        assertEquals(appointment1.toString(), appointmentRepository.findById(appointment1.getId()).toString());
-        assertEquals(appointment2.toString(), appointmentRepository.findById(appointment2.getId()).toString());
-        assertEquals(appointment3.toString(), appointmentRepository.findById(appointment3.getId()).toString());
+        // assert
+        assertThat(appointmentRepository.findById(appointment1.getId())).usingRecursiveComparison()
+                .isEqualTo(appointment1);
+        assertThat(appointmentRepository.findById(appointment2.getId())).usingRecursiveComparison()
+                .isEqualTo(appointment2);
+        assertThat(appointmentRepository.findById(appointment3.getId())).usingRecursiveComparison()
+                .isEqualTo(appointment3);
     }
 
     @Test
@@ -264,6 +279,6 @@ class AppointmentRepositoryTest {
         // act
 
         // assert
-        assertNull(appointmentRepository.findById(1));
+        assertThat(appointmentRepository.findById(1)).isNull();
     }
 }
