@@ -28,8 +28,6 @@ class AppointmentRepositoryTest {
 
     @AfterEach
     public void tearDown() {
-        // to clear the tables again of all the test values
-        SqlRunner.dropTablesAndCreateEmptyTables();
     }
 
     @Test
