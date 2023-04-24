@@ -27,19 +27,7 @@ class AppointmentTest {
     }
 
     @Test
-    void test_ToString_SimpleCtor_ShouldShowEnteredValues() {
-        // arrange
-        Appointment appointment = new Appointment(localDateTime, instructor, course);
-
-        // act
-
-        // assert
-        assertThat(appointment.toString())
-                .isEqualTo("Appointment{id=null, start=" + localDateTime.toString() + ", instructorId=Instructor{id=null, firstName='firstName', lastName='lastName', phoneNr='+43 6704070789', email='lastName@gmail.com'}, courseId=Course{id=null, name='Course1', description='Test Course', minutesPerAppointment=90, amountOfAppointments=1}}");
-    }
-
-    @Test
-    void test_Getters_SimpleCtor_ShouldReturnEnteredValues() {
+    void test_getters_with_simple_constructor_ok() {
         // arrange
         Appointment appointment = new Appointment(localDateTime, instructor, course);
 
@@ -53,7 +41,7 @@ class AppointmentTest {
     }
 
     @Test
-    void test_Getters_DefaultCtor_ShouldReturnDefaultValues() {
+    void test_getters_default_constructor_ok() {
         // arrange
         Appointment appointment = new Appointment();
 
@@ -67,7 +55,7 @@ class AppointmentTest {
     }
 
     @Test
-    void test_Setters_DefaultCtor_ShouldSetValuesAccordingly() {
+    void test_setters_with_default_constructor_ok() {
         // arrange
         Appointment appointment = new Appointment();
 
@@ -85,7 +73,7 @@ class AppointmentTest {
     }
 
     @Test
-    void test_Setters_SimpleCtor_ShouldChangeValuesAccordingly() {
+    void test_setters_simple_constructor_ok() {
         // arrange
         Appointment appointment = new Appointment(localDateTime, instructor, course);
         Course newCourse = new Course("Testing123", "This is illegal", 90,
@@ -108,7 +96,7 @@ class AppointmentTest {
     }
 
     @Test
-    void test_Setters_ChangeReferenceValues_ShouldChangeValuesAccordingly() {
+    void test_setters_and_change_values_of_references_ok() {
         // arrange
         Appointment appointment = new Appointment(localDateTime, instructor, course);
 

@@ -10,6 +10,7 @@ import org.junit.jupiter.api.Test;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatCode;
 import static org.assertj.db.api.Assertions.assertThat;
 
 class InstructorRepositoryTest {
@@ -26,7 +27,7 @@ class InstructorRepositoryTest {
     }
 
     @Test
-    void test_save_SaveSimpleInstructor_ShouldResultInDatabaseRowWithValues() {
+    void test_save_save_simple_instructor_ok() {
         // arrange
         Table table = new Table(Database.getDataSource(), tableName);
 
@@ -51,7 +52,17 @@ class InstructorRepositoryTest {
     }
 
     @Test
-    void test_update_SimpleUpdate_ShouldUpdateValues() {
+    void test_save_save_null_ok() {
+        // arrange
+        InstructorRepository instructorRepository = new InstructorRepository();
+
+        // act
+
+        // assert
+        assertThatCode(() -> instructorRepository.save(null)).doesNotThrowAnyException();
+    }
+    @Test
+    void test_update_update_instructor_ok() {
         // arrange
         Table table = new Table(Database.getDataSource(), tableName);
 
@@ -76,7 +87,18 @@ class InstructorRepositoryTest {
     }
 
     @Test
-    void test_insert_SimpleInsert_ShouldAddValuesToDatabase() {
+    void test_update_update_null_ok() {
+        // arrange
+        InstructorRepository instructorRepository = new InstructorRepository();
+
+        // act
+
+        // assert
+        assertThatCode(() -> instructorRepository.update(null)).doesNotThrowAnyException();
+    }
+
+    @Test
+    void test_insert_insert_instructor_ok() {
         // arrange
         Table table = new Table(Database.getDataSource(), tableName);
 
@@ -98,7 +120,18 @@ class InstructorRepositoryTest {
     }
 
     @Test
-    void test_delete_SimpleDelete_ShouldRemoveValues() {
+    void test_insert_insert_null_ok() {
+        // arrange
+        InstructorRepository instructorRepository = new InstructorRepository();
+
+        // act
+
+        // assert
+        assertThatCode(() -> instructorRepository.insert(null)).doesNotThrowAnyException();
+    }
+
+    @Test
+    void test_delete_delete_instructor_ok() {
         // arrange
         Table table = new Table(Database.getDataSource(), tableName);
 
@@ -117,7 +150,18 @@ class InstructorRepositoryTest {
     }
 
     @Test
-    void test_delete_DeleteFakeInstructor_ShouldThrowError() {
+    void test_delete_delete_null_ok() {
+        // arrange
+        InstructorRepository instructorRepository = new InstructorRepository();
+
+        // act
+
+        // assert
+        assertThatCode(() -> instructorRepository.delete(null)).doesNotThrowAnyException();
+    }
+
+    @Test
+    void test_delete_delete_fake_instructor_ok() {
         // arrange
         InstructorRepository instructorRepository = new InstructorRepository();
         Instructor fakeInstructor = new Instructor();
@@ -132,7 +176,7 @@ class InstructorRepositoryTest {
     }
 
     @Test
-    void test_findAll_SimpleInsertAndFind_ShouldFindInsertedValues() {
+    void test_findall_find_elements_ok() {
         // arrange
         InstructorRepository insRep = new InstructorRepository();
         Instructor instructor1 = new Instructor("1", "lastName", "+43 6704070789",
@@ -156,7 +200,7 @@ class InstructorRepositoryTest {
     }
 
     @Test
-    void test_findById_SimpleInsertAndFind_ShouldFindValues() {
+    void test_findbyid_find_elements_ok() {
         // arrange
         InstructorRepository insRep = new InstructorRepository();
         Instructor instructor1 = new Instructor("1", "lastName", "+43 6704070789",
@@ -178,7 +222,7 @@ class InstructorRepositoryTest {
     }
 
     @Test
-    void test_findById_whenNotInTables() {
+    void test_findbyid_find_invalid_id() {
         // arrange
         InstructorRepository insRep = new InstructorRepository();
 

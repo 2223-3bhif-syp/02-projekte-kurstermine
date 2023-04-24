@@ -15,6 +15,7 @@ import java.util.List;
 import java.util.Locale;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatCode;
 import static org.assertj.db.api.Assertions.assertThat;
 
 class AppointmentRepositoryTest {
@@ -31,7 +32,7 @@ class AppointmentRepositoryTest {
     }
 
     @Test
-    void test_save_SaveSimpleAppointment_ShouldResultInDatabaseRowWithValues() {
+    void test_save_save_simple_appointment_and_check_database_ok() {
         // arrange
         Table table = new Table(Database.getDataSource(), tableName);
 
@@ -73,8 +74,20 @@ class AppointmentRepositoryTest {
                 .value().isEqualTo(appointment.getCourse().getId());
     }
 
+
     @Test
-    void test_update_SimpleUpdate_ShouldUpdateValues() {
+    void test_save_save_null_ok() {
+        // arrange
+        AppointmentRepository appointmentRepository = new AppointmentRepository();
+
+        // act
+
+        // assert
+        assertThatCode(() -> appointmentRepository.save(null)).doesNotThrowAnyException();
+    }
+
+    @Test
+    void test_update_update_appointment_and_check_database_ok() {
         // arrange
         Table table = new Table(Database.getDataSource(), tableName);
 
@@ -117,7 +130,18 @@ class AppointmentRepositoryTest {
     }
 
     @Test
-    void test_insert_SimpleInsert_ShouldAddValuesToDatabase() {
+    void test_update_update_null_ok() {
+        // arrange
+        AppointmentRepository appointmentRepository = new AppointmentRepository();
+
+        // act
+
+        // assert
+        assertThatCode(() -> appointmentRepository.update(null)).doesNotThrowAnyException();
+    }
+
+    @Test
+    void test_insert_insert_appointment_and_check_database_ok() {
         // arrange
         Table table = new Table(Database.getDataSource(), tableName);
 
@@ -155,7 +179,18 @@ class AppointmentRepositoryTest {
     }
 
     @Test
-    void test_delete_SimpleDelete_ShouldRemoveValues() {
+    void test_insert_insert_null_ok() {
+        // arrange
+        AppointmentRepository appointmentRepository = new AppointmentRepository();
+
+        // act
+
+        // assert
+        assertThatCode(() -> appointmentRepository.insert(null)).doesNotThrowAnyException();
+    }
+
+    @Test
+    void test_delete_delete_appointment_from_database_ok() {
         // arrange
         Table table = new Table(Database.getDataSource(), tableName);
 
@@ -187,7 +222,18 @@ class AppointmentRepositoryTest {
     }
 
     @Test
-    void test_delete_DeleteFakeAppointment_ShouldThrowError() {
+    void test_delete_delete_null_ok() {
+        // arrange
+        AppointmentRepository appointmentRepository = new AppointmentRepository();
+
+        // act
+
+        // assert
+        assertThatCode(() -> appointmentRepository.delete(null)).doesNotThrowAnyException();
+    }
+
+    @Test
+    void test_delete_delete_fake_appointment_ok() {
         // arrange
         AppointmentRepository appointmentRepository = new AppointmentRepository();
         Appointment fakeAppointment = new Appointment();
@@ -202,7 +248,7 @@ class AppointmentRepositoryTest {
     }
 
     @Test
-    void test_findAll_SimpleInsertAndFind_ShouldFindInsertedValues() {
+    void test_findall_list_contains_inserted_values_ok() {
         // arrange
         AppointmentRepository appointmentRepository = new AppointmentRepository();
 
@@ -243,7 +289,7 @@ class AppointmentRepositoryTest {
     }
 
     @Test
-    void test_findById_SimpleInsertAndFind_ShouldFindValues() {
+    void test_findbyid_find_inserted_values_ok() {
         // arrange
         AppointmentRepository appointmentRepository = new AppointmentRepository();
 
@@ -285,7 +331,7 @@ class AppointmentRepositoryTest {
     }
 
     @Test
-    void test_findById_whenNotInTables() {
+    void test_findbyid_with_id_not_in_table_ok() {
         // arrange
         AppointmentRepository appointmentRepository = new AppointmentRepository();
 

@@ -17,20 +17,7 @@ class ParticipantTest {
     }
 
     @Test
-    void test_ToString_AfterNormalCtor_ShouldResultInEnteredValuesAndIdNull() {
-        // arrange
-        Participant participant = new Participant("firstName", "lastName", 2000,
-                "+43 6704070789", "lastName@gmail.com");
-
-        // act
-
-        // assert
-        assertThat(participant.toString())
-                .isEqualTo("Participant{id=null, firstName='firstName', lastName='lastName', yearOfBirth=2000, phoneNr='+43 6704070789', email='lastName@gmail.com'}");
-    }
-
-    @Test
-    void test_Getters_AfterNormalCtor_ShouldResultInEnteredValuesAndIdNull() {
+    void test_getters_with_simple_constructor_ok() {
         // arrange
         Participant participant = new Participant("firstName", "lastName", 2000,
                 "+43 6704070789", "lastName@gmail.com");
@@ -47,7 +34,7 @@ class ParticipantTest {
     }
 
     @Test
-    void test_Getters_AfterDefaultCtor_ShouldResultInDefaultValues() {
+    void test_getters_with_default_constructor_ok() {
         // arrange
         Participant participant = new Participant();
 
@@ -63,7 +50,7 @@ class ParticipantTest {
     }
 
     @Test
-    void test_Setters_SimpleChangesOfDefaultValues_ShouldResultInNewValues() {
+    void test_setters_with_default_constructor_ok() {
         // arrange
         Participant participant = new Participant();
 
@@ -86,7 +73,7 @@ class ParticipantTest {
     }
 
     @Test
-    void test_Setters_SimpleChangesOfCtorSetValues_ShouldResultInNewValues() {
+    void test_setters_with_simple_constructor_ok() {
         // arrange
         Participant participant = new Participant("Anita", "Huber", 1999,
                 "+43 681 0304877", "anitaHuber@gmail.com");

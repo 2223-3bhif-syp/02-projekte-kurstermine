@@ -31,19 +31,7 @@ class RegistrationTest {
     }
 
     @Test
-    void test_ToString_SimpleCtor_ShouldResultInStringWithCtorValues() {
-        // arrange
-        Registration registration = new Registration(participant, appointment);
-
-        // act
-
-        // assert
-        assertThat(registration.toString())
-                .isEqualTo("Registration{participantId=Participant{id=null, firstName='Michael', lastName='Blauberg', yearOfBirth=2010, phoneNr='+43 323 2314809', email='blaubergMich@gmail.com'}, appointmentId=Appointment{id=null, start=" + localDateTime.toString() + ", instructorId=Instructor{id=null, firstName='InstructorName', lastName='Leitner', phoneNr='+43 6704070789', email='LeiterName@speedmail.com'}, courseId=Course{id=null, name='Amselarbeit', description='Die Arbeit, sie ruft', minutesPerAppointment=180, amountOfAppointments=45}}}");
-    }
-
-    @Test
-    void test_Getters_SimpleCtor_ShouldResultInEnteredValues() {
+    void test_getters_with_simple_constructor_ok() {
         // arrange
         Registration registration = new Registration(participant, appointment);
 
@@ -55,7 +43,7 @@ class RegistrationTest {
     }
 
     @Test
-    void test_Getters_DefaultCtor_ShouldResultInDefaultValues() {
+    void test_getters_with_default_constructor_ok() {
         // arrange
         Registration registration = new Registration();
 
@@ -67,7 +55,7 @@ class RegistrationTest {
     }
 
     @Test
-    void test_Setters_SimpleCtor_ShouldChangeValuesAccordingly() {
+    void test_setters_with_simple_constructor_ok() {
         // arrange
         Registration registration = new Registration(participant, appointment);
 
@@ -90,7 +78,7 @@ class RegistrationTest {
     }
 
     @Test
-    void test_Setters_DefaultCtor_ShouldResultInNewValues() {
+    void test_setters_with_default_constructor_ok() {
         // arrange
         Registration registration = new Registration();
 

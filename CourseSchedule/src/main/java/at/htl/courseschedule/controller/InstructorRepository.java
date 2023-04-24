@@ -12,6 +12,10 @@ public class InstructorRepository implements Persistent<Instructor> {
 
     @Override
     public void save(Instructor instructor) {
+        if (instructor == null) {
+            return;
+        }
+
         if (instructor.getId() == null) {
             insert(instructor);
         }
@@ -22,6 +26,10 @@ public class InstructorRepository implements Persistent<Instructor> {
 
     @Override
     public void update(Instructor instructor) {
+        if (instructor == null) {
+            return;
+        }
+
         try (Connection connection = dataSource.getConnection()) {
             String sql = "UPDATE CS_INSTRUCTOR SET I_FIRST_NAME=?, I_LAST_NAME=?, I_PHONE_NR=?, I_EMAIL=? WHERE I_ID=?";
 
@@ -42,6 +50,10 @@ public class InstructorRepository implements Persistent<Instructor> {
 
     @Override
     public void insert(Instructor instructor) {
+        if (instructor == null) {
+            return;
+        }
+
         try (Connection connection = dataSource.getConnection()) {
             String sql = "INSERT INTO CS_INSTRUCTOR (I_FIRST_NAME, I_LAST_NAME, I_PHONE_NR, I_EMAIL) VALUES (?,?,?,?)";
 
@@ -69,6 +81,10 @@ public class InstructorRepository implements Persistent<Instructor> {
 
     @Override
     public void delete(Instructor instructor) {
+        if (instructor == null) {
+            return;
+        }
+
         try (Connection connection = dataSource.getConnection()) {
             String sql = "DELETE FROM CS_INSTRUCTOR WHERE I_ID=?";
 
@@ -115,7 +131,7 @@ public class InstructorRepository implements Persistent<Instructor> {
         Instructor instructor = null;
 
         try (Connection connection = dataSource.getConnection()) {
-            String sql = "SELECT * FROM CS_INSTRUCTOR WHERE I_ID=?";
+            String sql = "SELECT I_ID, I_FIRST_NAME, I_LAST_NAME, I_PHONE_NR, I_EMAIL FROM CS_INSTRUCTOR WHERE I_ID=?";
 
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setLong(1, id);

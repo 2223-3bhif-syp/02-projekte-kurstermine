@@ -12,6 +12,10 @@ public class AppointmentRepository implements Persistent<Appointment> {
 
     @Override
     public void save(Appointment appointment) {
+        if (appointment == null) {
+            return;
+        }
+
         if (appointment.getId() == null) {
             insert(appointment);
         } else {
@@ -21,6 +25,10 @@ public class AppointmentRepository implements Persistent<Appointment> {
 
     @Override
     public void update(Appointment appointment) {
+        if (appointment == null) {
+            return;
+        }
+
         try (Connection connection = dataSource.getConnection()) {
             String sql = "UPDATE CS_APPOINTMENT SET A_START=?, A_I_ID=?, A_C_ID=? WHERE A_ID=?";
 
@@ -40,6 +48,10 @@ public class AppointmentRepository implements Persistent<Appointment> {
 
     @Override
     public void insert(Appointment appointment) {
+        if (appointment == null) {
+            return;
+        }
+
         try (Connection connection = dataSource.getConnection()) {
             String sql = "INSERT INTO CS_APPOINTMENT (A_START, A_I_ID, A_C_ID) VALUES (?,?,?)";
 
@@ -66,6 +78,10 @@ public class AppointmentRepository implements Persistent<Appointment> {
 
     @Override
     public void delete(Appointment appointment) {
+        if (appointment == null) {
+            return;
+        }
+
         try (Connection connection = dataSource.getConnection()) {
             String sql = "DELETE FROM CS_APPOINTMENT WHERE A_ID=?";
 
@@ -115,7 +131,7 @@ public class AppointmentRepository implements Persistent<Appointment> {
         Appointment appointment = null;
 
         try (Connection connection = dataSource.getConnection()) {
-            String sql = "SELECT * FROM CS_APPOINTMENT WHERE A_ID=?";
+            String sql = "SELECT A_ID, A_START, A_I_ID, A_C_ID FROM CS_APPOINTMENT WHERE A_ID=?";
 
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setLong(1, id);

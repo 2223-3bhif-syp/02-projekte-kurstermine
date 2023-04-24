@@ -10,6 +10,7 @@ import org.junit.jupiter.api.Test;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatCode;
 import static org.assertj.db.api.Assertions.assertThat;
 
 class CourseRepositoryTest {
@@ -26,7 +27,7 @@ class CourseRepositoryTest {
     }
 
     @Test
-    void test_save_SaveSimpleCourse_ShouldResultInDatabaseRowWithValues() {
+    void test_save_save_simple_course_and_db_check_ok() {
         // arrange
         Table table = new Table(Database.getDataSource(), tableName);
 
@@ -56,7 +57,18 @@ class CourseRepositoryTest {
     }
 
     @Test
-    void test_update_SimpleUpdate_ShouldUpdateValues() {
+    void test_save_save_null_ok() {
+        // arrange
+        CourseRepository courseRepository = new CourseRepository();
+
+        // act
+
+        // assert
+        assertThatCode(() -> courseRepository.save(null)).doesNotThrowAnyException();
+    }
+
+    @Test
+    void test_update_update_course_ok() {
         // arrange
         Table table = new Table(Database.getDataSource(), tableName);
 
@@ -86,7 +98,18 @@ class CourseRepositoryTest {
     }
 
     @Test
-    void test_insert_SimpleInsert_ShouldAddValuesToDatabase() {
+    void test_update_update_null_ok() {
+        // arrange
+        CourseRepository courseRepository = new CourseRepository();
+
+        // act
+
+        // assert
+        assertThatCode(() -> courseRepository.update(null)).doesNotThrowAnyException();
+    }
+
+    @Test
+    void test_insert_insert_course_ok() {
         // arrange
         Table table = new Table(Database.getDataSource(), tableName);
 
@@ -113,7 +136,18 @@ class CourseRepositoryTest {
     }
 
     @Test
-    void test_delete_SimpleDelete_ShouldRemoveValues() {
+    void test_insert_insert_null_ok() {
+        // arrange
+        CourseRepository courseRepository = new CourseRepository();
+
+        // act
+
+        // assert
+        assertThatCode(() -> courseRepository.insert(null)).doesNotThrowAnyException();
+    }
+
+    @Test
+    void test_delete_delete_inserted_course_ok() {
         // arrange
         Table table = new Table(Database.getDataSource(), tableName);
 
@@ -132,7 +166,18 @@ class CourseRepositoryTest {
     }
 
     @Test
-    void test_delete_DeleteFakeCourse_ShouldThrowError() {
+    void test_delete_delete_null_ok() {
+        // arrange
+        CourseRepository courseRepository = new CourseRepository();
+
+        // act
+
+        // assert
+        assertThatCode(() -> courseRepository.delete(null)).doesNotThrowAnyException();
+    }
+
+    @Test
+    void test_delete_delete_fake_course() {
         // arrange
         CourseRepository courseRepository = new CourseRepository();
         Course fakeCourse = new Course();
@@ -147,7 +192,7 @@ class CourseRepositoryTest {
     }
 
     @Test
-    void test_findAll_SimpleInsertAndFind_ShouldFindInsertedValues() {
+    void test_findall_retreive_inserted_data_ok() {
         // arrange
         CourseRepository courseRepository = new CourseRepository();
         Course course1 = new Course("Course1", "Test Course", 90,
@@ -171,7 +216,7 @@ class CourseRepositoryTest {
     }
 
     @Test
-    void test_findById_SimpleInsertAndFind_ShouldFindValues() {
+    void test_findbyid_find_inserted_elements_by_id_ok() {
         // arrange
         CourseRepository courseRepository = new CourseRepository();
         Course course1 = new Course("Course1", "Test Course", 90,
@@ -193,7 +238,7 @@ class CourseRepositoryTest {
     }
 
     @Test
-    void test_findById_whenNotInTables() {
+    void test_findbyid_search_for_element_not_in_table_ok() {
         // arrange
         CourseRepository courseRepository = new CourseRepository();
 

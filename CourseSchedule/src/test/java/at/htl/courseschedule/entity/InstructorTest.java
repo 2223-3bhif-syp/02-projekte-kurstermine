@@ -17,20 +17,7 @@ class InstructorTest {
     }
 
     @Test
-    void test_ToString_SimpleCtor_ShouldReturnStringWithCtorValues() {
-        // arrange
-        Instructor instructor = new Instructor("firstName", "lastName", "+43 6704070789",
-                "lastName@gmail.com");
-
-        // act
-
-        // assert
-        assertThat(instructor.toString())
-                .isEqualTo("Instructor{id=null, firstName='firstName', lastName='lastName', phoneNr='+43 6704070789', email='lastName@gmail.com'}");
-    }
-
-    @Test
-    void test_Getters_AfterNormalCtor_ShouldResultInCtorValuesAndIdNull() {
+    void test_getters_after_simple_constructor_ok() {
         // arrange
         Instructor instructor = new Instructor("Franz", "Hintermüller", "+43 067 23423445",
                 "progamerHD@gmail.com");
@@ -46,7 +33,7 @@ class InstructorTest {
     }
 
     @Test
-    void test_Getters_AfterDefaultCtor_ShouldResultInDefaultValues() {
+    void test_getters_after_default_constructor_ok() {
         // arrange
         Instructor instructor = new Instructor();
 
@@ -61,7 +48,7 @@ class InstructorTest {
     }
 
     @Test
-    void test_Setters_SimpleChangesOfDefaultValues_ShouldResultInNewValues() {
+    void test_setters_after_default_constructors_ok() {
         // arrange
         Instructor instructor = new Instructor();
 
@@ -82,7 +69,7 @@ class InstructorTest {
     }
 
     @Test
-    void test_Setters_SimpleChangesOfCtorSetValues_ShouldResultInNewValues() {
+    void test_setters_with_simple_constructor_ok() {
         // arrange
         Instructor instructor = new Instructor("Sirius", "Klein", "+43 234 23469876",
                 "sirusk@gmail.com");

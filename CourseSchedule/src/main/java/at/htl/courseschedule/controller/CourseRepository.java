@@ -12,16 +12,23 @@ public class CourseRepository implements Persistent<Course> {
 
     @Override
     public void save(Course course) {
+        if (course == null) {
+            return;
+        }
+
         if (course.getId() == null) {
             insert(course);
-        }
-        else {
+        } else {
             update(course);
         }
     }
 
     @Override
     public void update(Course course) {
+        if (course == null) {
+            return;
+        }
+
         try (Connection connection = dataSource.getConnection()) {
             String sql = "UPDATE CS_COURSE SET C_NAME=?, C_DESCRIPTION=?, C_MINUTES_PER_APPOINTMENT=?, C_AMOUNT_OF_APPOINTMENTS=? WHERE C_ID=?";
 
@@ -42,6 +49,10 @@ public class CourseRepository implements Persistent<Course> {
 
     @Override
     public void insert(Course course) {
+        if (course == null) {
+            return;
+        }
+
         try (Connection connection = dataSource.getConnection()) {
             String sql = "INSERT INTO CS_COURSE (C_NAME, C_DESCRIPTION, C_MINUTES_PER_APPOINTMENT, C_AMOUNT_OF_APPOINTMENTS) VALUES (?,?,?,?)";
 
@@ -69,6 +80,10 @@ public class CourseRepository implements Persistent<Course> {
 
     @Override
     public void delete(Course course) {
+        if (course == null) {
+            return;
+        }
+
         try (Connection connection = dataSource.getConnection()) {
             String sql = "DELETE FROM CS_COURSE WHERE C_ID=?";
 
@@ -89,16 +104,17 @@ public class CourseRepository implements Persistent<Course> {
         List<Course> courses = new ArrayList<>();
 
         try (Connection connection = dataSource.getConnection()) {
-            String sql = "SELECT * FROM CS_COURSE";
+            String sql = "SELECT C_ID, C_NAME, C_DESCRIPTION, C_MINUTES_PER_APPOINTMENT, C_AMOUNT_OF_APPOINTMENTS " +
+                    "FROM CS_COURSE";
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             ResultSet result = preparedStatement.executeQuery();
 
-            while(result.next()) {
+            while (result.next()) {
                 Course course = new Course(result.getString("C_NAME"),
                         result.getString("C_DESCRIPTION"), result.getInt("C_MINUTES_PER_APPOINTMENT"),
                         result.getInt("C_AMOUNT_OF_APPOINTMENTS"));
 
-                course.setId((long)result.getInt("C_ID"));
+                course.setId((long) result.getInt("C_ID"));
 
                 courses.add(course);
             }
@@ -123,7 +139,7 @@ public class CourseRepository implements Persistent<Course> {
             if (result.next()) {
                 course = new Course(result.getString("C_NAME"), result.getString("C_DESCRIPTION"),
                         result.getInt("C_MINUTES_PER_APPOINTMENT"), result.getInt("C_AMOUNT_OF_APPOINTMENTS"));
-                course.setId((long)result.getInt("C_ID"));
+                course.setId((long) result.getInt("C_ID"));
             }
         } catch (SQLException e) {
             e.printStackTrace();

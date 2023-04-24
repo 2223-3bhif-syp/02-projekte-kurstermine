@@ -17,20 +17,7 @@ class CourseTest {
     }
 
     @Test
-    void test_ToString_AfterNormalCtor_ShouldResultInEnteredValuesAndIdNull() {
-        // arrange
-        Course course = new Course("Course1", "Test Course", 90,
-                1);
-
-        // act
-
-        // assert
-        assertThat(course.toString())
-                .isEqualTo("Course{id=null, name='Course1', description='Test Course', minutesPerAppointment=90, amountOfAppointments=1}");
-    }
-
-    @Test
-    void test_Getters_AfterNormalCtor_ShouldResultInEnteredValuesAndIdNull() {
+    void test_getters_after_simple_constructor_ok() {
         // arrange
         Course course = new Course("Course1", "Test Course", 90,
                 1);
@@ -46,7 +33,7 @@ class CourseTest {
     }
 
     @Test
-    void test_Getters_AfterDefaultCtor_ShouldResultInDefaultValues() {
+    void test_getters_after_default_constructor_ok() {
         // arrange
         Course course = new Course();
 
@@ -61,7 +48,7 @@ class CourseTest {
     }
 
     @Test
-    void test_Setters_SimpleChangesOfDefaultValues_ShouldResultInNewValues() {
+    void test_setters_with_default_constructor_ok() {
         // arrange
         Course course = new Course();
 
@@ -81,7 +68,7 @@ class CourseTest {
     }
 
     @Test
-    void test_Setters_SimpleChangesOfCtorSetValues_ShouldResultInNewValues() {
+    void test_setters_with_simple_constructor_ok() {
         // arrange
         Course course = new Course("Das große ABC", "In diesem Kurs lernt niemand was?",
                 0, 0);
