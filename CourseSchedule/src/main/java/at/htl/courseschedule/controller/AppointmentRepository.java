@@ -12,9 +12,7 @@ public class AppointmentRepository implements Persistent<Appointment> {
 
     @Override
     public void save(Appointment appointment) {
-        if (appointment == null) {
-            return;
-        }
+        throwExceptionOnInvalidAppointment(appointment);
 
         if (appointment.getId() == null) {
             insert(appointment);
@@ -25,9 +23,7 @@ public class AppointmentRepository implements Persistent<Appointment> {
 
     @Override
     public void update(Appointment appointment) {
-        if (appointment == null) {
-            return;
-        }
+        throwExceptionOnInvalidAppointment(appointment);
 
         try (Connection connection = dataSource.getConnection()) {
             String sql = "UPDATE CS_APPOINTMENT SET A_START=?, A_I_ID=?, A_C_ID=? WHERE A_ID=?";
@@ -48,9 +44,7 @@ public class AppointmentRepository implements Persistent<Appointment> {
 
     @Override
     public void insert(Appointment appointment) {
-        if (appointment == null) {
-            return;
-        }
+        throwExceptionOnInvalidAppointment(appointment);
 
         try (Connection connection = dataSource.getConnection()) {
             String sql = "INSERT INTO CS_APPOINTMENT (A_START, A_I_ID, A_C_ID) VALUES (?,?,?)";
@@ -78,9 +72,7 @@ public class AppointmentRepository implements Persistent<Appointment> {
 
     @Override
     public void delete(Appointment appointment) {
-        if (appointment == null) {
-            return;
-        }
+        throwExceptionOnInvalidAppointment(appointment);
 
         try (Connection connection = dataSource.getConnection()) {
             String sql = "DELETE FROM CS_APPOINTMENT WHERE A_ID=?";
@@ -102,7 +94,7 @@ public class AppointmentRepository implements Persistent<Appointment> {
         List<Appointment> appointments = new ArrayList<>();
 
         try (Connection connection = dataSource.getConnection()) {
-            String sql = "SELECT * FROM CS_APPOINTMENT";
+            String sql = "SELECT A_ID, A_START, A_I_ID, A_C_ID FROM CS_APPOINTMENT";
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             ResultSet result = preparedStatement.executeQuery();
 
@@ -153,5 +145,19 @@ public class AppointmentRepository implements Persistent<Appointment> {
         }
 
         return appointment;
+    }
+
+    private void throwExceptionOnInvalidAppointment(Appointment appointment) {
+        if (appointment == null) {
+            throw new IllegalArgumentException("Appointment can not be null!");
+        }
+
+        if (appointment.getInstructor() == null) {
+            throw new IllegalArgumentException("Instructor of appointment can not be null!");
+        }
+
+        if (appointment.getCourse() == null) {
+            throw new IllegalArgumentException("Course of appointment can not be null!");
+        }
     }
 }

@@ -12,10 +12,10 @@ public class Appointment {
     public Appointment() {
     }
 
-    public Appointment(LocalDateTime start, Instructor instructor, Course courseId) {
+    public Appointment(LocalDateTime start, Instructor instructor, Course course) {
         this.start = start;
         this.instructor = instructor;
-        this.course = courseId;
+        this.course = course;
     }
     //endregion
 

@@ -12,9 +12,7 @@ public class InstructorRepository implements Persistent<Instructor> {
 
     @Override
     public void save(Instructor instructor) {
-        if (instructor == null) {
-            return;
-        }
+        throwExceptionOnInvalidInstructor(instructor);
 
         if (instructor.getId() == null) {
             insert(instructor);
@@ -26,9 +24,7 @@ public class InstructorRepository implements Persistent<Instructor> {
 
     @Override
     public void update(Instructor instructor) {
-        if (instructor == null) {
-            return;
-        }
+        throwExceptionOnInvalidInstructor(instructor);
 
         try (Connection connection = dataSource.getConnection()) {
             String sql = "UPDATE CS_INSTRUCTOR SET I_FIRST_NAME=?, I_LAST_NAME=?, I_PHONE_NR=?, I_EMAIL=? WHERE I_ID=?";
@@ -50,9 +46,7 @@ public class InstructorRepository implements Persistent<Instructor> {
 
     @Override
     public void insert(Instructor instructor) {
-        if (instructor == null) {
-            return;
-        }
+        throwExceptionOnInvalidInstructor(instructor);
 
         try (Connection connection = dataSource.getConnection()) {
             String sql = "INSERT INTO CS_INSTRUCTOR (I_FIRST_NAME, I_LAST_NAME, I_PHONE_NR, I_EMAIL) VALUES (?,?,?,?)";
@@ -81,9 +75,7 @@ public class InstructorRepository implements Persistent<Instructor> {
 
     @Override
     public void delete(Instructor instructor) {
-        if (instructor == null) {
-            return;
-        }
+        throwExceptionOnInvalidInstructor(instructor);
 
         try (Connection connection = dataSource.getConnection()) {
             String sql = "DELETE FROM CS_INSTRUCTOR WHERE I_ID=?";
@@ -106,7 +98,7 @@ public class InstructorRepository implements Persistent<Instructor> {
         List<Instructor> instructors = new ArrayList<>();
 
         try (Connection connection = dataSource.getConnection()) {
-            String sql = "SELECT * FROM CS_INSTRUCTOR";
+            String sql = "SELECT I_ID, I_FIRST_NAME, I_LAST_NAME, I_PHONE_NR, I_EMAIL FROM CS_INSTRUCTOR";
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             ResultSet result = preparedStatement.executeQuery();
 
@@ -147,5 +139,11 @@ public class InstructorRepository implements Persistent<Instructor> {
         }
 
         return instructor;
+    }
+
+    private void throwExceptionOnInvalidInstructor(Instructor instructor) {
+        if (instructor == null) {
+            throw new IllegalArgumentException("Instructor can not be null!");
+        }
     }
 }

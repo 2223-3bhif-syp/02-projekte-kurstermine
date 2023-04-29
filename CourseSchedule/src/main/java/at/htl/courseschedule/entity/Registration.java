@@ -1,6 +1,7 @@
 package at.htl.courseschedule.entity;
 
 public class Registration {
+    private Long id;
     private Participant participant;
     private Appointment appointment;
 
@@ -15,6 +16,14 @@ public class Registration {
     //endregion
 
     //region Getters and Setters
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
     public Participant getParticipant() {
         return participant;
     }
@@ -35,8 +44,9 @@ public class Registration {
     @Override
     public String toString() {
         return "Registration{" +
-                "participantId=" + participant +
-                ", appointmentId=" + appointment +
+                "id=" + id +
+                ", participant=" + participant +
+                ", appointment=" + appointment +
                 '}';
     }
 }

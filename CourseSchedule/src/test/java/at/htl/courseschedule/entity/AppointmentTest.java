@@ -9,17 +9,9 @@ import java.time.LocalDateTime;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class AppointmentTest {
-    Instructor instructor;
-    LocalDateTime localDateTime;
-    Course course;
 
     @BeforeEach
     public void setUp() {
-        instructor = new Instructor("firstName", "lastName", "+43 6704070789",
-                "lastName@gmail.com");
-        localDateTime = LocalDateTime.now();
-        course = new Course("Course1", "Test Course", 90,
-                1);
     }
 
     @AfterEach
@@ -29,6 +21,11 @@ class AppointmentTest {
     @Test
     void test_getters_with_simple_constructor_ok() {
         // arrange
+        Instructor instructor = new Instructor("firstName", "lastName", "+43 6704070789",
+                "lastName@gmail.com");
+        LocalDateTime localDateTime = LocalDateTime.now();
+        Course course = new Course("Course1", "Test Course", 90,
+                1);
         Appointment appointment = new Appointment(localDateTime, instructor, course);
 
         // act
@@ -57,6 +54,11 @@ class AppointmentTest {
     @Test
     void test_setters_with_default_constructor_ok() {
         // arrange
+        Instructor instructor = new Instructor("firstName", "lastName", "+43 6704070789",
+                "lastName@gmail.com");
+        LocalDateTime localDateTime = LocalDateTime.now();
+        Course course = new Course("Course1", "Test Course", 90,
+                1);
         Appointment appointment = new Appointment();
 
         // act
@@ -75,6 +77,11 @@ class AppointmentTest {
     @Test
     void test_setters_simple_constructor_ok() {
         // arrange
+        Instructor instructor = new Instructor("firstName", "lastName", "+43 6704070789",
+                "lastName@gmail.com");
+        LocalDateTime localDateTime = LocalDateTime.now();
+        Course course = new Course("Course1", "Test Course", 90,
+                1);
         Appointment appointment = new Appointment(localDateTime, instructor, course);
         Course newCourse = new Course("Testing123", "This is illegal", 90,
                 3);
@@ -98,6 +105,11 @@ class AppointmentTest {
     @Test
     void test_setters_and_change_values_of_references_ok() {
         // arrange
+        Instructor instructor = new Instructor("firstName", "lastName", "+43 6704070789",
+                "lastName@gmail.com");
+        LocalDateTime localDateTime = LocalDateTime.now();
+        Course course = new Course("Course1", "Test Course", 90,
+                1);
         Appointment appointment = new Appointment(localDateTime, instructor, course);
 
         // act

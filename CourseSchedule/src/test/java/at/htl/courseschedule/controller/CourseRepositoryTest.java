@@ -10,7 +10,7 @@ import org.junit.jupiter.api.Test;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatCode;
+import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 import static org.assertj.db.api.Assertions.assertThat;
 
 class CourseRepositoryTest {
@@ -64,7 +64,8 @@ class CourseRepositoryTest {
         // act
 
         // assert
-        assertThatCode(() -> courseRepository.save(null)).doesNotThrowAnyException();
+        assertThatExceptionOfType(IllegalArgumentException.class)
+                .isThrownBy(() -> courseRepository.save(null));
     }
 
     @Test
@@ -105,7 +106,8 @@ class CourseRepositoryTest {
         // act
 
         // assert
-        assertThatCode(() -> courseRepository.update(null)).doesNotThrowAnyException();
+        assertThatExceptionOfType(IllegalArgumentException.class)
+                .isThrownBy(() -> courseRepository.update(null));
     }
 
     @Test
@@ -143,7 +145,8 @@ class CourseRepositoryTest {
         // act
 
         // assert
-        assertThatCode(() -> courseRepository.insert(null)).doesNotThrowAnyException();
+        assertThatExceptionOfType(IllegalArgumentException.class)
+                .isThrownBy(() -> courseRepository.insert(null));
     }
 
     @Test
@@ -173,7 +176,8 @@ class CourseRepositoryTest {
         // act
 
         // assert
-        assertThatCode(() -> courseRepository.delete(null)).doesNotThrowAnyException();
+        assertThatExceptionOfType(IllegalArgumentException.class)
+                .isThrownBy(() -> courseRepository.delete(null));
     }
 
     @Test

@@ -10,12 +10,10 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.List;
-import java.util.Locale;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatCode;
+import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 import static org.assertj.db.api.Assertions.assertThat;
 
 class AppointmentRepositoryTest {
@@ -37,10 +35,7 @@ class AppointmentRepositoryTest {
         Table table = new Table(Database.getDataSource(), tableName);
 
         AppointmentRepository appointmentRepository = new AppointmentRepository();
-
-        String dateString = "07-08-2023 00:00:00";
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss", Locale.ROOT);
-        LocalDateTime dateTime = LocalDateTime.parse(dateString, formatter);
+        LocalDateTime dateTime = LocalDateTime.now();
         Instructor instructor = new Instructor("firstName", "lastName", "+43 6704070789",
                 "lastName@gmail.com");
         InstructorRepository instructorRepository = new InstructorRepository();
@@ -56,8 +51,7 @@ class AppointmentRepositoryTest {
         // act
         appointmentRepository.save(appointment);
 
-        String dateString2 = "16-08-2023 00:00:00";
-        LocalDateTime dateTime2 = LocalDateTime.parse(dateString2, formatter);
+        LocalDateTime dateTime2 = dateTime.plusHours(10);
         appointment.setStart(dateTime2);
         appointmentRepository.save(appointment);
 
@@ -74,6 +68,19 @@ class AppointmentRepositoryTest {
                 .value().isEqualTo(appointment.getCourse().getId());
     }
 
+    @Test
+    void test_save_instructor_and_course_null_ok() {
+        // arrange
+        AppointmentRepository appointmentRepository = new AppointmentRepository();
+        LocalDateTime now = LocalDateTime.now();
+        Appointment appointment = new Appointment(now, null, null);
+
+        // act
+
+        // assert
+        assertThatExceptionOfType(IllegalArgumentException.class)
+                .isThrownBy(() -> appointmentRepository.save(appointment));
+    }
 
     @Test
     void test_save_save_null_ok() {
@@ -83,7 +90,8 @@ class AppointmentRepositoryTest {
         // act
 
         // assert
-        assertThatCode(() -> appointmentRepository.save(null)).doesNotThrowAnyException();
+        assertThatExceptionOfType(IllegalArgumentException.class)
+                .isThrownBy(() -> appointmentRepository.save(null));
     }
 
     @Test
@@ -93,9 +101,7 @@ class AppointmentRepositoryTest {
 
         AppointmentRepository appointmentRepository = new AppointmentRepository();
 
-        String dateString = "07-08-2023 00:00:00";
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss", Locale.ROOT);
-        LocalDateTime dateTime = LocalDateTime.parse(dateString, formatter);
+        LocalDateTime dateTime = LocalDateTime.now();
         Instructor instructor = new Instructor("firstName", "lastName", "+43 6704070789",
                 "lastName@gmail.com");
         InstructorRepository instructorRepository = new InstructorRepository();
@@ -111,8 +117,7 @@ class AppointmentRepositoryTest {
         // act
         appointmentRepository.insert(appointment);
 
-        String dateString2 = "17-09-2023 00:00:00";
-        LocalDateTime dateTime2 = LocalDateTime.parse(dateString2, formatter);
+        LocalDateTime dateTime2 = dateTime.plusHours(15);
         appointment.setStart(dateTime2);
         appointmentRepository.update(appointment);
 
@@ -130,6 +135,20 @@ class AppointmentRepositoryTest {
     }
 
     @Test
+    void test_update_instructor_and_course_null_ok() {
+        // arrange
+        AppointmentRepository appointmentRepository = new AppointmentRepository();
+        LocalDateTime now = LocalDateTime.now();
+        Appointment appointment = new Appointment(now, null, null);
+
+        // act
+
+        // assert
+        assertThatExceptionOfType(IllegalArgumentException.class)
+                .isThrownBy(() -> appointmentRepository.update(appointment));
+    }
+
+    @Test
     void test_update_update_null_ok() {
         // arrange
         AppointmentRepository appointmentRepository = new AppointmentRepository();
@@ -137,7 +156,8 @@ class AppointmentRepositoryTest {
         // act
 
         // assert
-        assertThatCode(() -> appointmentRepository.update(null)).doesNotThrowAnyException();
+        assertThatExceptionOfType(IllegalArgumentException.class)
+                .isThrownBy(() -> appointmentRepository.update(null));
     }
 
     @Test
@@ -147,9 +167,7 @@ class AppointmentRepositoryTest {
 
         AppointmentRepository appointmentRepository = new AppointmentRepository();
 
-        String dateString = "07-08-2023 00:00:00";
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss", Locale.ROOT);
-        LocalDateTime dateTime = LocalDateTime.parse(dateString, formatter);
+        LocalDateTime dateTime = LocalDateTime.now();
         Instructor instructor = new Instructor("firstName", "lastName", "+43 6704070789",
                 "lastName@gmail.com");
         InstructorRepository instructorRepository = new InstructorRepository();
@@ -179,6 +197,20 @@ class AppointmentRepositoryTest {
     }
 
     @Test
+    void test_insert_instructor_and_course_null_ok() {
+        // arrange
+        AppointmentRepository appointmentRepository = new AppointmentRepository();
+        LocalDateTime now = LocalDateTime.now();
+        Appointment appointment = new Appointment(now, null, null);
+
+        // act
+
+        // assert
+        assertThatExceptionOfType(IllegalArgumentException.class)
+                .isThrownBy(() -> appointmentRepository.insert(appointment));
+    }
+
+    @Test
     void test_insert_insert_null_ok() {
         // arrange
         AppointmentRepository appointmentRepository = new AppointmentRepository();
@@ -186,7 +218,8 @@ class AppointmentRepositoryTest {
         // act
 
         // assert
-        assertThatCode(() -> appointmentRepository.insert(null)).doesNotThrowAnyException();
+        assertThatExceptionOfType(IllegalArgumentException.class)
+                .isThrownBy(() -> appointmentRepository.insert(null));
     }
 
     @Test
@@ -195,10 +228,7 @@ class AppointmentRepositoryTest {
         Table table = new Table(Database.getDataSource(), tableName);
 
         AppointmentRepository appointmentRepository = new AppointmentRepository();
-
-        String dateString = "07-08-2023 00:00:00";
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss", Locale.ROOT);
-        LocalDateTime dateTime = LocalDateTime.parse(dateString, formatter);
+        LocalDateTime dateTime = LocalDateTime.now();
         Instructor instructor = new Instructor("firstName", "lastName", "+43 6704070789",
                 "lastName@gmail.com");
         InstructorRepository instructorRepository = new InstructorRepository();
@@ -222,6 +252,20 @@ class AppointmentRepositoryTest {
     }
 
     @Test
+    void test_delete_instructor_and_course_null_ok() {
+        // arrange
+        AppointmentRepository appointmentRepository = new AppointmentRepository();
+        LocalDateTime now = LocalDateTime.now();
+        Appointment appointment = new Appointment(now, null, null);
+
+        // act
+
+        // assert
+        assertThatExceptionOfType(IllegalArgumentException.class)
+                .isThrownBy(() -> appointmentRepository.update(appointment));
+    }
+
+    @Test
     void test_delete_delete_null_ok() {
         // arrange
         AppointmentRepository appointmentRepository = new AppointmentRepository();
@@ -229,14 +273,15 @@ class AppointmentRepositoryTest {
         // act
 
         // assert
-        assertThatCode(() -> appointmentRepository.delete(null)).doesNotThrowAnyException();
+        assertThatExceptionOfType(IllegalArgumentException.class)
+                .isThrownBy(() -> appointmentRepository.delete(null));
     }
 
     @Test
     void test_delete_delete_fake_appointment_ok() {
         // arrange
         AppointmentRepository appointmentRepository = new AppointmentRepository();
-        Appointment fakeAppointment = new Appointment();
+        Appointment fakeAppointment = new Appointment(LocalDateTime.now(), new Instructor(), new Course());
         fakeAppointment.setId(-1L);
 
         // act
@@ -252,9 +297,7 @@ class AppointmentRepositoryTest {
         // arrange
         AppointmentRepository appointmentRepository = new AppointmentRepository();
 
-        String dateString = "07-08-2023 00:00:00";
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss", Locale.ROOT);
-        LocalDateTime dateTime = LocalDateTime.parse(dateString, formatter);
+        LocalDateTime dateTime = LocalDateTime.now();
         Instructor instructor = new Instructor("firstName", "lastName", "+43 6704070789",
                 "lastName@gmail.com");
         InstructorRepository instructorRepository = new InstructorRepository();
@@ -293,9 +336,7 @@ class AppointmentRepositoryTest {
         // arrange
         AppointmentRepository appointmentRepository = new AppointmentRepository();
 
-        String dateString = "07-08-2023 00:00:00";
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss", Locale.ROOT);
-        LocalDateTime dateTime = LocalDateTime.parse(dateString, formatter);
+        LocalDateTime dateTime = LocalDateTime.now();
         Instructor instructor = new Instructor("firstName", "lastName", "+43 6704070789",
                 "lastName@gmail.com");
         InstructorRepository instructorRepository = new InstructorRepository();

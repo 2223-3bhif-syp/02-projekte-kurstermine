@@ -12,9 +12,7 @@ public class CourseRepository implements Persistent<Course> {
 
     @Override
     public void save(Course course) {
-        if (course == null) {
-            return;
-        }
+        throwExceptionOnInvalidCourse(course);
 
         if (course.getId() == null) {
             insert(course);
@@ -25,9 +23,7 @@ public class CourseRepository implements Persistent<Course> {
 
     @Override
     public void update(Course course) {
-        if (course == null) {
-            return;
-        }
+        throwExceptionOnInvalidCourse(course);
 
         try (Connection connection = dataSource.getConnection()) {
             String sql = "UPDATE CS_COURSE SET C_NAME=?, C_DESCRIPTION=?, C_MINUTES_PER_APPOINTMENT=?, C_AMOUNT_OF_APPOINTMENTS=? WHERE C_ID=?";
@@ -49,9 +45,7 @@ public class CourseRepository implements Persistent<Course> {
 
     @Override
     public void insert(Course course) {
-        if (course == null) {
-            return;
-        }
+        throwExceptionOnInvalidCourse(course);
 
         try (Connection connection = dataSource.getConnection()) {
             String sql = "INSERT INTO CS_COURSE (C_NAME, C_DESCRIPTION, C_MINUTES_PER_APPOINTMENT, C_AMOUNT_OF_APPOINTMENTS) VALUES (?,?,?,?)";
@@ -80,9 +74,7 @@ public class CourseRepository implements Persistent<Course> {
 
     @Override
     public void delete(Course course) {
-        if (course == null) {
-            return;
-        }
+        throwExceptionOnInvalidCourse(course);
 
         try (Connection connection = dataSource.getConnection()) {
             String sql = "DELETE FROM CS_COURSE WHERE C_ID=?";
@@ -130,7 +122,8 @@ public class CourseRepository implements Persistent<Course> {
         Course course = null;
 
         try (Connection connection = dataSource.getConnection()) {
-            String sql = "SELECT * FROM CS_COURSE WHERE C_ID=?";
+            String sql = "SELECT C_ID, C_NAME, C_DESCRIPTION, C_MINUTES_PER_APPOINTMENT, C_AMOUNT_OF_APPOINTMENTS " +
+                    "FROM CS_COURSE WHERE C_ID=?";
 
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setLong(1, id);
@@ -146,5 +139,11 @@ public class CourseRepository implements Persistent<Course> {
         }
 
         return course;
+    }
+
+    private void throwExceptionOnInvalidCourse(Course course) {
+        if (course == null) {
+            throw new IllegalArgumentException("Course can not be null!");
+        }
     }
 }

@@ -12,9 +12,7 @@ public class ParticipantRepository implements Persistent<Participant> {
 
     @Override
     public void save(Participant participant) {
-        if (participant == null) {
-            return;
-        }
+        throwExceptionOnInvalidParticipant(participant);
 
         if (participant.getId() == null) {
             insert(participant);
@@ -26,9 +24,7 @@ public class ParticipantRepository implements Persistent<Participant> {
 
     @Override
     public void update(Participant participant) {
-        if (participant == null) {
-            return;
-        }
+        throwExceptionOnInvalidParticipant(participant);
 
         try (Connection connection = dataSource.getConnection()) {
             String sql = "UPDATE CS_PARTICIPANT SET P_FIRST_NAME=?, P_LAST_NAME=?, P_YEAR_OF_BIRTH=?, P_PHONE_NR=?, P_EMAIL=? WHERE P_ID=?";
@@ -51,9 +47,7 @@ public class ParticipantRepository implements Persistent<Participant> {
 
     @Override
     public void insert(Participant participant) {
-        if (participant == null) {
-            return;
-        }
+        throwExceptionOnInvalidParticipant(participant);
 
         try (Connection connection = dataSource.getConnection()) {
             String sql = "INSERT INTO CS_PARTICIPANT (P_FIRST_NAME, P_LAST_NAME, P_YEAR_OF_BIRTH, P_PHONE_NR, P_EMAIL) VALUES (?,?,?,?,?)";
@@ -83,9 +77,7 @@ public class ParticipantRepository implements Persistent<Participant> {
 
     @Override
     public void delete(Participant participant) {
-        if (participant == null) {
-            return;
-        }
+        throwExceptionOnInvalidParticipant(participant);
 
         try (Connection connection = dataSource.getConnection()) {
             String sql = "DELETE FROM CS_PARTICIPANT WHERE P_ID=?";
@@ -107,7 +99,8 @@ public class ParticipantRepository implements Persistent<Participant> {
         List<Participant> participants = new ArrayList<>();
 
         try (Connection connection = dataSource.getConnection()) {
-            String sql = "SELECT * FROM CS_PARTICIPANT";
+            String sql = "SELECT P_ID, P_FIRST_NAME, P_LAST_NAME, P_YEAR_OF_BIRTH, P_PHONE_NR, P_EMAIL " +
+                    "FROM CS_PARTICIPANT";
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             ResultSet result = preparedStatement.executeQuery();
 
@@ -149,5 +142,11 @@ public class ParticipantRepository implements Persistent<Participant> {
         }
 
         return participant;
+    }
+
+    private void throwExceptionOnInvalidParticipant(Participant participant) {
+        if (participant == null) {
+            throw new IllegalArgumentException("Participant can not be null!");
+        }
     }
 }
