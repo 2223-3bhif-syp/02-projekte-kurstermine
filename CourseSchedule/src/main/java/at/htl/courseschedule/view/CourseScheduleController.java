@@ -1,16 +1,18 @@
 package at.htl.courseschedule.view;
 
+import at.htl.courseschedule.entity.Appointment;
+import at.htl.courseschedule.entity.Course;
+import at.htl.courseschedule.entity.Instructor;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
-import javafx.scene.layout.ColumnConstraints;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.RowConstraints;
+import javafx.scene.layout.*;
 
 import java.time.DayOfWeek;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.TextStyle;
 import java.util.Arrays;
@@ -19,12 +21,19 @@ import java.util.Locale;
 
 public class CourseScheduleController {
     private static final int DAYS_PER_WEEK = 7;
+    private static final int MINUTES_PER_HOUR = 60;
     private static final int FIRST_HOUR = 8;
     private static final int LAST_HOUR = 20;
     private static final int DISPLAYED_HOURS = LAST_HOUR - FIRST_HOUR + 1; // +1: typical fencepost problem
+    private static final double DAY_OF_WEEK_ROW_PERCENTAGE = 5.0d;
+    private static final double TIME_ROW_PERCENTAGE = (100 - DAY_OF_WEEK_ROW_PERCENTAGE) / DISPLAYED_HOURS;
+    private static final double TIME_COL_PERCENTAGE = 5.5d;
+    private static final double DAY_OF_WEEK_COL_PERCENTAGE = 13.5d;
 
     @FXML
     private GridPane timeGrid;
+
+    private AnchorPane drawPane;
 
     @FXML
     private void initialize() {
@@ -32,6 +41,26 @@ public class CourseScheduleController {
         addGridConstraints();
         addWeekdayLabels();
         addHourLabels();
+        drawPane = initDrawPane();
+    }
+
+    public void afterLoad() {
+        // Show some sample data
+        Instructor instructor = new Instructor("k", "k", ",", " ");
+        Course course1 = new Course("a", "b", 60, 10);
+        Course course2 = new Course("a", "b", 30, 10);
+
+        Appointment app = new Appointment(
+                LocalDateTime.of(2023, 05, 22, 8, 30, 0),
+                instructor,
+                course1);
+        Appointment app2 = new Appointment(
+                LocalDateTime.of(2023, 05, 22, 9, 30, 0),
+                instructor,
+                course2);
+
+        showAppointment(app);
+        showAppointment(app2);
     }
 
     private void addGridConstraints() {
@@ -40,23 +69,23 @@ public class CourseScheduleController {
 
         // first column is smaller since it only contains the time
         ColumnConstraints timeCol = new ColumnConstraints();
-        timeCol.setPercentWidth(5.5d);
+        timeCol.setPercentWidth(TIME_COL_PERCENTAGE);
         colConstraints.add(timeCol);
 
         for (int i = 0; i < DAYS_PER_WEEK; i++) {
             ColumnConstraints dayCol = new ColumnConstraints();
-            dayCol.setPercentWidth(13.5d);
+            dayCol.setPercentWidth(DAY_OF_WEEK_COL_PERCENTAGE);
             colConstraints.add(dayCol);
         }
 
         // first column is smaller since it only contains the time
         RowConstraints labelRow = new RowConstraints();
-        labelRow.setPercentHeight(9.0d);
+        labelRow.setPercentHeight(DAY_OF_WEEK_ROW_PERCENTAGE);
         rowConstraints.add(labelRow);
 
         for (int i = 0; i < DISPLAYED_HOURS; i++) {
             RowConstraints hourRow = new RowConstraints();
-            hourRow.setPercentHeight(13.0d);
+            hourRow.setPercentHeight(TIME_ROW_PERCENTAGE);
             rowConstraints.add(hourRow);
         }
     }
@@ -95,5 +124,49 @@ public class CourseScheduleController {
 
             timeGrid.add(labelBox, 0, i - FIRST_HOUR + 1);
         }
+    }
+
+    private AnchorPane initDrawPane() {
+        AnchorPane pane = new AnchorPane();
+
+        GridPane.setColumnSpan(pane, DAYS_PER_WEEK);
+        GridPane.setRowSpan(pane, DISPLAYED_HOURS);
+
+        timeGrid.add(pane, 1, 1);
+        return pane;
+    }
+
+    private double getPosXFromDayOfWeek(DayOfWeek dayOfWeek) {
+        return (dayOfWeek.getValue() - 1) * (DAY_OF_WEEK_COL_PERCENTAGE / 100 * timeGrid.getWidth());
+    }
+
+    private double getPosYFromStartTime(LocalDateTime start) {
+        return (drawPane.getHeight() / (DISPLAYED_HOURS * MINUTES_PER_HOUR)) * ((start.getHour() - FIRST_HOUR) * 60 + start.getMinute());
+    }
+
+    private double getHeight(int minutesInAppointment) {
+        return (drawPane.getHeight() / (DISPLAYED_HOURS * MINUTES_PER_HOUR)) * minutesInAppointment - timeGrid.getHgap();
+    }
+
+    private double getWidth() {
+        return DAY_OF_WEEK_COL_PERCENTAGE / 100 * timeGrid.getWidth() - timeGrid.getHgap();
+    }
+
+    private void showAppointment(Appointment appointment) {
+        AppointmentComponent appointmentComponent = new AppointmentComponent(appointment.getCourse().getName(),
+                appointment.getInstructor().getFirstName(),
+                appointment.getInstructor().getLastName());
+
+        AnchorPane.setLeftAnchor(appointmentComponent, getPosXFromDayOfWeek(appointment.getStart().getDayOfWeek()));
+        AnchorPane.setTopAnchor(appointmentComponent, getPosYFromStartTime(appointment.getStart()));
+
+        appointmentComponent.setPrefHeight(getHeight(appointment.getCourse().getMinutesPerAppointment()));
+        appointmentComponent.setPrefWidth(getWidth());
+
+        drawPane.getChildren().add(appointmentComponent);
+    }
+
+    public void addButtonClicked(ActionEvent actionEvent) {
+
     }
 }

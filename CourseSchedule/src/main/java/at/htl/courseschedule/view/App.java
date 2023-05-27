@@ -13,6 +13,7 @@ public class App extends Application {
         stage.setScene(scene);
         stage.setTitle("Course Schedule");
         stage.show();
+        fxmlLoader.<CourseScheduleController>getController().afterLoad(); // Manually invoke after load (workaround)
     }
 
     public static void main(String[] args) {

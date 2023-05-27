@@ -12,27 +12,7 @@
         <Insets top="10" bottom="10" left="10" right="10"/>
     </padding>
     <GridPane fx:id="timeGrid" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
-              AnchorPane.topAnchor="0.0" alignment="CENTER"
-              hgap="3" vgap="3">
-        <AnchorPane GridPane.columnIndex="1" GridPane.rowIndex="1" GridPane.fillHeight="true" GridPane.fillWidth="true"
-                    styleClass="bg-lighter">
-            <Label AnchorPane.bottomAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="0"
-                   AnchorPane.leftAnchor="0" alignment="CENTER">Test
-            </Label>
-        </AnchorPane>
-        <AnchorPane GridPane.columnIndex="1" GridPane.rowIndex="2" GridPane.fillHeight="true" GridPane.fillWidth="true"
-                    styleClass="bg-lighter">
-            <Label AnchorPane.bottomAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="0"
-                   AnchorPane.leftAnchor="0" alignment="CENTER">Test
-            </Label>
-        </AnchorPane>
-        <AnchorPane GridPane.columnIndex="7" GridPane.rowIndex="13" GridPane.fillHeight="true" GridPane.fillWidth="true"
-                    styleClass="bg-lighter">
-            <Label AnchorPane.bottomAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="0"
-                   AnchorPane.leftAnchor="0" alignment="CENTER">Test
-            </Label>
-        </AnchorPane>
+              AnchorPane.topAnchor="0.0" alignment="CENTER" gridLinesVisible="false" hgap="3" vgap="3">
     </GridPane>
-
-    <Button AnchorPane.rightAnchor="10.0" AnchorPane.bottomAnchor="10.0" prefHeight="50" prefWidth="50">+</Button>
+    <Button AnchorPane.rightAnchor="10.0" AnchorPane.bottomAnchor="10.0" prefHeight="50" prefWidth="50" onAction="#addButtonClicked">+</Button>
 </AnchorPane>
