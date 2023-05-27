@@ -69,10 +69,13 @@ public class CourseScheduleController {
         for (int i = 0; i < DAYS_PER_WEEK; i++) {
             // Convert date back to day of week and get short form for a german locale
             Label weekday = new Label(weekDates.get(i).getDayOfWeek().getDisplayName(TextStyle.SHORT, Locale.GERMAN));
+            weekday.getStyleClass().add("bg-lighter");
             Label date = new Label(weekDates.get(i).format(DateTimeFormatter.ofPattern("dd.MM")));
+            date.getStyleClass().add("bg-lighter");
             date.setDisable(true);
 
             HBox labelBox = new HBox(weekday, date);
+            labelBox.getStyleClass().add("bg-lighter");
             labelBox.setAlignment(Pos.CENTER);
             labelBox.setSpacing(2);
 
@@ -83,9 +86,11 @@ public class CourseScheduleController {
     private void addHourLabels() {
         for (int i = FIRST_HOUR; i <= LAST_HOUR; i++) {
             Label hour = new Label(String.format("%02d:00", i));
+            hour.getStyleClass().add("bg-lighter");
             hour.setDisable(true);
 
             HBox labelBox = new HBox(hour);
+            labelBox.getStyleClass().add("bg-lighter");
             labelBox.setAlignment(Pos.CENTER);
 
             timeGrid.add(labelBox, 0, i - FIRST_HOUR + 1);
