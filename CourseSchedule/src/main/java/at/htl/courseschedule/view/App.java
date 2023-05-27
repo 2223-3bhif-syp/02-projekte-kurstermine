@@ -8,12 +8,12 @@ import javafx.stage.Stage;
 public class App extends Application {
     @Override
     public void start(Stage stage) throws Exception {
-        FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("/course-schedule.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("/admin-view.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 1330, 600);
         stage.setScene(scene);
         stage.setTitle("Course Schedule");
         stage.show();
-        fxmlLoader.<CourseScheduleController>getController().afterLoad(); // Manually invoke after load (workaround)
+        fxmlLoader.<AdminViewController>getController().afterLoad(); // Manually invoke after load (workaround)
     }
 
     public static void main(String[] args) {
