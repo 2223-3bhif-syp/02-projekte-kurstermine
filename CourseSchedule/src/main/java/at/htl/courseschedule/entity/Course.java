@@ -63,12 +63,6 @@ public class Course {
     //endregion
     @Override
     public String toString() {
-        return "Course{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", description='" + description + '\'' +
-                ", minutesPerAppointment=" + minutesPerAppointment +
-                ", amountOfAppointments=" + amountOfAppointments +
-                '}';
+        return name;
     }
 }

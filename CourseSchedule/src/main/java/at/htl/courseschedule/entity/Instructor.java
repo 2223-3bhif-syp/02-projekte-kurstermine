@@ -61,12 +61,6 @@ public class Instructor {
     //endregion
     @Override
     public String toString() {
-        return "Instructor{" +
-                "id=" + id +
-                ", firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", phoneNr='" + phoneNr + '\'' +
-                ", email='" + email + '\'' +
-                '}';
+        return firstName + " " + lastName;
     }
 }
