@@ -6,34 +6,10 @@
 <AnchorPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
             fx:controller="at.htl.courseschedule.view.CourseScheduleController" prefWidth="1330" prefHeight="600">
-    <GridPane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
-              AnchorPane.topAnchor="0.0" style="-fx-border-color: red;" gridLinesVisible="true">
-        <columnConstraints>
-            <ColumnConstraints percentWidth="5.5"/>
-            <ColumnConstraints percentWidth="13.5"/>
-            <ColumnConstraints percentWidth="13.5"/>
-            <ColumnConstraints percentWidth="13.5"/>
-            <ColumnConstraints percentWidth="13.5"/>
-            <ColumnConstraints percentWidth="13.5"/>
-            <ColumnConstraints percentWidth="13.5"/>
-            <ColumnConstraints percentWidth="13.5"/>
-        </columnConstraints>
-        <rowConstraints>
-            <RowConstraints percentHeight="9"/>
-            <RowConstraints percentHeight="13"/>
-            <RowConstraints percentHeight="13"/>
-            <RowConstraints percentHeight="13"/>
-            <RowConstraints percentHeight="13"/>
-            <RowConstraints percentHeight="13"/>
-            <RowConstraints percentHeight="13"/>
-            <RowConstraints percentHeight="13"/>
-            <RowConstraints percentHeight="13"/>
-            <RowConstraints percentHeight="13"/>
-            <RowConstraints percentHeight="13"/>
-            <RowConstraints percentHeight="13"/>
-            <RowConstraints percentHeight="13"/>
-            <RowConstraints percentHeight="13"/>
-        </rowConstraints>
+    <GridPane fx:id="timeGrid" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
+              AnchorPane.topAnchor="0.0" style="-fx-border-color: red;" gridLinesVisible="true" alignment="CENTER"
+              hgap="3" vgap="3">
+
     </GridPane>
 
     <Button AnchorPane.rightAnchor="10.0" AnchorPane.bottomAnchor="10.0" prefHeight="50" prefWidth="50">+</Button>
