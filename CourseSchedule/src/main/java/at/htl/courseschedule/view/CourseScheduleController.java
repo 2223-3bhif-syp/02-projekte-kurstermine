@@ -1,11 +1,8 @@
 package at.htl.courseschedule.view;
 
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
@@ -35,11 +32,6 @@ public class CourseScheduleController {
         addGridConstraints();
         addWeekdayLabels();
         addHourLabels();
-    }
-
-    @FXML
-    private void onTestButtonClick(ActionEvent actionEvent) {
-        (new Alert(Alert.AlertType.INFORMATION, "This is a test dialog", ButtonType.OK)).show();
     }
 
     private void addGridConstraints() {
