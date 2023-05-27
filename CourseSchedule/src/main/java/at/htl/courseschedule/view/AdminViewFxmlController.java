@@ -1,3 +1,5 @@
+package at.htl.courseschedule.view;
+
 import at.htl.courseschedule.controller.AppointmentRepository;
 import at.htl.courseschedule.controller.CourseRepository;
 import at.htl.courseschedule.controller.InstructorRepository;
@@ -42,7 +44,7 @@ public class AdminViewFxmlController {
         DatePicker date = new DatePicker();
         date.setPromptText("Date");
         TextField time = new TextField();
-        time.setPromptText("hh:mm:ss");
+        time.setPromptText("hh:mm");
         ComboBox<Instructor> instructorSelector = new ComboBox<>();
         InstructorRepository instructorRepository = new InstructorRepository();
         instructorSelector.setItems(FXCollections.observableList(instructorRepository.findAll()));
@@ -71,7 +73,7 @@ public class AdminViewFxmlController {
                         return false;
                     }
 
-                    if (!time.getText().matches("^\\d{2}:\\d{2}:\\d{2}$")) {
+                    if (!time.getText().matches("^\\d{2}:\\d{2}$")) {
                         // print error
                         return false;
                     }
@@ -100,8 +102,7 @@ public class AdminViewFxmlController {
         dialog.setResultConverter(dialogButton -> {
             if (isAppointment.get()) {
                 int[] timeValues = Arrays.stream(time.getText().split(":")).mapToInt(Integer::parseInt).toArray();
-                LocalDateTime dateTime = LocalDateTime.of(date.getValue(), LocalTime.of(timeValues[0], timeValues[1],
-                        timeValues[2]));
+                LocalDateTime dateTime = LocalDateTime.of(date.getValue(), LocalTime.of(timeValues[0], timeValues[1]));
                 return new Appointment(dateTime, instructorSelector.getValue(), courseSelector.getValue());
             }
 
