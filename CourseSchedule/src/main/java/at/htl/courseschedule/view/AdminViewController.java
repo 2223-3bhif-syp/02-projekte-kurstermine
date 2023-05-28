@@ -9,6 +9,7 @@ import at.htl.courseschedule.service.AppointmentService;
 import javafx.beans.binding.Bindings;
 import javafx.beans.binding.BooleanBinding;
 import javafx.collections.FXCollections;
+import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
@@ -24,6 +25,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.time.format.TextStyle;
 import java.util.Arrays;
 import java.util.List;
@@ -62,23 +64,19 @@ public class AdminViewController {
         timeGrid.widthProperty().addListener((observableValue, number, t1) -> recalcComponentSizes());
 
         drawPane.heightProperty().addListener((observableValue, number, t1) -> recalcComponentSizes());
-
-        // Show some sample data
-        Instructor instructor = new Instructor("k", "k", ",", " ");
-        Course course1 = new Course("a", "b", 60, 10);
-        Course course2 = new Course("a", "b", 30, 10);
-
-        Appointment app = new Appointment(
-                LocalDateTime.of(2023, 5, 22, 8, 30, 0),
-                instructor,
-                course1);
-        Appointment app2 = new Appointment(
-                LocalDateTime.of(2023, 5, 22, 9, 30, 0),
-                instructor,
-                course2);
-
-        showAppointment(app);
-        showAppointment(app2);
+        ObservableList<Appointment> appointments = AppointmentService.getInstance().getAppointments();
+        appointments.forEach(this::showAppointment);
+        appointments.addListener((ListChangeListener<? super Appointment>) change -> {
+            while (change.next()) {
+                if (change.wasAdded()) {
+                    Appointment appointment = change.getAddedSubList().get(0);
+                    showAppointment(appointment);
+                } else if (change.wasRemoved()) {
+                    drawPane.getChildren().clear();
+                    AppointmentService.getInstance().getAppointments().forEach(this::showAppointment);
+                }
+            }
+        });
     }
 
     private void addGridConstraints() {
@@ -252,17 +250,16 @@ public class AdminViewController {
                         return false;
                     }
 
-                    if (!time.getText().matches("^\\d{2}:\\d{2}$")) {
+                    LocalTime localTime;
+
+                    try {
+                        localTime = LocalTime.parse(time.getText());
+                    } catch (DateTimeParseException e) {
                         errorLabel.setText("Enter a valid time format hh:mm!");
                         return false;
                     }
 
-                    int[] timeValues = Arrays.stream(time.getText().split(":")).mapToInt(Integer::parseInt)
-                            .toArray();
-
-                    if (timeValues[0] > 20 || timeValues[0] < 8 ||
-                            Arrays.stream(timeValues).skip(1).anyMatch(value -> value > 59) ||
-                            Arrays.stream(timeValues).skip(1).anyMatch(value -> value < 0)) {
+                    if (localTime.getHour() > 20 || localTime.getHour() < 8) {
                         errorLabel.setText("The time you entered is not valid!");
                         return false;
                     }
@@ -288,8 +285,7 @@ public class AdminViewController {
         dialog.getDialogPane().setContent(grid);
         dialog.setResultConverter(dialogButton -> {
             if (isAppointment.get()) {
-                int[] timeValues = Arrays.stream(time.getText().split(":")).mapToInt(Integer::parseInt).toArray();
-                LocalDateTime dateTime = LocalDateTime.of(date.getValue(), LocalTime.of(timeValues[0], timeValues[1]));
+                LocalDateTime dateTime = LocalDateTime.of(date.getValue(), LocalTime.parse(time.getText()));
                 return new Appointment(dateTime, instructorSelector.getValue(), courseSelector.getValue());
             }
 
