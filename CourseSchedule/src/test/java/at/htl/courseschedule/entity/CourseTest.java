@@ -19,8 +19,12 @@ class CourseTest {
     @Test
     void test_getters_after_simple_constructor_ok() {
         // arrange
-        Course course = new Course("Course1", "Test Course", 90,
-                1);
+        Course course = new Course(
+                "Course1",
+                "Test Course",
+                90,
+                1
+        );
 
         // act
 
@@ -70,8 +74,11 @@ class CourseTest {
     @Test
     void test_setters_with_simple_constructor_ok() {
         // arrange
-        Course course = new Course("Das große ABC", "In diesem Kurs lernt niemand was?",
-                0, 0);
+        Course course = new Course(
+                "Das große ABC",
+                "In diesem Kurs lernt niemand was?",
+                0,
+                0);
 
         // act
         course.setId(120L);
