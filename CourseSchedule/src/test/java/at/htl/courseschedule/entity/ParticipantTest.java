@@ -19,8 +19,13 @@ class ParticipantTest {
     @Test
     void test_getters_with_simple_constructor_ok() {
         // arrange
-        Participant participant = new Participant("firstName", "lastName", 2000,
-                "+43 6704070789", "lastName@gmail.com");
+        Participant participant = new Participant(
+                "firstName",
+                "lastName",
+                2000,
+                "+43 6704070789",
+                "lastName@gmail.com"
+        );
 
         // act
 
@@ -75,8 +80,13 @@ class ParticipantTest {
     @Test
     void test_setters_with_simple_constructor_ok() {
         // arrange
-        Participant participant = new Participant("Anita", "Huber", 1999,
-                "+43 681 0304877", "anitaHuber@gmail.com");
+        Participant participant = new Participant(
+                "Anita",
+                "Huber",
+                1999,
+                "+43 681 0304877",
+                "anitaHuber@gmail.com"
+        );
 
         // act
         participant.setId(23L);
