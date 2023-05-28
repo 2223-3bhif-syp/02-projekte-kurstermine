@@ -1,14 +1,13 @@
 package at.htl.courseschedule.view;
 
-import at.htl.courseschedule.controller.CourseRepository;
-import at.htl.courseschedule.controller.InstructorRepository;
 import at.htl.courseschedule.entity.Appointment;
 import at.htl.courseschedule.entity.Course;
 import at.htl.courseschedule.entity.Instructor;
 import at.htl.courseschedule.service.AppointmentService;
+import at.htl.courseschedule.service.CourseService;
+import at.htl.courseschedule.service.InstructorService;
 import javafx.beans.binding.Bindings;
 import javafx.beans.binding.BooleanBinding;
-import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -220,12 +219,10 @@ public class AdminViewController {
         TextField time = new TextField();
         time.setPromptText("hh:mm");
         ComboBox<Instructor> instructorSelector = new ComboBox<>();
-        InstructorRepository instructorRepository = new InstructorRepository();
-        instructorSelector.setItems(FXCollections.observableList(instructorRepository.findAll()));
+        instructorSelector.setItems(InstructorService.getInstance().getInstructors());
         instructorSelector.setPromptText("Instructor");
         ComboBox<Course> courseSelector = new ComboBox<>();
-        CourseRepository courseRepository = new CourseRepository();
-        courseSelector.setItems(FXCollections.observableList(courseRepository.findAll()));
+        courseSelector.setItems(CourseService.getInstance().getCourses());
         courseSelector.setPromptText("Course");
         Label errorLabel = new Label();
         errorLabel.setTextFill(Color.RED);

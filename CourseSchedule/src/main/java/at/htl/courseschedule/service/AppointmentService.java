@@ -47,6 +47,6 @@ public class AppointmentService implements Service<Appointment> {
     }
 
     public ObservableList<Appointment> getAppointments() {
-        return FXCollections.unmodifiableObservableList(appointments);
+        return appointments;
     }
 }
