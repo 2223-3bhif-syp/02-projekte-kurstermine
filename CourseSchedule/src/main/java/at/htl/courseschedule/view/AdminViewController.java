@@ -11,6 +11,7 @@ import javafx.beans.binding.BooleanBinding;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -26,6 +27,7 @@ import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.time.chrono.ChronoLocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.time.format.TextStyle;
@@ -84,6 +86,26 @@ public class AdminViewController {
         weekBeforeBtn.setGraphic(viewLeft);
         weekAfterBtn.setGraphic(viewRight);
 
+        datepicker.setValue(LocalDate.now());
+        datepicker.setOnAction(event -> {
+            //resets the dates from above
+            addWeekdayLabels();
+
+            //sets the predicate for the current appointments
+            filteredAppointments.setPredicate((a) ->
+                    a.getStart()
+                            .isAfter(getDateOfDayOfWeek(DayOfWeek.MONDAY).atStartOfDay()) &&
+                            a.getStart()
+                                    .plusMinutes(a.getCourse().getMinutesPerAppointment())
+                                    .isBefore(getDateOfDayOfWeek(DayOfWeek.SUNDAY).atStartOfDay().plusHours(23))
+            );
+
+            // redraws all appointments
+            redrawAppointments();
+
+            System.out.println("Hello");
+        });
+
         //add Btn initialisation
         addButton.setShape(new Circle(1.5));
 
@@ -104,14 +126,35 @@ public class AdminViewController {
         filteredAppointments.addListener((ListChangeListener<Appointment>) change -> redrawAppointments());
         filteredAppointments.setPredicate((a) ->
                 a.getStart()
-                    .isAfter(LocalDateTime.of(2023, 5, 22, 8, 0)) &&
+                    .isAfter(getDateOfDayOfWeek(DayOfWeek.MONDAY).atStartOfDay()) &&
                 a.getStart()
                     .plusMinutes(a.getCourse().getMinutesPerAppointment())
-                    .isBefore(LocalDateTime.of(2023, 5, 28, 22, 0))
+                    .isBefore(getDateOfDayOfWeek(DayOfWeek.SUNDAY).atStartOfDay().plusHours(23))
         );
 
         // Force initial draw
         redrawAppointments();
+    }
+
+    private LocalDate getDateOfDayOfWeek(DayOfWeek dayOfWeek) {
+        List<LocalDate> weekDates = Arrays.stream(DayOfWeek.values())
+                .map(datepicker.getValue()::with)
+                .toList();
+        return weekDates.get(dayOfWeekToInt(dayOfWeek));
+    }
+
+    private int dayOfWeekToInt(DayOfWeek dayOfWeek) {
+        int result = switch (dayOfWeek) {
+            case TUESDAY -> 1;
+            case WEDNESDAY -> 2;
+            case THURSDAY -> 3;
+            case FRIDAY -> 4;
+            case SATURDAY -> 5;
+            case SUNDAY -> 6;
+            default -> 0;
+        };
+
+        return result;
     }
 
     private void addGridConstraints() {
@@ -144,7 +187,7 @@ public class AdminViewController {
     private void addWeekdayLabels() {
         // Prepare Dates of the current week
         LocalDate now = LocalDate.now();
-        List<LocalDate> weekDates = Arrays.stream(DayOfWeek.values()).map(now::with).toList();
+        List<LocalDate> weekDates = Arrays.stream(DayOfWeek.values()).map(datepicker.getValue()::with).toList();
 
         for (int i = 0; i < DAYS_PER_WEEK; i++) {
             // Convert date back to day of week and get short form for a german locale
@@ -331,5 +374,17 @@ public class AdminViewController {
 
         Optional<Appointment> optionalAppointment = dialog.showAndWait();
         optionalAppointment.ifPresent(appointment -> appointmentService.add(appointment));
+    }
+
+    @FXML
+    private void weekAfterBtnClicked(ActionEvent actionEvent) {
+        datepicker.setValue(datepicker.getValue().plusWeeks(1));
+        datepicker.setValue(getDateOfDayOfWeek(DayOfWeek.MONDAY));
+    }
+
+    @FXML
+    public void weekBeforeBtnClicked(ActionEvent actionEvent) {
+        datepicker.setValue(datepicker.getValue().minusWeeks(1));
+        datepicker.setValue(getDateOfDayOfWeek(DayOfWeek.MONDAY));
     }
 }
