@@ -12,6 +12,7 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 import static org.assertj.db.api.Assertions.assertThat;
+import static org.assertj.db.output.Outputs.output;
 
 class CourseRepositoryTest {
     private static final String tableName = "CS_COURSE";
@@ -45,21 +46,26 @@ class CourseRepositoryTest {
         // act
         courseRepository.save(course);
 
+        output(table).toConsole();
+
         course.setMinutesPerAppointment(60);
         courseRepository.save(course);
 
         // assert
+        table = new Table(
+                Database.getDataSource(),
+                tableName
+        );
+
+        output(table).toConsole();
+
         assertThat(course.getId()).isEqualTo(1);
 
-        assertThat(table).column("C_ID")
-                .value().isEqualTo(course.getId());
-        assertThat(table).column("C_NAME")
-                .value().isEqualTo(course.getName());
-        assertThat(table).column("C_DESCRIPTION")
-                .value().isEqualTo(course.getDescription());
-        assertThat(table).column("C_MINUTES_PER_APPOINTMENT")
-                .value().isEqualTo(course.getMinutesPerAppointment());
-        assertThat(table).column("C_AMOUNT_OF_APPOINTMENTS")
+        assertThat(table).row(0)
+                .value().isEqualTo(course.getId())
+                .value().isEqualTo(course.getName())
+                .value().isEqualTo(course.getDescription())
+                .value().isEqualTo(course.getMinutesPerAppointment())
                 .value().isEqualTo(course.getAmountOfAppointments());
     }
 
@@ -94,21 +100,26 @@ class CourseRepositoryTest {
         // act
         courseRepository.insert(course);
 
+        output(table).toConsole();
+
         course.setMinutesPerAppointment(60);
         courseRepository.update(course);
 
         // assert
+        table = new Table(
+                Database.getDataSource(),
+                tableName
+        );
+
+        output(table).toConsole();
+
         assertThat(course.getId()).isEqualTo(1);
 
-        assertThat(table).column("C_ID")
-                .value().isEqualTo(course.getId());
-        assertThat(table).column("C_NAME")
-                .value().isEqualTo(course.getName());
-        assertThat(table).column("C_DESCRIPTION")
-                .value().isEqualTo(course.getDescription());
-        assertThat(table).column("C_MINUTES_PER_APPOINTMENT")
-                .value().isEqualTo(course.getMinutesPerAppointment());
-        assertThat(table).column("C_AMOUNT_OF_APPOINTMENTS")
+        assertThat(table).row(0)
+                .value().isEqualTo(course.getId())
+                .value().isEqualTo(course.getName())
+                .value().isEqualTo(course.getDescription())
+                .value().isEqualTo(course.getMinutesPerAppointment())
                 .value().isEqualTo(course.getAmountOfAppointments());
     }
 
@@ -143,18 +154,23 @@ class CourseRepositoryTest {
         // act
         courseRepository.insert(course);
 
+        output(table).toConsole();
+
         // assert
+        table = new Table(
+                Database.getDataSource(),
+                tableName
+        );
+
+        output(table).toConsole();
+
         assertThat(course.getId()).isEqualTo(1);
 
-        assertThat(table).column("C_ID")
-                .value().isEqualTo(course.getId());
-        assertThat(table).column("C_NAME")
-                .value().isEqualTo(course.getName());
-        assertThat(table).column("C_DESCRIPTION")
-                .value().isEqualTo(course.getDescription());
-        assertThat(table).column("C_MINUTES_PER_APPOINTMENT")
-                .value().isEqualTo(course.getMinutesPerAppointment());
-        assertThat(table).column("C_AMOUNT_OF_APPOINTMENTS")
+        assertThat(table).row(0)
+                .value().isEqualTo(course.getId())
+                .value().isEqualTo(course.getName())
+                .value().isEqualTo(course.getDescription())
+                .value().isEqualTo(course.getMinutesPerAppointment())
                 .value().isEqualTo(course.getAmountOfAppointments());
     }
 
