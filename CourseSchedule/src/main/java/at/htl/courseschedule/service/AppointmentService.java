@@ -26,21 +26,27 @@ public class AppointmentService implements Service<Appointment> {
     @Override
     public void add(Appointment appointment) {
         appointmentRepository.insert(appointment);
-        appointments.add(appointment);
+        updateAppointments();
     }
 
     @Override
     public void remove(Appointment appointment) {
         appointmentRepository.delete(appointment);
-        appointments.remove(appointment);
+        updateAppointments();
     }
 
     @Override
     public void update(Appointment appointment) {
         appointmentRepository.update(appointment);
+        updateAppointments();
+    }
+
+    private void updateAppointments() {
+        appointments.clear();
+        appointments.setAll(appointmentRepository.findAll());
     }
 
     public ObservableList<Appointment> getAppointments() {
-        return appointments;
+        return FXCollections.unmodifiableObservableList(appointments);
     }
 }
