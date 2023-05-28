@@ -16,6 +16,8 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
@@ -44,6 +46,15 @@ public class AdminViewController {
     private static final double DAY_OF_WEEK_COL_PERCENTAGE = 13.5d;
 
     @FXML
+    private Button weekBeforeBtn;
+
+    @FXML
+    private DatePicker datepicker;
+
+    @FXML
+    private Button weekAfterBtn;
+
+    @FXML
     private GridPane timeGrid;
 
     @FXML
@@ -57,6 +68,23 @@ public class AdminViewController {
 
     @FXML
     public void initialize() {
+        //Pagination initialisation
+        Image btnImage = new Image(String.valueOf(App.class.getResource("/arrow-image.png")));
+
+        ImageView viewLeft = new ImageView(btnImage);
+        ImageView viewRight = new ImageView(btnImage);
+
+        viewLeft.setRotate(180);
+        viewLeft.setPreserveRatio(true);
+        viewRight.setPreserveRatio(true);
+
+        viewLeft.setFitHeight(17);
+        viewRight.setFitHeight(17);
+
+        weekBeforeBtn.setGraphic(viewLeft);
+        weekAfterBtn.setGraphic(viewRight);
+
+        //add Btn initialisation
         addButton.setShape(new Circle(1.5));
 
         // Add rows and cols with correct height and width
