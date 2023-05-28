@@ -34,7 +34,8 @@ class AppointmentRepositoryTest {
         // arrange
         Table table = new Table(
                 Database.getDataSource(),
-                tableName);
+                tableName
+        );
 
         AppointmentRepository appointmentRepository = new AppointmentRepository();
         LocalDateTime dateTime = LocalDateTime.of(
@@ -42,12 +43,14 @@ class AppointmentRepositoryTest {
                 5,
                 26,
                 12,
-                30);
+                30
+        );
         Instructor instructor = new Instructor(
                 "firstName",
                 "lastName",
                 "+43 6704070789",
-                "lastName@gmail.com");
+                "lastName@gmail.com"
+        );
         InstructorRepository instructorRepository = new InstructorRepository();
         instructorRepository.save(instructor);
 
@@ -55,14 +58,16 @@ class AppointmentRepositoryTest {
                 "Course1",
                 "Test Course",
                 90,
-                1);
+                1
+        );
         CourseRepository courseRepository = new CourseRepository();
         courseRepository.save(course);
 
         Appointment appointment = new Appointment(
                 dateTime,
                 instructor,
-                course);
+                course
+        );
 
         // act
         appointmentRepository.save(appointment);
@@ -93,11 +98,13 @@ class AppointmentRepositoryTest {
                 5,
                 26,
                 12,
-                30);
+                30
+        );
         Appointment appointment = new Appointment(
                 dateTime,
                 null,
-                null);
+                null
+        );
 
         // act
 
@@ -123,7 +130,8 @@ class AppointmentRepositoryTest {
         // arrange
         Table table = new Table(
                 Database.getDataSource(),
-                tableName);
+                tableName
+        );
 
         AppointmentRepository appointmentRepository = new AppointmentRepository();
 
@@ -132,12 +140,14 @@ class AppointmentRepositoryTest {
                 5,
                 26,
                 12,
-                30);
+                30
+        );
         Instructor instructor = new Instructor(
                 "firstName",
                 "lastName",
                 "+43 6704070789",
-                "lastName@gmail.com");
+                "lastName@gmail.com"
+        );
         InstructorRepository instructorRepository = new InstructorRepository();
         instructorRepository.save(instructor);
 
@@ -145,14 +155,16 @@ class AppointmentRepositoryTest {
                 "Course1",
                 "Test Course",
                 90,
-                1);
+                1
+        );
         CourseRepository courseRepository = new CourseRepository();
         courseRepository.save(course);
 
         Appointment appointment = new Appointment(
                 dateTime,
                 instructor,
-                course);
+                course
+        );
 
         // act
         appointmentRepository.insert(appointment);
@@ -183,11 +195,13 @@ class AppointmentRepositoryTest {
                 5,
                 26,
                 12,
-                30);
+                30
+        );
         Appointment appointment = new Appointment(
                 now,
                 null,
-                null);
+                null
+        );
 
         // act
 
@@ -213,7 +227,8 @@ class AppointmentRepositoryTest {
         // arrange
         Table table = new Table(
                 Database.getDataSource(),
-                tableName);
+                tableName
+        );
 
         AppointmentRepository appointmentRepository = new AppointmentRepository();
 
@@ -222,12 +237,14 @@ class AppointmentRepositoryTest {
                 5,
                 26,
                 12,
-                30);
+                30
+        );
         Instructor instructor = new Instructor(
                 "firstName",
                 "lastName",
                 "+43 6704070789",
-                "lastName@gmail.com");
+                "lastName@gmail.com"
+        );
         InstructorRepository instructorRepository = new InstructorRepository();
         instructorRepository.save(instructor);
 
@@ -235,14 +252,16 @@ class AppointmentRepositoryTest {
                 "Course1",
                 "Test Course",
                 90,
-                1);
+                1
+        );
         CourseRepository courseRepository = new CourseRepository();
         courseRepository.save(course);
 
         Appointment appointment = new Appointment(
                 dateTime,
                 instructor,
-                course);
+                course
+        );
 
         // act
         appointmentRepository.insert(appointment);
@@ -269,11 +288,13 @@ class AppointmentRepositoryTest {
                 5,
                 26,
                 12,
-                30);
+                30
+        );
         Appointment appointment = new Appointment(
                 now,
                 null,
-                null);
+                null
+        );
 
         // act
 
@@ -299,7 +320,8 @@ class AppointmentRepositoryTest {
         // arrange
         Table table = new Table(
                 Database.getDataSource(),
-                tableName);
+                tableName
+        );
 
         AppointmentRepository appointmentRepository = new AppointmentRepository();
         LocalDateTime dateTime = LocalDateTime.of(
@@ -307,12 +329,14 @@ class AppointmentRepositoryTest {
                 5,
                 26,
                 12,
-                30);
+                30
+        );
         Instructor instructor = new Instructor(
                 "firstName",
                 "lastName",
                 "+43 6704070789",
-                "lastName@gmail.com");
+                "lastName@gmail.com"
+        );
         InstructorRepository instructorRepository = new InstructorRepository();
         instructorRepository.save(instructor);
 
@@ -320,14 +344,16 @@ class AppointmentRepositoryTest {
                 "Course1",
                 "Test Course",
                 90,
-                1);
+                1
+        );
         CourseRepository courseRepository = new CourseRepository();
         courseRepository.save(course);
 
         Appointment appointment = new Appointment(
                 dateTime,
                 instructor,
-                course);
+                course
+        );
 
         // act
         appointmentRepository.save(appointment);
@@ -348,11 +374,13 @@ class AppointmentRepositoryTest {
                 5,
                 26,
                 12,
-                30);
+                30
+        );
         Appointment appointment = new Appointment(
                 now,
                 null,
-                null);
+                null
+        );
 
         // act
 
@@ -383,12 +411,14 @@ class AppointmentRepositoryTest {
                 5,
                 26,
                 12,
-                30);
+                30
+        );
         Instructor instructor = new Instructor(
                 "firstName",
                 "lastName",
                 "+43 6704070789",
-                "lastName@gmail.com");
+                "lastName@gmail.com"
+        );
         InstructorRepository instructorRepository = new InstructorRepository();
         instructorRepository.save(instructor);
 
@@ -397,33 +427,39 @@ class AppointmentRepositoryTest {
                 "Course1",
                 "Test Course",
                 90,
-                1);
+                1
+        );
         courseRepository.save(course1);
         Course course2 = new Course(
                 "Course2",
                 "Test Course",
                 90,
-                1);
+                1
+        );
         courseRepository.save(course2);
         Course course3 = new Course(
                 "Course3",
                 "Test Course",
                 90,
-                1);
+                1
+        );
         courseRepository.save(course3);
 
         Appointment appointment1 = new Appointment(
                 dateTime,
                 instructor,
-                course1);
+                course1
+        );
         Appointment appointment2 = new Appointment(
                 dateTime,
                 instructor,
-                course2);
+                course2
+        );
         Appointment appointment3 = new Appointment(
                 dateTime,
                 instructor,
-                course3);
+                course3
+        );
 
         // act
         appointmentRepository.save(appointment1);
@@ -448,12 +484,14 @@ class AppointmentRepositoryTest {
                 5,
                 26,
                 12,
-                30);
+                30
+        );
         Instructor instructor = new Instructor(
                 "firstName",
                 "lastName",
                 "+43 6704070789",
-                "lastName@gmail.com");
+                "lastName@gmail.com"
+        );
         InstructorRepository instructorRepository = new InstructorRepository();
         instructorRepository.save(instructor);
 
@@ -462,33 +500,39 @@ class AppointmentRepositoryTest {
                 "Course1",
                 "Test Course",
                 90,
-                1);
+                1
+        );
         courseRepository.save(course1);
         Course course2 = new Course(
                 "Course2",
                 "Test Course",
                 90,
-                1);
+                1
+        );
         courseRepository.save(course2);
         Course course3 = new Course(
                 "Course3",
                 "Test Course",
                 90,
-                1);
+                1
+        );
         courseRepository.save(course3);
 
         Appointment appointment1 = new Appointment(
                 dateTime,
                 instructor,
-                course1);
+                course1
+        );
         Appointment appointment2 = new Appointment(
                 dateTime,
                 instructor,
-                course2);
+                course2
+        );
         Appointment appointment3 = new Appointment(
                 dateTime,
                 instructor,
-                course3);
+                course3
+        );
 
         // act
         appointmentRepository.save(appointment1);

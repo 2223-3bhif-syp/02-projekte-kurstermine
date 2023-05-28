@@ -31,14 +31,16 @@ class CourseRepositoryTest {
         // arrange
         Table table = new Table(
                 Database.getDataSource(),
-                tableName);
+                tableName
+        );
 
         CourseRepository courseRepository = new CourseRepository();
         Course course = new Course(
                 "Course1",
                 "Test Course",
                 90,
-                1);
+                1
+        );
 
         // act
         courseRepository.save(course);
@@ -78,14 +80,16 @@ class CourseRepositoryTest {
         // arrange
         Table table = new Table(
                 Database.getDataSource(),
-                tableName);
+                tableName
+        );
 
         CourseRepository courseRepository = new CourseRepository();
         Course course = new Course(
                 "Course1",
                 "Test Course",
                 90,
-                1);
+                1
+        );
 
         // act
         courseRepository.insert(course);
@@ -125,14 +129,16 @@ class CourseRepositoryTest {
         // arrange
         Table table = new Table(
                 Database.getDataSource(),
-                tableName);
+                tableName
+        );
 
         CourseRepository courseRepository = new CourseRepository();
         Course course = new Course(
                 "Course1",
                 "Test Course",
                 90,
-                1);
+                1
+        );
 
         // act
         courseRepository.insert(course);
@@ -169,14 +175,16 @@ class CourseRepositoryTest {
         // arrange
         Table table = new Table(
                 Database.getDataSource(),
-                tableName);
+                tableName
+        );
 
         CourseRepository courseRepository = new CourseRepository();
         Course course = new Course(
                 "Course1",
                 "Test Course",
                 90,
-                1);
+                1
+        );
 
         // act
         courseRepository.insert(course);
@@ -208,17 +216,20 @@ class CourseRepositoryTest {
                 "Course1",
                 "Test Course",
                 90,
-                1);
+                1
+        );
         Course course2 = new Course(
                 "Course2",
                 "Test Course",
                 90,
-                1);
+                1
+        );
         Course course3 = new Course(
                 "Course3",
                 "Test Course",
                 90,
-                1);
+                1
+        );
 
         // act
         courseRepository.save(course1);
@@ -241,17 +252,20 @@ class CourseRepositoryTest {
                 "Course1",
                 "Test Course",
                 90,
-                1);
+                1
+        );
         Course course2 = new Course(
                 "Course2",
                 "Test Course",
                 90,
-                1);
+                1
+        );
         Course course3 = new Course(
                 "Course3",
                 "Test Course",
                 90,
-                1);
+                1
+        );
 
         // act
         courseRepository.save(course1);

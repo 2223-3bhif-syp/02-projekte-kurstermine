@@ -29,11 +29,18 @@ class InstructorRepositoryTest {
     @Test
     void test_save_save_simple_instructor_ok() {
         // arrange
-        Table table = new Table(Database.getDataSource(), tableName);
+        Table table = new Table(
+                Database.getDataSource(),
+                tableName
+        );
 
         InstructorRepository insRep = new InstructorRepository();
-        Instructor instructor = new Instructor("firstName", "lastName", "+43 6704070789",
-                "lastName@gmail.com");
+        Instructor instructor = new Instructor(
+                "firstName",
+                "lastName",
+                "+43 6704070789",
+                "lastName@gmail.com"
+        );
 
         // act
         insRep.save(instructor);
@@ -65,11 +72,18 @@ class InstructorRepositoryTest {
     @Test
     void test_update_update_instructor_ok() {
         // arrange
-        Table table = new Table(Database.getDataSource(), tableName);
+        Table table = new Table(
+                Database.getDataSource(),
+                tableName
+        );
 
         InstructorRepository insRep = new InstructorRepository();
-        Instructor instructor = new Instructor("firstName", "lastName", "+43 6704070789",
-                "lastName@gmail.com");
+        Instructor instructor = new Instructor(
+                "firstName",
+                "lastName",
+                "+43 6704070789",
+                "lastName@gmail.com"
+        );
 
         // act
         insRep.insert(instructor);
@@ -102,11 +116,18 @@ class InstructorRepositoryTest {
     @Test
     void test_insert_insert_instructor_ok() {
         // arrange
-        Table table = new Table(Database.getDataSource(), tableName);
+        Table table = new Table(
+                Database.getDataSource(),
+                tableName
+        );
 
         InstructorRepository insRep = new InstructorRepository();
-        Instructor instructor = new Instructor("firstName", "lastName", "+43 6704070789",
-                "lastName@gmail.com");
+        Instructor instructor = new Instructor(
+                "firstName",
+                "lastName",
+                "+43 6704070789",
+                "lastName@gmail.com"
+        );
 
         // act
         insRep.insert(instructor);
@@ -136,11 +157,18 @@ class InstructorRepositoryTest {
     @Test
     void test_delete_delete_instructor_ok() {
         // arrange
-        Table table = new Table(Database.getDataSource(), tableName);
+        Table table = new Table(
+                Database.getDataSource(),
+                tableName
+        );
 
         InstructorRepository insRep = new InstructorRepository();
-        Instructor instructor = new Instructor("firstName", "lastName", "+43 6704070789",
-                "lastName@gmail.com");
+        Instructor instructor = new Instructor(
+                "firstName",
+                "lastName",
+                "+43 6704070789",
+                "lastName@gmail.com"
+        );
 
         // act
         insRep.insert(instructor);
@@ -168,12 +196,24 @@ class InstructorRepositoryTest {
     void test_findall_find_elements_ok() {
         // arrange
         InstructorRepository insRep = new InstructorRepository();
-        Instructor instructor1 = new Instructor("1", "lastName", "+43 6704070789",
-                "lastName@gmail.com");
-        Instructor instructor2 = new Instructor("2", "lastName", "+43 6704070789",
-                "lastName@gmail.com");
-        Instructor instructor3 = new Instructor("3", "lastName", "+43 6704070789",
-                "lastName@gmail.com");
+        Instructor instructor1 = new Instructor(
+                "1",
+                "lastName",
+                "+43 6704070789",
+                "lastName@gmail.com"
+        );
+        Instructor instructor2 = new Instructor(
+                "2",
+                "lastName",
+                "+43 6704070789",
+                "lastName@gmail.com"
+        );
+        Instructor instructor3 = new Instructor(
+                "3",
+                "lastName",
+                "+43 6704070789",
+                "lastName@gmail.com"
+        );
 
         // act
         insRep.save(instructor1);
@@ -192,12 +232,24 @@ class InstructorRepositoryTest {
     void test_findbyid_find_elements_ok() {
         // arrange
         InstructorRepository insRep = new InstructorRepository();
-        Instructor instructor1 = new Instructor("1", "lastName", "+43 6704070789",
-                "lastName@gmail.com");
-        Instructor instructor2 = new Instructor("2", "lastName", "+43 6704070789",
-                "lastName@gmail.com");
-        Instructor instructor3 = new Instructor("3", "lastName", "+43 6704070789",
-                "lastName@gmail.com");
+        Instructor instructor1 = new Instructor(
+                "1",
+                "lastName",
+                "+43 6704070789",
+                "lastName@gmail.com"
+        );
+        Instructor instructor2 = new Instructor(
+                "2",
+                "lastName",
+                "+43 6704070789",
+                "lastName@gmail.com"
+        );
+        Instructor instructor3 = new Instructor(
+                "3",
+                "lastName",
+                "+43 6704070789",
+                "lastName@gmail.com"
+        );
 
         // act
         insRep.save(instructor1);
