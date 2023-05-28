@@ -31,22 +31,51 @@ public class RegistrationRepositoryTest {
     @Test
     void test_save_save_simple_registration_and_check_database_ok() {
         // arrange
-        Table table = new Table(Database.getDataSource(), tableName);
+        Table table = new Table(
+                Database.getDataSource(),
+                tableName
+        );
         RegistrationRepository registrationRepository = new RegistrationRepository();
         AppointmentRepository appointmentRepository = new AppointmentRepository();
         CourseRepository courseRepository = new CourseRepository();
         InstructorRepository instructorRepository = new InstructorRepository();
         ParticipantRepository participantRepository = new ParticipantRepository();
 
-        Participant participant = new Participant("Hans", "Müller", 1997,
-                "+43 681 2340234085", "hansmueller@gmail.com");
-        Instructor instructor = new Instructor("Franz", "Huber",
-                "+43 770 232342877", "fhuber@yahoo.com");
-        Course course = new Course("Example", "Lorem ipsum", 50,
-                10);
-        LocalDateTime now = LocalDateTime.of(2023, 5, 26, 12, 30);
-        Appointment appointment = new Appointment(now, instructor, course);
-        Registration registration = new Registration(participant, appointment);
+        Participant participant = new Participant(
+                "Hans",
+                "Müller",
+                1997,
+                "+43 681 2340234085",
+                "hansmueller@gmail.com"
+        );
+        Instructor instructor = new Instructor(
+                "Franz",
+                "Huber",
+                "+43 770 232342877",
+                "fhuber@yahoo.com"
+        );
+        Course course = new Course(
+                "Example",
+                "Lorem ipsum",
+                50,
+                10
+        );
+        LocalDateTime now = LocalDateTime.of(
+                2023,
+                5,
+                26,
+                12,
+                30
+        );
+        Appointment appointment = new Appointment(
+                now,
+                instructor,
+                course
+        );
+        Registration registration = new Registration(
+                participant,
+                appointment
+        );
 
         participantRepository.save(participant);
         instructorRepository.save(instructor);
@@ -68,7 +97,9 @@ public class RegistrationRepositoryTest {
     void test_save_participant_and_appointment_null_ok() {
         // arrange
         RegistrationRepository registrationRepository = new RegistrationRepository();
-        Registration registration = new Registration(null, null);
+        Registration registration = new Registration(
+                null,
+                null);
 
         // act
 
@@ -93,25 +124,63 @@ public class RegistrationRepositoryTest {
     @Test
     void test_update_update_registration_and_check_database_ok() {
         // arrange
-        Table table = new Table(Database.getDataSource(), tableName);
+        Table table = new Table(
+                Database.getDataSource(),
+                tableName
+        );
         RegistrationRepository registrationRepository = new RegistrationRepository();
         AppointmentRepository appointmentRepository = new AppointmentRepository();
         CourseRepository courseRepository = new CourseRepository();
         InstructorRepository instructorRepository = new InstructorRepository();
         ParticipantRepository participantRepository = new ParticipantRepository();
 
-        Participant participant = new Participant("Hans", "Müller", 1997,
-                "+43 681 2340234085", "hansmueller@gmail.com");
-        Instructor instructor = new Instructor("Franz", "Huber",
-                "+43 770 232342877", "fhuber@yahoo.com");
-        Participant participant2 = new Participant("Florian", "Mühle", 1990,
-                "+43 681 234987", "fmuehle@gmail.com");
-        Course course = new Course("Example", "Lorem ipsum", 50,
-                10);
-        LocalDateTime now = LocalDateTime.of(2023, 5, 26, 12, 30);
-        Appointment appointment = new Appointment(now, instructor, course);
-        Appointment appointment2 = new Appointment(now.plusHours(5), instructor, course);
-        Registration registration = new Registration(participant, appointment);
+        Participant participant = new Participant(
+                "Hans",
+                "Müller",
+                1997,
+                "+43 681 2340234085",
+                "hansmueller@gmail.com"
+        );
+        Instructor instructor = new Instructor(
+                "Franz",
+                "Huber",
+                "+43 770 232342877",
+                "fhuber@yahoo.com"
+        );
+        Participant participant2 = new Participant(
+                "Florian",
+                "Mühle",
+                1990,
+                "+43 681 234987",
+                "fmuehle@gmail.com"
+        );
+        Course course = new Course(
+                "Example",
+                "Lorem ipsum",
+                50,
+                10
+        );
+        LocalDateTime now = LocalDateTime.of(
+                2023,
+                5,
+                26,
+                12,
+                30
+        );
+        Appointment appointment = new Appointment(
+                now,
+                instructor,
+                course
+        );
+        Appointment appointment2 = new Appointment(
+                now.plusHours(5),
+                instructor,
+                course
+        );
+        Registration registration = new Registration(
+                participant,
+                appointment
+        );
 
         participantRepository.save(participant);
         participantRepository.save(participant2);
@@ -139,7 +208,10 @@ public class RegistrationRepositoryTest {
     void test_update_participant_and_appointment_null_ok() {
         /// arrange
         RegistrationRepository registrationRepository = new RegistrationRepository();
-        Registration registration = new Registration(null, null);
+        Registration registration = new Registration(
+                null,
+                null
+        );
 
         // act
 
@@ -164,22 +236,51 @@ public class RegistrationRepositoryTest {
     @Test
     void test_insert_insert_appointment_and_check_database_ok() {
         // arrange
-        Table table = new Table(Database.getDataSource(), tableName);
+        Table table = new Table(
+                Database.getDataSource(),
+                tableName
+        );
         RegistrationRepository registrationRepository = new RegistrationRepository();
         AppointmentRepository appointmentRepository = new AppointmentRepository();
         CourseRepository courseRepository = new CourseRepository();
         InstructorRepository instructorRepository = new InstructorRepository();
         ParticipantRepository participantRepository = new ParticipantRepository();
 
-        Participant participant = new Participant("Hans", "Müller", 1997,
-                "+43 681 2340234085", "hansmueller@gmail.com");
-        Instructor instructor = new Instructor("Franz", "Huber",
-                "+43 770 232342877", "fhuber@yahoo.com");
-        Course course = new Course("Example", "Lorem ipsum", 50,
-                10);
-        LocalDateTime now = LocalDateTime.of(2023, 5, 26, 12, 30);
-        Appointment appointment = new Appointment(now, instructor, course);
-        Registration registration = new Registration(participant, appointment);
+        Participant participant = new Participant(
+                "Hans",
+                "Müller",
+                1997,
+                "+43 681 2340234085",
+                "hansmueller@gmail.com"
+        );
+        Instructor instructor = new Instructor(
+                "Franz",
+                "Huber",
+                "+43 770 232342877",
+                "fhuber@yahoo.com"
+        );
+        Course course = new Course(
+                "Example",
+                "Lorem ipsum",
+                50,
+                10
+        );
+        LocalDateTime now = LocalDateTime.of(
+                2023,
+                5,
+                26,
+                12,
+                30
+        );
+        Appointment appointment = new Appointment(
+                now,
+                instructor,
+                course
+        );
+        Registration registration = new Registration(
+                participant,
+                appointment
+        );
 
         participantRepository.save(participant);
         instructorRepository.save(instructor);
@@ -201,7 +302,10 @@ public class RegistrationRepositoryTest {
     void test_insert_participant_and_appointment_null_ok() {
         // arrange
         RegistrationRepository registrationRepository = new RegistrationRepository();
-        Registration registration = new Registration(null, null);
+        Registration registration = new Registration(
+                null,
+                null
+        );
 
         // act
 
@@ -225,20 +329,42 @@ public class RegistrationRepositoryTest {
     @Test
     void test_delete_delete_registration_from_database_ok() {
         // arrange
-        Table table = new Table(Database.getDataSource(), tableName);
+        Table table = new Table(
+                Database.getDataSource(),
+                tableName
+        );
         RegistrationRepository registrationRepository = new RegistrationRepository();
         AppointmentRepository appointmentRepository = new AppointmentRepository();
         CourseRepository courseRepository = new CourseRepository();
         InstructorRepository instructorRepository = new InstructorRepository();
         ParticipantRepository participantRepository = new ParticipantRepository();
 
-        Participant participant = new Participant("Hans", "Müller", 1997,
-                "+43 681 2340234085", "hansmueller@gmail.com");
-        Instructor instructor = new Instructor("Franz", "Huber",
-                "+43 770 232342877", "fhuber@yahoo.com");
-        Course course = new Course("Example", "Lorem ipsum", 50,
-                10);
-        LocalDateTime now = LocalDateTime.of(2023, 5, 26, 12, 30);
+        Participant participant = new Participant(
+                "Hans",
+                "Müller",
+                1997,
+                "+43 681 2340234085",
+                "hansmueller@gmail.com"
+        );
+        Instructor instructor = new Instructor(
+                "Franz",
+                "Huber",
+                "+43 770 232342877",
+                "fhuber@yahoo.com"
+        );
+        Course course = new Course(
+                "Example",
+                "Lorem ipsum",
+                50,
+                10
+        );
+        LocalDateTime now = LocalDateTime.of(
+                2023,
+                5,
+                26,
+                12,
+                30
+        );
         Appointment appointment = new Appointment(now, instructor, course);
         Registration registration = new Registration(participant, appointment);
 
@@ -261,7 +387,10 @@ public class RegistrationRepositoryTest {
     void test_delete_participant_and_appointment_null_ok() {
         // arrange
         RegistrationRepository registrationRepository = new RegistrationRepository();
-        Registration registration = new Registration(null, null);
+        Registration registration = new Registration(
+                null,
+                null
+        );
 
         // act
 
@@ -284,30 +413,83 @@ public class RegistrationRepositoryTest {
 
     @Test
     void test_findall_list_contains_inserted_values_ok() {
-        Table table = new Table(Database.getDataSource(), tableName);
+        Table table = new Table(
+                Database.getDataSource(),
+                tableName
+        );
         RegistrationRepository registrationRepository = new RegistrationRepository();
         AppointmentRepository appointmentRepository = new AppointmentRepository();
         CourseRepository courseRepository = new CourseRepository();
         InstructorRepository instructorRepository = new InstructorRepository();
         ParticipantRepository participantRepository = new ParticipantRepository();
 
-        Participant participant = new Participant("Hans", "Müller", 1997,
-                "+43 681 2340234085", "hansmueller@gmail.com");
-        Instructor instructor = new Instructor("Franz", "Huber",
-                "+43 770 232342877", "fhuber@yahoo.com");
-        Participant participant2 = new Participant("Florian", "Mühle", 1990,
-                "+43 681 234987", "fmuehle@gmail.com");
-        Participant participant3 = new Participant("Kilian", "Brand", 2001,
-                "+43 681 324678482", "kilibrnd@gmail.com");
-        Course course = new Course("Example", "Lorem ipsum", 50,
-                10);
-        LocalDateTime now = LocalDateTime.of(2023, 5, 26, 12, 30);
-        Appointment appointment = new Appointment(now, instructor, course);
-        Appointment appointment2 = new Appointment(now.plusHours(5), instructor, course);
-        Appointment appointment3 = new Appointment(now.plusHours(10), instructor, course);
-        Registration registration = new Registration(participant, appointment);
-        Registration registration2 = new Registration(participant2, appointment2);
-        Registration registration3 = new Registration(participant3, appointment3);
+        Participant participant = new Participant(
+                "Hans",
+                "Müller",
+                1997,
+                "+43 681 2340234085",
+                "hansmueller@gmail.com"
+        );
+        Instructor instructor = new Instructor(
+                "Franz",
+                "Huber",
+                "+43 770 232342877",
+                "fhuber@yahoo.com"
+        );
+        Participant participant2 = new Participant(
+                "Florian",
+                "Mühle",
+                1990,
+                "+43 681 234987",
+                "fmuehle@gmail.com"
+        );
+        Participant participant3 = new Participant(
+                "Kilian",
+                "Brand",
+                2001,
+                "+43 681 324678482",
+                "kilibrnd@gmail.com"
+        );
+        Course course = new Course(
+                "Example",
+                "Lorem ipsum",
+                50,
+                10
+        );
+        LocalDateTime now = LocalDateTime.of(
+                2023,
+                5,
+                26,
+                12,
+                30
+        );
+        Appointment appointment = new Appointment(
+                now,
+                instructor,
+                course
+        );
+        Appointment appointment2 = new Appointment(
+                now.plusHours(5),
+                instructor,
+                course
+        );
+        Appointment appointment3 = new Appointment(
+                now.plusHours(10),
+                instructor,
+                course
+        );
+        Registration registration = new Registration(
+                participant,
+                appointment
+        );
+        Registration registration2 = new Registration(
+                participant2,
+                appointment2
+        );
+        Registration registration3 = new Registration(
+                participant3,
+                appointment3
+        );
 
         participantRepository.save(participant);
         participantRepository.save(participant2);
@@ -332,30 +514,83 @@ public class RegistrationRepositoryTest {
 
     @Test
     void test_findbyid_find_inserted_values_ok() {
-        Table table = new Table(Database.getDataSource(), tableName);
+        Table table = new Table(
+                Database.getDataSource(),
+                tableName
+        );
         RegistrationRepository registrationRepository = new RegistrationRepository();
         AppointmentRepository appointmentRepository = new AppointmentRepository();
         CourseRepository courseRepository = new CourseRepository();
         InstructorRepository instructorRepository = new InstructorRepository();
         ParticipantRepository participantRepository = new ParticipantRepository();
 
-        Participant participant = new Participant("Hans", "Müller", 1997,
-                "+43 681 2340234085", "hansmueller@gmail.com");
-        Instructor instructor = new Instructor("Franz", "Huber",
-                "+43 770 232342877", "fhuber@yahoo.com");
-        Participant participant2 = new Participant("Florian", "Mühle", 1990,
-                "+43 681 234987", "fmuehle@gmail.com");
-        Participant participant3 = new Participant("Kilian", "Brand", 2001,
-                "+43 681 324678482", "kilibrnd@gmail.com");
-        Course course = new Course("Example", "Lorem ipsum", 50,
-                10);
-        LocalDateTime now = LocalDateTime.of(2023, 5, 26, 12, 30);
-        Appointment appointment = new Appointment(now, instructor, course);
-        Appointment appointment2 = new Appointment(now.plusHours(5), instructor, course);
-        Appointment appointment3 = new Appointment(now.plusHours(10), instructor, course);
-        Registration registration = new Registration(participant, appointment);
-        Registration registration2 = new Registration(participant2, appointment2);
-        Registration registration3 = new Registration(participant3, appointment3);
+        Participant participant = new Participant(
+                "Hans",
+                "Müller",
+                1997,
+                "+43 681 2340234085",
+                "hansmueller@gmail.com"
+        );
+        Instructor instructor = new Instructor(
+                "Franz",
+                "Huber",
+                "+43 770 232342877",
+                "fhuber@yahoo.com"
+        );
+        Participant participant2 = new Participant(
+                "Florian",
+                "Mühle",
+                1990,
+                "+43 681 234987",
+                "fmuehle@gmail.com"
+        );
+        Participant participant3 = new Participant(
+                "Kilian",
+                "Brand",
+                2001,
+                "+43 681 324678482",
+                "kilibrnd@gmail.com"
+        );
+        Course course = new Course(
+                "Example",
+                "Lorem ipsum",
+                50,
+                10
+        );
+        LocalDateTime now = LocalDateTime.of(
+                2023,
+                5,
+                26,
+                12,
+                30
+        );
+        Appointment appointment = new Appointment(
+                now,
+                instructor,
+                course
+        );
+        Appointment appointment2 = new Appointment(
+                now.plusHours(5),
+                instructor,
+                course
+        );
+        Appointment appointment3 = new Appointment(
+                now.plusHours(10),
+                instructor,
+                course
+        );
+        Registration registration = new Registration(
+                participant,
+                appointment
+        );
+        Registration registration2 = new Registration(
+                participant2,
+                appointment2
+        );
+        Registration registration3 = new Registration(
+                participant3,
+                appointment3
+        );
 
         participantRepository.save(participant);
         participantRepository.save(participant2);
