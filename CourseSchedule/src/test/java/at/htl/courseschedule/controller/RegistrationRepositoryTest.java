@@ -14,6 +14,7 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatExceptionOfType;
 import static org.assertj.db.api.Assertions.assertThat;
+import static org.assertj.db.output.Outputs.output;
 
 public class RegistrationRepositoryTest {
     private static final String tableName = "CS_REGISTRATION";
@@ -86,11 +87,14 @@ public class RegistrationRepositoryTest {
         registrationRepository.save(registration);
 
         // assert
+        output(table).toConsole();
+
         assertThat(registration.getId()).isEqualTo(1);
 
-        assertThat(table).column("R_ID").value().isEqualTo(registration.getId());
-        assertThat(table).column("R_A_ID").value().isEqualTo(appointment.getId());
-        assertThat(table).column("R_P_ID").value().isEqualTo(participant.getId());
+        assertThat(table).row()
+                .value().isEqualTo(registration.getId())
+                .value().isEqualTo(appointment.getId())
+                .value().isEqualTo(participant.getId());
     }
 
     @Test
@@ -191,17 +195,27 @@ public class RegistrationRepositoryTest {
         registrationRepository.save(registration);
 
         // act
+        output(table).toConsole();
+
         registration.setParticipant(participant2);
         registration.setAppointment(appointment2);
 
         registrationRepository.update(registration);
 
         // assert
+        table = new Table(
+                Database.getDataSource(),
+                tableName
+        );
+
+        output(table).toConsole();
+
         assertThat(registration.getId()).isEqualTo(1);
 
-        assertThat(table).column("R_ID").value().isEqualTo(registration.getId());
-        assertThat(table).column("R_A_ID").value().isEqualTo(appointment2.getId());
-        assertThat(table).column("R_P_ID").value().isEqualTo(participant2.getId());
+        assertThat(table).row()
+                .value().isEqualTo(registration.getId())
+                .value().isEqualTo(appointment.getId())
+                .value().isEqualTo(participant.getId());
     }
 
     @Test
@@ -291,11 +305,14 @@ public class RegistrationRepositoryTest {
         registrationRepository.insert(registration);
 
         // assert
+        output(table).toConsole();
+
         assertThat(registration.getId()).isEqualTo(1);
 
-        assertThat(table).column("R_ID").value().isEqualTo(registration.getId());
-        assertThat(table).column("R_A_ID").value().isEqualTo(appointment.getId());
-        assertThat(table).column("R_P_ID").value().isEqualTo(participant.getId());
+        assertThat(table).row()
+                .value().isEqualTo(registration.getId())
+                .value().isEqualTo(appointment.getId())
+                .value().isEqualTo(participant.getId());
     }
 
     @Test
