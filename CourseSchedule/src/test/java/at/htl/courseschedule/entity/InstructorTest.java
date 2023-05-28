@@ -19,8 +19,12 @@ class InstructorTest {
     @Test
     void test_getters_after_simple_constructor_ok() {
         // arrange
-        Instructor instructor = new Instructor("Franz", "Hintermüller", "+43 067 23423445",
-                "progamerHD@gmail.com");
+        Instructor instructor = new Instructor(
+                "Franz",
+                "Hintermüller",
+                "+43 067 23423445",
+                "progamerHD@gmail.com"
+        );
 
         // act
 
@@ -71,8 +75,12 @@ class InstructorTest {
     @Test
     void test_setters_with_simple_constructor_ok() {
         // arrange
-        Instructor instructor = new Instructor("Sirius", "Klein", "+43 234 23469876",
-                "sirusk@gmail.com");
+        Instructor instructor = new Instructor(
+                "Sirius",
+                "Klein",
+                "+43 234 23469876",
+                "sirusk@gmail.com"
+        );
 
         // act
         instructor.setId(2L);

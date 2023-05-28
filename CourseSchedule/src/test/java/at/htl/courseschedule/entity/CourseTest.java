@@ -78,7 +78,8 @@ class CourseTest {
                 "Das große ABC",
                 "In diesem Kurs lernt niemand was?",
                 0,
-                0);
+                0
+        );
 
         // act
         course.setId(120L);
