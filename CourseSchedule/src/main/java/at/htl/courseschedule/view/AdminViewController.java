@@ -1,11 +1,11 @@
 package at.htl.courseschedule.view;
 
-import at.htl.courseschedule.controller.AppointmentRepository;
 import at.htl.courseschedule.controller.CourseRepository;
 import at.htl.courseschedule.controller.InstructorRepository;
 import at.htl.courseschedule.entity.Appointment;
 import at.htl.courseschedule.entity.Course;
 import at.htl.courseschedule.entity.Instructor;
+import at.htl.courseschedule.service.AppointmentService;
 import javafx.beans.binding.Bindings;
 import javafx.beans.binding.BooleanBinding;
 import javafx.collections.FXCollections;
@@ -16,6 +16,7 @@ import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 
 import java.time.DayOfWeek;
@@ -58,13 +59,9 @@ public class AdminViewController {
         addHourLabels();
         drawPane = initDrawPane();
 
-        timeGrid.widthProperty().addListener((observableValue, number, t1) -> {
-            recalcComponentSizes();
-        });
+        timeGrid.widthProperty().addListener((observableValue, number, t1) -> recalcComponentSizes());
 
-        drawPane.heightProperty().addListener((observableValue, number, t1) -> {
-            recalcComponentSizes();
-        });
+        drawPane.heightProperty().addListener((observableValue, number, t1) -> recalcComponentSizes());
 
         // Show some sample data
         Instructor instructor = new Instructor("k", "k", ",", " ");
@@ -232,15 +229,18 @@ public class AdminViewController {
         CourseRepository courseRepository = new CourseRepository();
         courseSelector.setItems(FXCollections.observableList(courseRepository.findAll()));
         courseSelector.setPromptText("Course");
+        Label errorLabel = new Label();
+        errorLabel.setTextFill(Color.RED);
 
-        grid.add(new Label("Date:"), 0, 0);
-        grid.add(date, 1, 0);
-        grid.add(new Label("Time:"), 0, 1);
-        grid.add(time, 1, 1);
-        grid.add(new Label("Instructor:"), 0, 2);
-        grid.add(instructorSelector, 1, 2);
-        grid.add(new Label("Course:"), 0, 3);
-        grid.add(courseSelector, 1, 3);
+        grid.add(errorLabel, 0, 0, 2, 1);
+        grid.add(new Label("Date:"), 0, 1);
+        grid.add(date, 1, 1);
+        grid.add(new Label("Time:"), 0, 2);
+        grid.add(time, 1, 2);
+        grid.add(new Label("Instructor:"), 0, 3);
+        grid.add(instructorSelector, 1, 3);
+        grid.add(new Label("Course:"), 0, 4);
+        grid.add(courseSelector, 1, 4);
 
         Node addButton = dialog.getDialogPane().lookupButton(addAppointmentButtonType);
         addButton.setDisable(true);
@@ -248,12 +248,12 @@ public class AdminViewController {
         BooleanBinding isAppointment = Bindings.createBooleanBinding(
                 () -> {
                     if (date.getValue() == null || !date.getValue().isAfter(LocalDate.now())) {
-                        // print error
+                        errorLabel.setText("The date has to be after today!");
                         return false;
                     }
 
                     if (!time.getText().matches("^\\d{2}:\\d{2}$")) {
-                        // print error
+                        errorLabel.setText("Enter a valid time format hh:mm!");
                         return false;
                     }
 
@@ -263,14 +263,22 @@ public class AdminViewController {
                     if (timeValues[0] > 20 || timeValues[0] < 8 ||
                             Arrays.stream(timeValues).skip(1).anyMatch(value -> value > 59) ||
                             Arrays.stream(timeValues).skip(1).anyMatch(value -> value < 0)) {
+                        errorLabel.setText("The time you entered is not valid!");
                         return false;
                     }
 
                     if (instructorSelector.getValue() == null) {
+                        errorLabel.setText("You have to select an instructor!");
                         return false;
                     }
 
-                    return courseSelector.getValue() != null;
+                    if (courseSelector.getValue() == null) {
+                        errorLabel.setText("You have to select a course!");
+                        return false;
+                    }
+
+                    errorLabel.setText("");
+                    return true;
                 },
                 date.valueProperty(), time.textProperty(), instructorSelector.valueProperty(),
                 courseSelector.valueProperty()
@@ -289,10 +297,6 @@ public class AdminViewController {
         });
 
         Optional<Appointment> optionalAppointment = dialog.showAndWait();
-
-        if (optionalAppointment.isPresent()) {
-            AppointmentRepository appointmentRepository = new AppointmentRepository();
-            appointmentRepository.save(optionalAppointment.get());
-        }
+        optionalAppointment.ifPresent(appointment -> AppointmentService.getInstance().add(appointment));
     }
 }

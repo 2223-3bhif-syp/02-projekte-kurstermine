@@ -42,7 +42,7 @@ public class ParticipantService implements Service<Participant> {
         updateParticipants();
     }
 
-    private void updateParticipants(){
+    private void updateParticipants() {
         participants.clear();
         participants.setAll(participantRepository.findAll());
     }
