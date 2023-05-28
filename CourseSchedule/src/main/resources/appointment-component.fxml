@@ -4,7 +4,11 @@
             xmlns:fx="http://javafx.com/fxml"
             stylesheets="course-schedule.css"
             styleClass="bg-lighter">
-    <Label AnchorPane.bottomAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="0"
-           AnchorPane.leftAnchor="0" alignment="CENTER">Test
-    </Label>
+    <VBox>
+        <Label fx:id="courseNameLabel"/>
+        <HBox>
+            <Label fx:id="instructorLabel" />
+            <Label fx:id="durationLabel" />
+        </HBox>
+    </VBox>
 </fx:root>

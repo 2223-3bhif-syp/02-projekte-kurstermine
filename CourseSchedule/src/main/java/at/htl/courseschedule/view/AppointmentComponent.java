@@ -1,13 +1,30 @@
 package at.htl.courseschedule.view;
 
 import at.htl.courseschedule.entity.Appointment;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Insets;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.Dialog;
+import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 
+import javax.swing.text.DateFormatter;
 import java.io.IOException;
 
 public class AppointmentComponent extends AnchorPane {
     private Appointment appointment;
+
+    @FXML
+    private Label courseNameLabel;
+
+    @FXML
+    private Label instructorLabel;
+
+    @FXML
+    private Label durationLabel;
 
     public AppointmentComponent(Appointment appointment) {
         FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("/appointment-component.fxml"));
@@ -20,10 +37,44 @@ public class AppointmentComponent extends AnchorPane {
             throw new RuntimeException(exception);
         }
         this.appointment = appointment;
-        // TODO
+
+        courseNameLabel.setText(appointment.getCourse().getName());;
+        instructorLabel.setText(String.format("%s %s", appointment.getInstructor().getLastName(), appointment.getInstructor().getFirstName()));
+        durationLabel.setText(String.format("%d m",appointment.getCourse().getMinutesPerAppointment()));
+
+        this.setOnMouseClicked(e -> openAppointmentDialog());
     }
 
     public Appointment getAppointment() {
         return appointment;
+    }
+
+    private void openAppointmentDialog() {
+        Dialog<Appointment> dialog = new Dialog<>();
+
+        dialog.setTitle("Appointment Information");
+
+        GridPane grid = new GridPane();
+        grid.setHgap(10);
+        grid.setVgap(10);
+        grid.setPadding(new Insets(20, 150, 10, 10));
+
+        grid.add(new Label("Course:"), 0, 0);
+        grid.add(new Label(appointment.getCourse().getName()), 1, 0);
+        grid.add(new Label("Instructor:"), 0, 1);
+        grid.add(new Label(appointment.getInstructor().toString()), 1, 1);
+        grid.add(new Label("Date"), 0, 2);
+        grid.add(new Label(appointment.getStart().toLocalDate().toString()), 1, 2);
+        grid.add(new Label("Time:"), 0, 3);
+        grid.add(new Label(appointment.getStart().toLocalTime().toString()), 1, 3);
+        grid.add(new Label("Duration:"), 0, 4);
+        grid.add(new Label(String.format("%d m", appointment.getCourse().getMinutesPerAppointment())), 1, 4);
+
+        dialog.getDialogPane().setContent(grid);
+        dialog.getDialogPane().getButtonTypes().addAll(
+                ButtonType.CLOSE
+        );
+
+        dialog.show();
     }
 }
