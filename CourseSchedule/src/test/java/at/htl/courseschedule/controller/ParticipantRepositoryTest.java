@@ -12,6 +12,7 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 import static org.assertj.db.api.Assertions.assertThat;
+import static org.assertj.db.output.Outputs.output;
 
 class ParticipantRepositoryTest {
     private static final String tableName = "CS_PARTICIPANT";
@@ -46,23 +47,27 @@ class ParticipantRepositoryTest {
         // act
         parRep.save(participant);
 
+        output(table).toConsole();
+
         participant.setEmail("newEmail@gmail.com");
         parRep.save(participant);
 
         // assert
+        table = new Table(
+            Database.getDataSource(),
+            tableName
+        );
+
+        output(table).toConsole();
+
         assertThat(participant.getId()).isEqualTo(1);
 
-        assertThat(table).column("P_ID")
-                .value().isEqualTo(participant.getId());
-        assertThat(table).column("P_FIRST_NAME")
-                .value().isEqualTo(participant.getFirstName());
-        assertThat(table).column("P_LAST_NAME")
-                .value().isEqualTo(participant.getLastName());
-        assertThat(table).column("P_YEAR_OF_BIRTH")
-                .value().isEqualTo(participant.getYearOfBirth());
-        assertThat(table).column("P_PHONE_NR")
-                .value().isEqualTo(participant.getPhoneNr());
-        assertThat(table).column("P_EMAIL")
+        assertThat(table).row()
+                .value().isEqualTo(participant.getId())
+                .value().isEqualTo(participant.getFirstName())
+                .value().isEqualTo(participant.getLastName())
+                .value().isEqualTo(participant.getYearOfBirth())
+                .value().isEqualTo(participant.getPhoneNr())
                 .value().isEqualTo(participant.getEmail());
     }
 
@@ -98,23 +103,27 @@ class ParticipantRepositoryTest {
         // act
         parRep.insert(participant);
 
+        output(table).toConsole();
+
         participant.setEmail("newEmail@gmail.com");
         parRep.update(participant);
 
         // assert
+        table = new Table(
+                Database.getDataSource(),
+                tableName
+        );
+
+        output(table).toConsole();
+
         assertThat(participant.getId()).isEqualTo(1);
 
-        assertThat(table).column("P_ID")
-                .value().isEqualTo(participant.getId());
-        assertThat(table).column("P_FIRST_NAME")
-                .value().isEqualTo(participant.getFirstName());
-        assertThat(table).column("P_LAST_NAME")
-                .value().isEqualTo(participant.getLastName());
-        assertThat(table).column("P_YEAR_OF_BIRTH")
-                .value().isEqualTo(participant.getYearOfBirth());
-        assertThat(table).column("P_PHONE_NR")
-                .value().isEqualTo(participant.getPhoneNr());
-        assertThat(table).column("P_EMAIL")
+        assertThat(table).row()
+                .value().isEqualTo(participant.getId())
+                .value().isEqualTo(participant.getFirstName())
+                .value().isEqualTo(participant.getLastName())
+                .value().isEqualTo(participant.getYearOfBirth())
+                .value().isEqualTo(participant.getPhoneNr())
                 .value().isEqualTo(participant.getEmail());
     }
 
@@ -150,20 +159,17 @@ class ParticipantRepositoryTest {
         // act
         parRep.insert(participant);
 
+        output(table).toConsole();
+
         // assert
         assertThat(participant.getId()).isEqualTo(1);
 
-        assertThat(table).column("P_ID")
-                .value().isEqualTo(participant.getId());
-        assertThat(table).column("P_FIRST_NAME")
-                .value().isEqualTo(participant.getFirstName());
-        assertThat(table).column("P_LAST_NAME")
-                .value().isEqualTo(participant.getLastName());
-        assertThat(table).column("P_YEAR_OF_BIRTH")
-                .value().isEqualTo(participant.getYearOfBirth());
-        assertThat(table).column("P_PHONE_NR")
-                .value().isEqualTo(participant.getPhoneNr());
-        assertThat(table).column("P_EMAIL")
+        assertThat(table).row()
+                .value().isEqualTo(participant.getId())
+                .value().isEqualTo(participant.getFirstName())
+                .value().isEqualTo(participant.getLastName())
+                .value().isEqualTo(participant.getYearOfBirth())
+                .value().isEqualTo(participant.getPhoneNr())
                 .value().isEqualTo(participant.getEmail());
     }
 
