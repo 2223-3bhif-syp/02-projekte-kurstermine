@@ -10,6 +10,7 @@ import javafx.beans.binding.Bindings;
 import javafx.beans.binding.BooleanBinding;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -49,6 +50,10 @@ public class AdminViewController {
     private Button addButton;
 
     private AnchorPane drawPane;
+    private AppointmentService appointmentService;
+    private InstructorService instructorService;
+    private CourseService courseService;
+    private FilteredList<Appointment> filteredAppointments;
 
     @FXML
     public void initialize() {
@@ -60,22 +65,25 @@ public class AdminViewController {
         addHourLabels();
         drawPane = initDrawPane();
 
-        timeGrid.widthProperty().addListener((observableValue, number, t1) -> recalcComponentSizes());
+        appointmentService = AppointmentService.getInstance();
+        instructorService = InstructorService.getInstance();
+        courseService = CourseService.getInstance();
 
+        timeGrid.widthProperty().addListener((observableValue, number, t1) -> recalcComponentSizes());
         drawPane.heightProperty().addListener((observableValue, number, t1) -> recalcComponentSizes());
-        ObservableList<Appointment> appointments = AppointmentService.getInstance().getAppointments();
-        appointments.forEach(this::showAppointment);
-        appointments.addListener((ListChangeListener<? super Appointment>) change -> {
-            while (change.next()) {
-                if (change.wasAdded()) {
-                    Appointment appointment = change.getAddedSubList().get(0);
-                    showAppointment(appointment);
-                } else if (change.wasRemoved()) {
-                    drawPane.getChildren().clear();
-                    AppointmentService.getInstance().getAppointments().forEach(this::showAppointment);
-                }
-            }
-        });
+
+        filteredAppointments = new FilteredList<>(appointmentService.getAppointments());
+        filteredAppointments.addListener((ListChangeListener<Appointment>) change -> redrawAppointments());
+        filteredAppointments.setPredicate((a) ->
+                a.getStart()
+                    .isAfter(LocalDateTime.of(2023, 5, 22, 8, 0)) &&
+                a.getStart()
+                    .plusMinutes(a.getCourse().getMinutesPerAppointment())
+                    .isBefore(LocalDateTime.of(2023, 5, 28, 22, 0))
+        );
+
+        // Force initial draw
+        redrawAppointments();
     }
 
     private void addGridConstraints() {
@@ -151,7 +159,6 @@ public class AdminViewController {
         return pane;
     }
 
-
     private double getPosXFromDayOfWeek(DayOfWeek dayOfWeek) {
         return (dayOfWeek.getValue() - 1) * (DAY_OF_WEEK_COL_PERCENTAGE / 100 * timeGrid.getWidth());
     }
@@ -202,6 +209,11 @@ public class AdminViewController {
         }
     }
 
+    private void redrawAppointments() {
+        drawPane.getChildren().clear();
+        filteredAppointments.forEach(this::showAppointment);
+    }
+
     @FXML
     private void addAppointment() {
         Dialog<Appointment> dialog = new Dialog<>();
@@ -219,10 +231,10 @@ public class AdminViewController {
         TextField time = new TextField();
         time.setPromptText("hh:mm");
         ComboBox<Instructor> instructorSelector = new ComboBox<>();
-        instructorSelector.setItems(InstructorService.getInstance().getInstructors());
+        instructorSelector.setItems(instructorService.getInstructors());
         instructorSelector.setPromptText("Instructor");
         ComboBox<Course> courseSelector = new ComboBox<>();
-        courseSelector.setItems(CourseService.getInstance().getCourses());
+        courseSelector.setItems(courseService.getCourses());
         courseSelector.setPromptText("Course");
         Label errorLabel = new Label();
         errorLabel.setTextFill(Color.RED);
@@ -290,6 +302,6 @@ public class AdminViewController {
         });
 
         Optional<Appointment> optionalAppointment = dialog.showAndWait();
-        optionalAppointment.ifPresent(appointment -> AppointmentService.getInstance().add(appointment));
+        optionalAppointment.ifPresent(appointment -> appointmentService.add(appointment));
     }
 }
