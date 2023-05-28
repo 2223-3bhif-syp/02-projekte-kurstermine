@@ -15,15 +15,38 @@ class RegistrationTest {
 
     @BeforeEach
     public void setUp() {
-        localDateTime = LocalDateTime.of(2023, 5, 26, 12, 30);
-        Instructor instructor = new Instructor("InstructorName", "Leitner",
-                "+43 6704070789", "LeiterName@speedmail.com");
-        Course course = new Course("Amselarbeit", "Die Arbeit, sie ruft", 180,
-                45);
+        localDateTime = LocalDateTime.of(
+                2023,
+                5,
+                26,
+                12,
+                30
+        );
+        Instructor instructor = new Instructor(
+                "InstructorName",
+                "Leitner",
+                "+43 6704070789",
+                "LeiterName@speedmail.com"
+        );
+        Course course = new Course(
+                "Amselarbeit",
+                "Die Arbeit, sie ruft",
+                180,
+                45
+        );
 
-        participant = new Participant("Michael", "Blauberg", 2010,
-                "+43 323 2314809", "blaubergMich@gmail.com");
-        appointment = new Appointment(localDateTime, instructor, course);
+        participant = new Participant(
+                "Michael",
+                "Blauberg",
+                2010,
+                "+43 323 2314809",
+                "blaubergMich@gmail.com"
+        );
+        appointment = new Appointment(
+                localDateTime,
+                instructor,
+                course
+        );
     }
 
     @AfterEach
@@ -33,7 +56,10 @@ class RegistrationTest {
     @Test
     void test_getters_with_simple_constructor_ok() {
         // arrange
-        Registration registration = new Registration(participant, appointment);
+        Registration registration = new Registration(
+                participant,
+                appointment
+        );
 
         // act
 
@@ -57,16 +83,36 @@ class RegistrationTest {
     @Test
     void test_setters_with_simple_constructor_ok() {
         // arrange
-        Registration registration = new Registration(participant, appointment);
+        Registration registration = new Registration(
+                participant,
+                appointment
+        );
 
-        LocalDateTime newLocalDateTime = LocalDateTime.of(2023, 5, 26, 12, 30).plusDays(18);
-        Instructor newInstructor = new Instructor("I am new", "New", "+43 2342343245",
-                "newmail@speedmail.com");
-        Course newCourse = new Course("Speedster", "Wer bremst verliert", 200,
-                85);
-        Participant newParticipant = new Participant("Winnie", "Ilming", 2006,
-                "+43 234 234243", "subbortyesyes@gmail.com");
-        Appointment newAppointment = new Appointment(newLocalDateTime, newInstructor, newCourse);
+        LocalDateTime newLocalDateTime = localDateTime.plusDays(18);
+        Instructor newInstructor = new Instructor(
+                "I am new",
+                "New",
+                "+43 2342343245",
+                "newmail@speedmail.com"
+        );
+        Course newCourse = new Course(
+                "Speedster",
+                "Wer bremst verliert",
+                200,
+                85
+        );
+        Participant newParticipant = new Participant(
+                "Winnie",
+                "Ilming",
+                2006,
+                "+43 234 234243",
+                "subbortyesyes@gmail.com"
+        );
+        Appointment newAppointment = new Appointment(
+                newLocalDateTime,
+                newInstructor,
+                newCourse
+        );
 
         // act
         registration.setAppointment(newAppointment);
