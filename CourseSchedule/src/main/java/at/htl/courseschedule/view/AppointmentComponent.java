@@ -1,16 +1,15 @@
 package at.htl.courseschedule.view;
 
+import at.htl.courseschedule.entity.Appointment;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.AnchorPane;
 
 import java.io.IOException;
 
 public class AppointmentComponent extends AnchorPane {
-    private String instructorFirstName;
-    private String instructorLastName;
-    private String courseName;
+    private Appointment appointment;
 
-    public AppointmentComponent(String courseName, String instructorFirstName, String instructorLastName) {
+    public AppointmentComponent(Appointment appointment) {
         FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("/appointment-component.fxml"));
         fxmlLoader.setRoot(this);
         fxmlLoader.setController(AppointmentComponent.this);
@@ -20,6 +19,11 @@ public class AppointmentComponent extends AnchorPane {
         } catch (IOException exception) {
             throw new RuntimeException(exception);
         }
+        this.appointment = appointment;
         // TODO
+    }
+
+    public Appointment getAppointment() {
+        return appointment;
     }
 }

@@ -57,9 +57,15 @@ public class AdminViewController {
         addWeekdayLabels();
         addHourLabels();
         drawPane = initDrawPane();
-    }
 
-    public void afterLoad() {
+        timeGrid.widthProperty().addListener((observableValue, number, t1) -> {
+            recalcComponentSizes();
+        });
+
+        drawPane.heightProperty().addListener((observableValue, number, t1) -> {
+            recalcComponentSizes();
+        });
+
         // Show some sample data
         Instructor instructor = new Instructor("k", "k", ",", " ");
         Course course1 = new Course("a", "b", 60, 10);
@@ -167,18 +173,28 @@ public class AdminViewController {
         return DAY_OF_WEEK_COL_PERCENTAGE / 100 * timeGrid.getWidth() - timeGrid.getHgap();
     }
 
-    private void showAppointment(Appointment appointment) {
-        AppointmentComponent appointmentComponent = new AppointmentComponent(appointment.getCourse().getName(),
-                appointment.getInstructor().getFirstName(),
-                appointment.getInstructor().getLastName());
+    private void setCalculatedComponentSize(AppointmentComponent appointmentComponent) {
+        AnchorPane.setLeftAnchor(appointmentComponent, getPosXFromDayOfWeek(appointmentComponent.getAppointment().getStart().getDayOfWeek()));
+        AnchorPane.setTopAnchor(appointmentComponent, getPosYFromStartTime(appointmentComponent.getAppointment().getStart()));
 
-        AnchorPane.setLeftAnchor(appointmentComponent, getPosXFromDayOfWeek(appointment.getStart().getDayOfWeek()));
-        AnchorPane.setTopAnchor(appointmentComponent, getPosYFromStartTime(appointment.getStart()));
-
-        appointmentComponent.setPrefHeight(getHeight(appointment.getCourse().getMinutesPerAppointment()));
+        appointmentComponent.setPrefHeight(getHeight(appointmentComponent.getAppointment().getCourse().getMinutesPerAppointment()));
         appointmentComponent.setPrefWidth(getWidth());
+    }
+
+    private void showAppointment(Appointment appointment) {
+        AppointmentComponent appointmentComponent = new AppointmentComponent(appointment);
+
+        setCalculatedComponentSize(appointmentComponent);
 
         drawPane.getChildren().add(appointmentComponent);
+    }
+
+    private void recalcComponentSizes() {
+        for (Node ac: drawPane.getChildren()) {
+            if (ac instanceof AppointmentComponent) {
+                setCalculatedComponentSize((AppointmentComponent) ac);
+            }
+        }
     }
 
     @FXML
