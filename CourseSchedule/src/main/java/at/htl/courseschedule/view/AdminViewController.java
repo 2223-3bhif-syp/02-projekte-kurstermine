@@ -157,27 +157,38 @@ public class AdminViewController {
         return pane;
     }
 
+
     private double getPosXFromDayOfWeek(DayOfWeek dayOfWeek) {
         return (dayOfWeek.getValue() - 1) * (DAY_OF_WEEK_COL_PERCENTAGE / 100 * timeGrid.getWidth());
     }
 
     private double getPosYFromStartTime(LocalDateTime start) {
-        return (drawPane.getHeight() / (DISPLAYED_HOURS * MINUTES_PER_HOUR)) * ((start.getHour() - FIRST_HOUR) * 60 + start.getMinute());
+        return ((drawPane.getHeight() * ((start.getHour() - FIRST_HOUR) * 60 + start.getMinute()))
+                / (DISPLAYED_HOURS * MINUTES_PER_HOUR)) ;
     }
 
     private double getHeight(int minutesInAppointment) {
-        return (drawPane.getHeight() / (DISPLAYED_HOURS * MINUTES_PER_HOUR)) * minutesInAppointment - timeGrid.getHgap();
+        return ((drawPane.getHeight() * minutesInAppointment)
+                / (DISPLAYED_HOURS * MINUTES_PER_HOUR)) - timeGrid.getHgap();
     }
 
     private double getWidth() {
-        return DAY_OF_WEEK_COL_PERCENTAGE / 100 * timeGrid.getWidth() - timeGrid.getHgap();
+        return (DAY_OF_WEEK_COL_PERCENTAGE * timeGrid.getWidth()) / 100.0d  - timeGrid.getVgap();
     }
 
     private void setCalculatedComponentSize(AppointmentComponent appointmentComponent) {
-        AnchorPane.setLeftAnchor(appointmentComponent, getPosXFromDayOfWeek(appointmentComponent.getAppointment().getStart().getDayOfWeek()));
-        AnchorPane.setTopAnchor(appointmentComponent, getPosYFromStartTime(appointmentComponent.getAppointment().getStart()));
+        AnchorPane.setLeftAnchor(appointmentComponent, getPosXFromDayOfWeek(appointmentComponent
+                .getAppointment()
+                .getStart()
+                .getDayOfWeek()));
+        AnchorPane.setTopAnchor(appointmentComponent, getPosYFromStartTime(appointmentComponent
+                .getAppointment()
+                .getStart()));
 
-        appointmentComponent.setPrefHeight(getHeight(appointmentComponent.getAppointment().getCourse().getMinutesPerAppointment()));
+        appointmentComponent.setPrefHeight(getHeight(appointmentComponent
+                .getAppointment()
+                .getCourse()
+                .getMinutesPerAppointment()));
         appointmentComponent.setPrefWidth(getWidth());
     }
 
