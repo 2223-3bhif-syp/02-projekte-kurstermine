@@ -12,6 +12,7 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 import static org.assertj.db.api.Assertions.assertThat;
+import static org.assertj.db.output.Outputs.output;
 
 class InstructorRepositoryTest {
     private static final String tableName = "CS_INSTRUCTOR";
@@ -45,17 +46,27 @@ class InstructorRepositoryTest {
         // act
         insRep.save(instructor);
 
+        output(table).toConsole();
+
         instructor.setEmail("newEmail@gmail.com");
         insRep.save(instructor);
 
         // assert
+        table = new Table(
+                Database.getDataSource(),
+                tableName
+        );
+
+        output(table).toConsole();
+
         assertThat(instructor.getId()).isEqualTo(1);
 
-        assertThat(table).column("I_ID").value().isEqualTo(instructor.getId());
-        assertThat(table).column("I_FIRST_NAME").value().isEqualTo(instructor.getFirstName());
-        assertThat(table).column("I_LAST_NAME").value().isEqualTo(instructor.getLastName());
-        assertThat(table).column("I_PHONE_NR").value().isEqualTo(instructor.getPhoneNr());
-        assertThat(table).column("I_EMAIL").value().isEqualTo(instructor.getEmail());
+        assertThat(table).row()
+                .value().isEqualTo(instructor.getId())
+                .value().isEqualTo(instructor.getFirstName())
+                .value().isEqualTo(instructor.getLastName())
+                .value().isEqualTo(instructor.getPhoneNr())
+                .value().isEqualTo(instructor.getEmail());
     }
 
     @Test
@@ -88,17 +99,27 @@ class InstructorRepositoryTest {
         // act
         insRep.insert(instructor);
 
+        output(table).toConsole();
+
         instructor.setEmail("newEmail@gmail.com");
         insRep.update(instructor);
 
         // assert
+        table = new Table(
+                Database.getDataSource(),
+                tableName
+        );
+
+        output(table).toConsole();
+
         assertThat(instructor.getId()).isEqualTo(1);
 
-        assertThat(table).column("I_ID").value().isEqualTo(instructor.getId());
-        assertThat(table).column("I_FIRST_NAME").value().isEqualTo(instructor.getFirstName());
-        assertThat(table).column("I_LAST_NAME").value().isEqualTo(instructor.getLastName());
-        assertThat(table).column("I_PHONE_NR").value().isEqualTo(instructor.getPhoneNr());
-        assertThat(table).column("I_EMAIL").value().isEqualTo(instructor.getEmail());
+        assertThat(table).row()
+                .value().isEqualTo(instructor.getId())
+                .value().isEqualTo(instructor.getFirstName())
+                .value().isEqualTo(instructor.getLastName())
+                .value().isEqualTo(instructor.getPhoneNr())
+                .value().isEqualTo(instructor.getEmail());
     }
 
     @Test
@@ -132,14 +153,17 @@ class InstructorRepositoryTest {
         // act
         insRep.insert(instructor);
 
+        output(table).toConsole();
+
         // assert
         assertThat(instructor.getId()).isEqualTo(1);
 
-        assertThat(table).column("I_ID").value().isEqualTo(instructor.getId());
-        assertThat(table).column("I_FIRST_NAME").value().isEqualTo(instructor.getFirstName());
-        assertThat(table).column("I_LAST_NAME").value().isEqualTo(instructor.getLastName());
-        assertThat(table).column("I_PHONE_NR").value().isEqualTo(instructor.getPhoneNr());
-        assertThat(table).column("I_EMAIL").value().isEqualTo(instructor.getEmail());
+        assertThat(table).row()
+                .value().isEqualTo(instructor.getId())
+                .value().isEqualTo(instructor.getFirstName())
+                .value().isEqualTo(instructor.getLastName())
+                .value().isEqualTo(instructor.getPhoneNr())
+                .value().isEqualTo(instructor.getEmail());
     }
 
     @Test

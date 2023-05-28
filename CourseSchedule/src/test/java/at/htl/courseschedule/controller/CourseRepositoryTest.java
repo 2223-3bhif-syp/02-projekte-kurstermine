@@ -157,13 +157,6 @@ class CourseRepositoryTest {
         output(table).toConsole();
 
         // assert
-        table = new Table(
-                Database.getDataSource(),
-                tableName
-        );
-
-        output(table).toConsole();
-
         assertThat(course.getId()).isEqualTo(1);
 
         assertThat(table).row(0)

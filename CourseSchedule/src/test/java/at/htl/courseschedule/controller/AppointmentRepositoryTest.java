@@ -282,12 +282,6 @@ class AppointmentRepositoryTest {
         output(table).toConsole();
 
         // assert
-        table = new Table(
-                Database.getDataSource(),
-                tableName
-        );
-
-        output(table).toConsole();
 
         assertThat(appointment.getId()).isEqualTo(1);
 
