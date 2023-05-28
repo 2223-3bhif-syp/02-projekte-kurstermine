@@ -15,6 +15,7 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 import static org.assertj.db.api.Assertions.assertThat;
+import static org.assertj.db.output.Outputs.output;
 
 class AppointmentRepositoryTest {
     private static final String tableName = "CS_APPOINTMENT";
@@ -72,20 +73,26 @@ class AppointmentRepositoryTest {
         // act
         appointmentRepository.save(appointment);
 
+        output(table).toConsole();
+
         LocalDateTime dateTime2 = dateTime.plusHours(10);
         appointment.setStart(dateTime2);
         appointmentRepository.save(appointment);
 
         // assert
+        table = new Table(
+                Database.getDataSource(),
+                tableName
+        );
+
+        output(table).toConsole();
+
         assertThat(appointment.getId()).isEqualTo(1);
 
-        assertThat(table).column("A_ID")
-                .value().isEqualTo(appointment.getId());
-        assertThat(table).column("A_START")
-                .value().isEqualTo(appointment.getStart());
-        assertThat(table).column("A_I_ID")
-                .value().isEqualTo(appointment.getInstructor().getId());
-        assertThat(table).column("A_C_ID")
+        assertThat(table).row(0)
+                .value().isEqualTo(appointment.getId())
+                .value().isEqualTo(appointment.getStart())
+                .value().isEqualTo(appointment.getInstructor().getId())
                 .value().isEqualTo(appointment.getCourse().getId());
     }
 
@@ -169,20 +176,26 @@ class AppointmentRepositoryTest {
         // act
         appointmentRepository.insert(appointment);
 
+        output(table).toConsole();
+
         LocalDateTime dateTime2 = dateTime.plusHours(15);
         appointment.setStart(dateTime2);
         appointmentRepository.update(appointment);
 
         // assert
+        table = new Table(
+                Database.getDataSource(),
+                tableName
+        ); //to update the table
+
+        output(table).toConsole();
+
         assertThat(appointment.getId()).isEqualTo(1);
 
-        assertThat(table).column("A_ID")
-                .value().isEqualTo(appointment.getId());
-        assertThat(table).column("A_START")
-                .value().isEqualTo(appointment.getStart());
-        assertThat(table).column("A_I_ID")
-                .value().isEqualTo(appointment.getInstructor().getId());
-        assertThat(table).column("A_C_ID")
+        assertThat(table).row(0)
+                .value().isEqualTo(appointment.getId())
+                .value().isEqualTo(appointment.getStart())
+                .value().isEqualTo(appointment.getInstructor().getId())
                 .value().isEqualTo(appointment.getCourse().getId());
     }
 
@@ -266,16 +279,22 @@ class AppointmentRepositoryTest {
         // act
         appointmentRepository.insert(appointment);
 
+        output(table).toConsole();
+
         // assert
+        table = new Table(
+                Database.getDataSource(),
+                tableName
+        );
+
+        output(table).toConsole();
+
         assertThat(appointment.getId()).isEqualTo(1);
 
-        assertThat(table).column("A_ID")
-                .value().isEqualTo(appointment.getId());
-        assertThat(table).column("A_START")
-                .value().isEqualTo(appointment.getStart());
-        assertThat(table).column("A_I_ID")
-                .value().isEqualTo(appointment.getInstructor().getId());
-        assertThat(table).column("A_C_ID")
+        assertThat(table).row(0)
+                .value().isEqualTo(appointment.getId())
+                .value().isEqualTo(appointment.getStart())
+                .value().isEqualTo(appointment.getInstructor().getId())
                 .value().isEqualTo(appointment.getCourse().getId());
     }
 
