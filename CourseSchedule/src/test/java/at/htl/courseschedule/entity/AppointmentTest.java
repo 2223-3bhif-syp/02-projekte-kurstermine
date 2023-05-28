@@ -21,12 +21,30 @@ class AppointmentTest {
     @Test
     void test_getters_with_simple_constructor_ok() {
         // arrange
-        Instructor instructor = new Instructor("firstName", "lastName", "+43 6704070789",
-                "lastName@gmail.com");
-        LocalDateTime localDateTime = LocalDateTime.of(2023, 5, 26, 12, 30);
-        Course course = new Course("Course1", "Test Course", 90,
-                1);
-        Appointment appointment = new Appointment(localDateTime, instructor, course);
+        Instructor instructor = new Instructor(
+                "firstName",
+                "lastName",
+                "+43 6704070789",
+                "lastName@gmail.com"
+        );
+        LocalDateTime localDateTime = LocalDateTime.of(
+                2023,
+                5,
+                26,
+                12,
+                30
+        );
+        Course course = new Course(
+                "Course1",
+                "Test Course",
+                90,
+                1
+        );
+        Appointment appointment = new Appointment(
+                localDateTime,
+                instructor,
+                course
+        );
 
         // act
 
@@ -54,11 +72,25 @@ class AppointmentTest {
     @Test
     void test_setters_with_default_constructor_ok() {
         // arrange
-        Instructor instructor = new Instructor("firstName", "lastName", "+43 6704070789",
-                "lastName@gmail.com");
-        LocalDateTime localDateTime = LocalDateTime.of(2023, 5, 26, 12, 30);
-        Course course = new Course("Course1", "Test Course", 90,
-                1);
+        Instructor instructor = new Instructor(
+                "firstName",
+                "lastName",
+                "+43 6704070789",
+                "lastName@gmail.com"
+        );
+        LocalDateTime localDateTime = LocalDateTime.of(
+                2023,
+                5,
+                26,
+                12,
+                30
+        );
+        Course course = new Course(
+                "Course1",
+                "Test Course",
+                90,
+                1
+        );
         Appointment appointment = new Appointment();
 
         // act
@@ -77,17 +109,43 @@ class AppointmentTest {
     @Test
     void test_setters_simple_constructor_ok() {
         // arrange
-        Instructor instructor = new Instructor("firstName", "lastName", "+43 6704070789",
-                "lastName@gmail.com");
-        LocalDateTime localDateTime = LocalDateTime.of(2023, 5, 26, 12, 30);
-        Course course = new Course("Course1", "Test Course", 90,
-                1);
-        Appointment appointment = new Appointment(localDateTime, instructor, course);
-        Course newCourse = new Course("Testing123", "This is illegal", 90,
-                3);
-        Instructor newInstructor = new Instructor("Theodor", "Grau", "+48 342 0323244",
-                "grauTheo@yahoomail.com");
-        LocalDateTime newDateTime = LocalDateTime.of(2023, 5, 26, 12, 30).minusDays(4);
+        Instructor instructor = new Instructor(
+                "firstName",
+                "lastName",
+                "+43 6704070789",
+                "lastName@gmail.com"
+        );
+        LocalDateTime localDateTime = LocalDateTime.of(
+                2023,
+                5,
+                26,
+                12,
+                30
+        );
+        Course course = new Course(
+                "Course1",
+                "Test Course",
+                90,
+                1
+        );
+        Appointment appointment = new Appointment(
+                localDateTime,
+                instructor,
+                course
+        );
+        Course newCourse = new Course(
+                "Testing123",
+                "This is illegal",
+                90,
+                3
+        );
+        Instructor newInstructor = new Instructor(
+                "Theodor",
+                "Grau",
+                "+48 342 0323244",
+                "grauTheo@yahoomail.com"
+        );
+        LocalDateTime newDateTime = localDateTime.minusDays(4);
 
         // act
         appointment.setId(12L);
@@ -105,12 +163,30 @@ class AppointmentTest {
     @Test
     void test_setters_and_change_values_of_references_ok() {
         // arrange
-        Instructor instructor = new Instructor("firstName", "lastName", "+43 6704070789",
-                "lastName@gmail.com");
-        LocalDateTime localDateTime = LocalDateTime.of(2023, 5, 26, 12, 30);
-        Course course = new Course("Course1", "Test Course", 90,
-                1);
-        Appointment appointment = new Appointment(localDateTime, instructor, course);
+        Instructor instructor = new Instructor(
+                "firstName",
+                "lastName",
+                "+43 6704070789",
+                "lastName@gmail.com"
+        );
+        LocalDateTime localDateTime = LocalDateTime.of(
+                2023,
+                5,
+                26,
+                12,
+                30
+        );
+        Course course = new Course(
+                "Course1",
+                "Test Course",
+                90,
+                1
+        );
+        Appointment appointment = new Appointment(
+                localDateTime,
+                instructor,
+                course
+        );
 
         // act
         appointment.getCourse().setName("Aaaaaaaaaaaaaa");
