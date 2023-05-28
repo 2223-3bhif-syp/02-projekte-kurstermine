@@ -5,7 +5,7 @@ import at.htl.courseschedule.entity.Participant;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
-public class ParticipantService {
+public class ParticipantService implements Service<Participant> {
     private static ParticipantService instance;
 
     private final ObservableList<Participant> participants;
@@ -24,18 +24,27 @@ public class ParticipantService {
         return instance;
     }
 
-    public void addParticipant(Participant participant) {
+    @Override
+    public void add(Participant participant) {
         participantRepository.insert(participant);
-        participants.add(participant);
+        updateParticipants();
     }
 
-    public void removeParticipant(Participant participant) {
+    @Override
+    public void remove(Participant participant) {
         participantRepository.delete(participant);
-        participants.remove(participant);
+        updateParticipants();
     }
 
-    public void updateParticipant(Participant participant) {
+    @Override
+    public void update(Participant participant) {
         participantRepository.update(participant);
+        updateParticipants();
+    }
+
+    private void updateParticipants(){
+        participants.clear();
+        participants.setAll(participantRepository.findAll());
     }
 
     public ObservableList<Participant> getParticipants() {
