@@ -16,10 +16,12 @@
               AnchorPane.topAnchor="35.0" alignment="CENTER" hgap="3" vgap="3">
     </GridPane>
 
+    <HBox AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" style="-fx-spacing: 10px;">
+        <Button fx:id="weekBeforeBtn" prefWidth="30" onAction="#weekBeforeBtnClicked"/>
+        <DatePicker fx:id="datepicker"/>
+        <Button fx:id="weekAfterBtn" prefWidth="30" onAction="#weekAfterBtnClicked"/>
+    </HBox>
 
-    <Button AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" fx:id="weekAfterBtn" prefWidth="30" onAction="#weekAfterBtnClicked"/>
-    <DatePicker AnchorPane.rightAnchor="45.0" AnchorPane.topAnchor="0.0" fx:id="datepicker"/>
-    <Button AnchorPane.rightAnchor="225.0" AnchorPane.topAnchor="0.0" fx:id="weekBeforeBtn" prefWidth="30" onAction="#weekBeforeBtnClicked"/>
 
     <Button fx:id="addButton" onAction="#addAppointment" AnchorPane.rightAnchor="10" AnchorPane.bottomAnchor="10"
             prefWidth="50" prefHeight="50">+
