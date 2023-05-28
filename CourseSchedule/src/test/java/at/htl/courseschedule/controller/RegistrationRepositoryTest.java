@@ -164,7 +164,7 @@ public class RegistrationRepositoryTest {
                 50,
                 10
         );
-        LocalDateTime now = LocalDateTime.of(
+        LocalDateTime dateTime = LocalDateTime.of(
                 2023,
                 5,
                 26,
@@ -172,12 +172,12 @@ public class RegistrationRepositoryTest {
                 30
         );
         Appointment appointment = new Appointment(
-                now,
+                dateTime,
                 instructor,
                 course
         );
         Appointment appointment2 = new Appointment(
-                now.plusHours(5),
+                dateTime.plusHours(5),
                 instructor,
                 course
         );
@@ -214,8 +214,8 @@ public class RegistrationRepositoryTest {
 
         assertThat(table).row()
                 .value().isEqualTo(registration.getId())
-                .value().isEqualTo(appointment.getId())
-                .value().isEqualTo(participant.getId());
+                .value().isEqualTo(appointment2.getId())
+                .value().isEqualTo(participant2.getId());
     }
 
     @Test
