@@ -71,40 +71,7 @@ public class AdminViewController {
     @FXML
     public void initialize() {
         //Pagination initialisation
-        Image btnImage = new Image(String.valueOf(App.class.getResource("/arrow-image.png")));
-
-        ImageView viewLeft = new ImageView(btnImage);
-        ImageView viewRight = new ImageView(btnImage);
-
-        viewLeft.setRotate(180);
-        viewLeft.setPreserveRatio(true);
-        viewRight.setPreserveRatio(true);
-
-        viewLeft.setFitHeight(17);
-        viewRight.setFitHeight(17);
-
-        weekBeforeBtn.setGraphic(viewLeft);
-        weekAfterBtn.setGraphic(viewRight);
-
-        datepicker.setValue(LocalDate.now());
-        datepicker.setOnAction(event -> {
-            //resets the dates from above
-            addWeekdayLabels();
-
-            //sets the predicate for the current appointments
-            filteredAppointments.setPredicate((a) ->
-                    a.getStart()
-                            .isAfter(getDateOfDayOfWeek(DayOfWeek.MONDAY).atStartOfDay()) &&
-                            a.getStart()
-                                    .plusMinutes(a.getCourse().getMinutesPerAppointment())
-                                    .isBefore(getDateOfDayOfWeek(DayOfWeek.SUNDAY).atStartOfDay().plusHours(23))
-            );
-
-            // redraws all appointments
-            redrawAppointments();
-
-            System.out.println("Hello");
-        });
+        initPagination();
 
         //add Btn initialisation
         addButton.setShape(new Circle(1.5));
@@ -126,14 +93,55 @@ public class AdminViewController {
         filteredAppointments.addListener((ListChangeListener<Appointment>) change -> redrawAppointments());
         filteredAppointments.setPredicate((a) ->
                 a.getStart()
-                    .isAfter(getDateOfDayOfWeek(DayOfWeek.MONDAY).atStartOfDay()) &&
+                        .isAfter(getDateOfDayOfWeek(DayOfWeek.MONDAY)
+                                .atStartOfDay())
+                &&
                 a.getStart()
-                    .plusMinutes(a.getCourse().getMinutesPerAppointment())
-                    .isBefore(getDateOfDayOfWeek(DayOfWeek.SUNDAY).atStartOfDay().plusHours(23))
+                        .plusMinutes(a.getCourse()
+                                .getMinutesPerAppointment())
+                        .isBefore(getDateOfDayOfWeek(DayOfWeek.SUNDAY)
+                                .atStartOfDay()
+                                .plusHours(23))
         );
 
         // Force initial draw
         redrawAppointments();
+    }
+
+    private void initPagination(){
+        Image btnImage = new Image(String.valueOf(App.class.getResource("/arrow-image.png")));
+
+        ImageView viewLeft = new ImageView(btnImage);
+        ImageView viewRight = new ImageView(btnImage);
+
+        viewLeft.setRotate(180);
+        viewLeft.setPreserveRatio(true);
+        viewRight.setPreserveRatio(true);
+        viewLeft.setFitHeight(17);
+        viewRight.setFitHeight(17);
+
+        weekBeforeBtn.setGraphic(viewLeft);
+        weekAfterBtn.setGraphic(viewRight);
+
+        datepicker.setValue(LocalDate.now());
+        datepicker.setOnAction(event -> {
+            //resets the dates from above
+            addWeekdayLabels();
+
+            //sets the predicate for the current appointments and changes them via the change listener
+            filteredAppointments.setPredicate((a) ->
+                    a.getStart()
+                            .isAfter(getDateOfDayOfWeek(DayOfWeek.MONDAY)
+                                    .atStartOfDay())
+                    &&
+                    a.getStart()
+                            .plusMinutes(a.getCourse()
+                                    .getMinutesPerAppointment())
+                            .isBefore(getDateOfDayOfWeek(DayOfWeek.SUNDAY)
+                                    .atStartOfDay()
+                                    .plusHours(23))
+            );
+        });
     }
 
     private LocalDate getDateOfDayOfWeek(DayOfWeek dayOfWeek) {
