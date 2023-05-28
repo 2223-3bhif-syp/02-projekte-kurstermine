@@ -29,10 +29,15 @@ class CourseRepositoryTest {
     @Test
     void test_save_save_simple_course_and_db_check_ok() {
         // arrange
-        Table table = new Table(Database.getDataSource(), tableName);
+        Table table = new Table(
+                Database.getDataSource(),
+                tableName);
 
         CourseRepository courseRepository = new CourseRepository();
-        Course course = new Course("Course1", "Test Course", 90,
+        Course course = new Course(
+                "Course1",
+                "Test Course",
+                90,
                 1);
 
         // act
@@ -71,10 +76,15 @@ class CourseRepositoryTest {
     @Test
     void test_update_update_course_ok() {
         // arrange
-        Table table = new Table(Database.getDataSource(), tableName);
+        Table table = new Table(
+                Database.getDataSource(),
+                tableName);
 
         CourseRepository courseRepository = new CourseRepository();
-        Course course = new Course("Course1", "Test Course", 90,
+        Course course = new Course(
+                "Course1",
+                "Test Course",
+                90,
                 1);
 
         // act
@@ -113,10 +123,15 @@ class CourseRepositoryTest {
     @Test
     void test_insert_insert_course_ok() {
         // arrange
-        Table table = new Table(Database.getDataSource(), tableName);
+        Table table = new Table(
+                Database.getDataSource(),
+                tableName);
 
         CourseRepository courseRepository = new CourseRepository();
-        Course course = new Course("Course1", "Test Course", 90,
+        Course course = new Course(
+                "Course1",
+                "Test Course",
+                90,
                 1);
 
         // act
@@ -152,10 +167,15 @@ class CourseRepositoryTest {
     @Test
     void test_delete_delete_inserted_course_ok() {
         // arrange
-        Table table = new Table(Database.getDataSource(), tableName);
+        Table table = new Table(
+                Database.getDataSource(),
+                tableName);
 
         CourseRepository courseRepository = new CourseRepository();
-        Course course = new Course("Course1", "Test Course", 90,
+        Course course = new Course(
+                "Course1",
+                "Test Course",
+                90,
                 1);
 
         // act
@@ -184,11 +204,20 @@ class CourseRepositoryTest {
     void test_findall_retreive_inserted_data_ok() {
         // arrange
         CourseRepository courseRepository = new CourseRepository();
-        Course course1 = new Course("Course1", "Test Course", 90,
+        Course course1 = new Course(
+                "Course1",
+                "Test Course",
+                90,
                 1);
-        Course course2 = new Course("Course2", "Test Course", 90,
+        Course course2 = new Course(
+                "Course2",
+                "Test Course",
+                90,
                 1);
-        Course course3 = new Course("Course3", "Test Course", 90,
+        Course course3 = new Course(
+                "Course3",
+                "Test Course",
+                90,
                 1);
 
         // act
@@ -208,11 +237,20 @@ class CourseRepositoryTest {
     void test_findbyid_find_inserted_elements_by_id_ok() {
         // arrange
         CourseRepository courseRepository = new CourseRepository();
-        Course course1 = new Course("Course1", "Test Course", 90,
+        Course course1 = new Course(
+                "Course1",
+                "Test Course",
+                90,
                 1);
-        Course course2 = new Course("Course2", "Test Course", 90,
+        Course course2 = new Course(
+                "Course2",
+                "Test Course",
+                90,
                 1);
-        Course course3 = new Course("Course3", "Test Course", 90,
+        Course course3 = new Course(
+                "Course3",
+                "Test Course",
+                90,
                 1);
 
         // act
