@@ -29,11 +29,19 @@ class ParticipantRepositoryTest {
     @Test
     void test_save_save_participant_ok() {
         // arrange
-        Table table = new Table(Database.getDataSource(), tableName);
+        Table table = new Table(
+                Database.getDataSource(),
+                tableName
+        );
 
         ParticipantRepository parRep = new ParticipantRepository();
-        Participant participant = new Participant("firstName", "lastName", 2000,
-                "+43 6704070789", "lastName@gmail.com");
+        Participant participant = new Participant(
+                "firstName",
+                "lastName",
+                2000,
+                "+43 6704070789",
+                "lastName@gmail.com"
+        );
 
         // act
         parRep.save(participant);
@@ -73,11 +81,19 @@ class ParticipantRepositoryTest {
     @Test
     void test_update_update_instructor_ok() {
         // arrange
-        Table table = new Table(Database.getDataSource(), tableName);
+        Table table = new Table(
+                Database.getDataSource(),
+                tableName
+        );
 
         ParticipantRepository parRep = new ParticipantRepository();
-        Participant participant = new Participant("firstName", "lastName", 2000,
-                "+43 6704070789", "lastName@gmail.com");
+        Participant participant = new Participant(
+                "firstName",
+                "lastName",
+                2000,
+                "+43 6704070789",
+                "lastName@gmail.com"
+        );
 
         // act
         parRep.insert(participant);
@@ -117,11 +133,19 @@ class ParticipantRepositoryTest {
     @Test
     void test_insert_insert_participant_ok() {
         // arrange
-        Table table = new Table(Database.getDataSource(), tableName);
+        Table table = new Table(
+                Database.getDataSource(),
+                tableName
+        );
 
         ParticipantRepository parRep = new ParticipantRepository();
-        Participant participant = new Participant("firstName", "lastName", 2000,
-                "+43 6704070789", "lastName@gmail.com");
+        Participant participant = new Participant(
+                "firstName",
+                "lastName",
+                2000,
+                "+43 6704070789",
+                "lastName@gmail.com"
+        );
 
         // act
         parRep.insert(participant);
@@ -158,11 +182,19 @@ class ParticipantRepositoryTest {
     @Test
     void test_delete_delete_inserted_participant_ok() {
         // arrange
-        Table table = new Table(Database.getDataSource(), tableName);
+        Table table = new Table(
+                Database.getDataSource(),
+                tableName
+        );
 
         ParticipantRepository parRep = new ParticipantRepository();
-        Participant participant = new Participant("firstName", "lastName", 2000,
-                "+43 6704070789", "lastName@gmail.com");
+        Participant participant = new Participant(
+                "firstName",
+                "lastName",
+                2000,
+                "+43 6704070789",
+                "lastName@gmail.com"
+        );
 
         // modify
         parRep.insert(participant);
@@ -190,12 +222,27 @@ class ParticipantRepositoryTest {
     void test_findall_find_all_inserted_participants_ok() {
         // arrange
         ParticipantRepository parRep = new ParticipantRepository();
-        Participant participant1 = new Participant("1", "lastName", 2000,
-                "+43 6704070789", "lastName@gmail.com");
-        Participant participant2 = new Participant("2", "lastName", 2000,
-                "+43 6704070789", "lastName@gmail.com");
-        Participant participant3 = new Participant("3", "lastName", 2000,
-                "+43 6704070789", "lastName@gmail.com");
+        Participant participant1 = new Participant(
+                "1",
+                "lastName",
+                2000,
+                "+43 6704070789",
+                "lastName@gmail.com"
+        );
+        Participant participant2 = new Participant(
+                "2",
+                "lastName",
+                2000,
+                "+43 6704070789",
+                "lastName@gmail.com"
+        );
+        Participant participant3 = new Participant(
+                "3",
+                "lastName",
+                2000,
+                "+43 6704070789",
+                "lastName@gmail.com"
+        );
 
         // act
         parRep.save(participant1);
@@ -214,12 +261,27 @@ class ParticipantRepositoryTest {
     void test_findbyid_find_inserted_elements_ok() {
         // arrange
         ParticipantRepository parRep = new ParticipantRepository();
-        Participant participant1 = new Participant("1", "lastName", 2000,
-                "+43 6704070789", "lastName@gmail.com");
-        Participant participant2 = new Participant("2", "lastName", 2000,
-                "+43 6704070789", "lastName@gmail.com");
-        Participant participant3 = new Participant("3", "lastName", 2000,
-                "+43 6704070789", "lastName@gmail.com");
+        Participant participant1 = new Participant(
+                "1",
+                "lastName",
+                2000,
+                "+43 6704070789",
+                "lastName@gmail.com"
+        );
+        Participant participant2 = new Participant(
+                "2",
+                "lastName",
+                2000,
+                "+43 6704070789",
+                "lastName@gmail.com"
+        );
+        Participant participant3 = new Participant(
+                "3",
+                "lastName",
+                2000,
+                "+43 6704070789",
+                "lastName@gmail.com"
+        );
 
         // modify
         parRep.save(participant1);
