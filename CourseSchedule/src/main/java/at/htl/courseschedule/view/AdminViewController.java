@@ -273,6 +273,16 @@ public class AdminViewController {
     }
 
     private void showAppointment(Appointment appointment) {
+        // TODO: Properly handle this edge case
+        if (appointment.getStart().getHour() > LAST_HOUR || appointment.getStart().getHour() < FIRST_HOUR
+            || appointment.getStart().plusMinutes(appointment
+                .getCourse()
+                .getMinutesPerAppointment()
+                ).getHour() > LAST_HOUR) {
+            System.err.println("Refusing to draw appointment: " + appointment.toString());
+            return;
+        }
+
         AppointmentComponent appointmentComponent = new AppointmentComponent(appointment);
 
         setCalculatedComponentSize(appointmentComponent);
