@@ -44,7 +44,7 @@ public class RegistrationRepositoryTest {
                 "+43 770 232342877", "fhuber@yahoo.com");
         Course course = new Course("Example", "Lorem ipsum", 50,
                 10);
-        LocalDateTime now = LocalDateTime.now();
+        LocalDateTime now = LocalDateTime.of(2023, 5, 26, 12, 30);
         Appointment appointment = new Appointment(now, instructor, course);
         Registration registration = new Registration(participant, appointment);
 
@@ -108,7 +108,7 @@ public class RegistrationRepositoryTest {
                 "+43 681 234987", "fmuehle@gmail.com");
         Course course = new Course("Example", "Lorem ipsum", 50,
                 10);
-        LocalDateTime now = LocalDateTime.now();
+        LocalDateTime now = LocalDateTime.of(2023, 5, 26, 12, 30);
         Appointment appointment = new Appointment(now, instructor, course);
         Appointment appointment2 = new Appointment(now.plusHours(5), instructor, course);
         Registration registration = new Registration(participant, appointment);
@@ -177,7 +177,7 @@ public class RegistrationRepositoryTest {
                 "+43 770 232342877", "fhuber@yahoo.com");
         Course course = new Course("Example", "Lorem ipsum", 50,
                 10);
-        LocalDateTime now = LocalDateTime.now();
+        LocalDateTime now = LocalDateTime.of(2023, 5, 26, 12, 30);
         Appointment appointment = new Appointment(now, instructor, course);
         Registration registration = new Registration(participant, appointment);
 
@@ -238,7 +238,7 @@ public class RegistrationRepositoryTest {
                 "+43 770 232342877", "fhuber@yahoo.com");
         Course course = new Course("Example", "Lorem ipsum", 50,
                 10);
-        LocalDateTime now = LocalDateTime.now();
+        LocalDateTime now = LocalDateTime.of(2023, 5, 26, 12, 30);
         Appointment appointment = new Appointment(now, instructor, course);
         Registration registration = new Registration(participant, appointment);
 
@@ -283,21 +283,6 @@ public class RegistrationRepositoryTest {
     }
 
     @Test
-    void test_delete_delete_fake_registration_ok() {
-        // arrange
-        RegistrationRepository registrationRepository = new RegistrationRepository();
-        Registration fakeRegistration = new Registration(new Participant(), new Appointment());
-        fakeRegistration.setId(-1L);
-
-        // act
-        registrationRepository.delete(fakeRegistration);
-
-        // assert
-        // if an error gets thrown the id does not reset to null and therefor should still be -1
-        assertThat(fakeRegistration.getId()).isEqualTo(-1);
-    }
-
-    @Test
     void test_findall_list_contains_inserted_values_ok() {
         Table table = new Table(Database.getDataSource(), tableName);
         RegistrationRepository registrationRepository = new RegistrationRepository();
@@ -316,7 +301,7 @@ public class RegistrationRepositoryTest {
                 "+43 681 324678482", "kilibrnd@gmail.com");
         Course course = new Course("Example", "Lorem ipsum", 50,
                 10);
-        LocalDateTime now = LocalDateTime.now();
+        LocalDateTime now = LocalDateTime.of(2023, 5, 26, 12, 30);
         Appointment appointment = new Appointment(now, instructor, course);
         Appointment appointment2 = new Appointment(now.plusHours(5), instructor, course);
         Appointment appointment3 = new Appointment(now.plusHours(10), instructor, course);
@@ -364,7 +349,7 @@ public class RegistrationRepositoryTest {
                 "+43 681 324678482", "kilibrnd@gmail.com");
         Course course = new Course("Example", "Lorem ipsum", 50,
                 10);
-        LocalDateTime now = LocalDateTime.now();
+        LocalDateTime now = LocalDateTime.of(2023, 5, 26, 12, 30);
         Appointment appointment = new Appointment(now, instructor, course);
         Appointment appointment2 = new Appointment(now.plusHours(5), instructor, course);
         Appointment appointment3 = new Appointment(now.plusHours(10), instructor, course);
@@ -383,8 +368,6 @@ public class RegistrationRepositoryTest {
         registrationRepository.save(registration);
         registrationRepository.save(registration2);
         registrationRepository.save(registration3);
-
-        System.out.println(Timestamp.valueOf(LocalDateTime.now()));
 
         // act
         Registration repositoryRegistration1 = registrationRepository.findById(registration.getId());

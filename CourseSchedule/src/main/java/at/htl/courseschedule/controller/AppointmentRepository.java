@@ -71,7 +71,7 @@ public class AppointmentRepository implements Persistent<Appointment> {
     }
 
     @Override
-    public void delete(Appointment appointment) {
+    public void delete(Appointment appointment){
         throwExceptionOnInvalidAppointment(appointment);
 
         try (Connection connection = dataSource.getConnection()) {

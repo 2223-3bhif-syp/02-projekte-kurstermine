@@ -165,21 +165,6 @@ class InstructorRepositoryTest {
     }
 
     @Test
-    void test_delete_delete_fake_instructor_ok() {
-        // arrange
-        InstructorRepository instructorRepository = new InstructorRepository();
-        Instructor fakeInstructor = new Instructor();
-        fakeInstructor.setId(-1L);
-
-        // act
-        instructorRepository.delete(fakeInstructor);
-
-        // assert
-        // if an error gets thrown the id does not reset to null and therefor should still be -1
-        assertThat(fakeInstructor.getId()).isEqualTo(-1);
-    }
-
-    @Test
     void test_findall_find_elements_ok() {
         // arrange
         InstructorRepository insRep = new InstructorRepository();

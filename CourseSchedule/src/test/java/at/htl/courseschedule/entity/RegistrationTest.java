@@ -15,7 +15,7 @@ class RegistrationTest {
 
     @BeforeEach
     public void setUp() {
-        localDateTime = LocalDateTime.now();
+        localDateTime = LocalDateTime.of(2023, 5, 26, 12, 30);
         Instructor instructor = new Instructor("InstructorName", "Leitner",
                 "+43 6704070789", "LeiterName@speedmail.com");
         Course course = new Course("Amselarbeit", "Die Arbeit, sie ruft", 180,
@@ -59,7 +59,7 @@ class RegistrationTest {
         // arrange
         Registration registration = new Registration(participant, appointment);
 
-        LocalDateTime newLocalDateTime = LocalDateTime.now().plusDays(18);
+        LocalDateTime newLocalDateTime = LocalDateTime.of(2023, 5, 26, 12, 30).plusDays(18);
         Instructor newInstructor = new Instructor("I am new", "New", "+43 2342343245",
                 "newmail@speedmail.com");
         Course newCourse = new Course("Speedster", "Wer bremst verliert", 200,

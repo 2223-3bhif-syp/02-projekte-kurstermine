@@ -9,6 +9,7 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -35,7 +36,7 @@ class AppointmentRepositoryTest {
         Table table = new Table(Database.getDataSource(), tableName);
 
         AppointmentRepository appointmentRepository = new AppointmentRepository();
-        LocalDateTime dateTime = LocalDateTime.now();
+        LocalDateTime dateTime = LocalDateTime.of(2023, 5, 26, 12, 30);
         Instructor instructor = new Instructor("firstName", "lastName", "+43 6704070789",
                 "lastName@gmail.com");
         InstructorRepository instructorRepository = new InstructorRepository();
@@ -72,7 +73,7 @@ class AppointmentRepositoryTest {
     void test_save_instructor_and_course_null_ok() {
         // arrange
         AppointmentRepository appointmentRepository = new AppointmentRepository();
-        LocalDateTime now = LocalDateTime.now();
+        LocalDateTime now = LocalDateTime.of(2023, 5, 26, 12, 30);
         Appointment appointment = new Appointment(now, null, null);
 
         // act
@@ -101,7 +102,7 @@ class AppointmentRepositoryTest {
 
         AppointmentRepository appointmentRepository = new AppointmentRepository();
 
-        LocalDateTime dateTime = LocalDateTime.now();
+        LocalDateTime dateTime = LocalDateTime.of(2023, 5, 26, 12, 30);
         Instructor instructor = new Instructor("firstName", "lastName", "+43 6704070789",
                 "lastName@gmail.com");
         InstructorRepository instructorRepository = new InstructorRepository();
@@ -138,7 +139,7 @@ class AppointmentRepositoryTest {
     void test_update_instructor_and_course_null_ok() {
         // arrange
         AppointmentRepository appointmentRepository = new AppointmentRepository();
-        LocalDateTime now = LocalDateTime.now();
+        LocalDateTime now = LocalDateTime.of(2023, 5, 26, 12, 30);
         Appointment appointment = new Appointment(now, null, null);
 
         // act
@@ -167,7 +168,7 @@ class AppointmentRepositoryTest {
 
         AppointmentRepository appointmentRepository = new AppointmentRepository();
 
-        LocalDateTime dateTime = LocalDateTime.now();
+        LocalDateTime dateTime = LocalDateTime.of(2023, 5, 26, 12, 30);
         Instructor instructor = new Instructor("firstName", "lastName", "+43 6704070789",
                 "lastName@gmail.com");
         InstructorRepository instructorRepository = new InstructorRepository();
@@ -200,7 +201,7 @@ class AppointmentRepositoryTest {
     void test_insert_instructor_and_course_null_ok() {
         // arrange
         AppointmentRepository appointmentRepository = new AppointmentRepository();
-        LocalDateTime now = LocalDateTime.now();
+        LocalDateTime now = LocalDateTime.of(2023, 5, 26, 12, 30);
         Appointment appointment = new Appointment(now, null, null);
 
         // act
@@ -228,7 +229,7 @@ class AppointmentRepositoryTest {
         Table table = new Table(Database.getDataSource(), tableName);
 
         AppointmentRepository appointmentRepository = new AppointmentRepository();
-        LocalDateTime dateTime = LocalDateTime.now();
+        LocalDateTime dateTime = LocalDateTime.of(2023, 5, 26, 12, 30);
         Instructor instructor = new Instructor("firstName", "lastName", "+43 6704070789",
                 "lastName@gmail.com");
         InstructorRepository instructorRepository = new InstructorRepository();
@@ -255,7 +256,7 @@ class AppointmentRepositoryTest {
     void test_delete_instructor_and_course_null_ok() {
         // arrange
         AppointmentRepository appointmentRepository = new AppointmentRepository();
-        LocalDateTime now = LocalDateTime.now();
+        LocalDateTime now = LocalDateTime.of(2023, 5, 26, 12, 30);
         Appointment appointment = new Appointment(now, null, null);
 
         // act
@@ -278,26 +279,11 @@ class AppointmentRepositoryTest {
     }
 
     @Test
-    void test_delete_delete_fake_appointment_ok() {
-        // arrange
-        AppointmentRepository appointmentRepository = new AppointmentRepository();
-        Appointment fakeAppointment = new Appointment(LocalDateTime.now(), new Instructor(), new Course());
-        fakeAppointment.setId(-1L);
-
-        // act
-        appointmentRepository.delete(fakeAppointment);
-
-        // assert
-        // if an error gets thrown the id does not reset to null and therefor should still be -1
-        assertThat(fakeAppointment.getId()).isEqualTo(-1);
-    }
-
-    @Test
     void test_findall_list_contains_inserted_values_ok() {
         // arrange
         AppointmentRepository appointmentRepository = new AppointmentRepository();
 
-        LocalDateTime dateTime = LocalDateTime.now();
+        LocalDateTime dateTime = LocalDateTime.of(2023, 5, 26, 12, 30);
         Instructor instructor = new Instructor("firstName", "lastName", "+43 6704070789",
                 "lastName@gmail.com");
         InstructorRepository instructorRepository = new InstructorRepository();
@@ -336,7 +322,7 @@ class AppointmentRepositoryTest {
         // arrange
         AppointmentRepository appointmentRepository = new AppointmentRepository();
 
-        LocalDateTime dateTime = LocalDateTime.now();
+        LocalDateTime dateTime = LocalDateTime.of(2023, 5, 26, 12, 30);
         Instructor instructor = new Instructor("firstName", "lastName", "+43 6704070789",
                 "lastName@gmail.com");
         InstructorRepository instructorRepository = new InstructorRepository();

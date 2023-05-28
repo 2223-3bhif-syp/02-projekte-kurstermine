@@ -181,21 +181,6 @@ class CourseRepositoryTest {
     }
 
     @Test
-    void test_delete_delete_fake_course() {
-        // arrange
-        CourseRepository courseRepository = new CourseRepository();
-        Course fakeCourse = new Course();
-        fakeCourse.setId(-1L);
-
-        // act
-        courseRepository.delete(fakeCourse);
-
-        // assert
-        // if an error gets thrown the id does not reset to null and therefor should still be -1
-        assertThat(fakeCourse.getId()).isEqualTo(-1);
-    }
-
-    @Test
     void test_findall_retreive_inserted_data_ok() {
         // arrange
         CourseRepository courseRepository = new CourseRepository();

@@ -23,7 +23,7 @@ class AppointmentTest {
         // arrange
         Instructor instructor = new Instructor("firstName", "lastName", "+43 6704070789",
                 "lastName@gmail.com");
-        LocalDateTime localDateTime = LocalDateTime.now();
+        LocalDateTime localDateTime = LocalDateTime.of(2023, 5, 26, 12, 30);
         Course course = new Course("Course1", "Test Course", 90,
                 1);
         Appointment appointment = new Appointment(localDateTime, instructor, course);
@@ -56,7 +56,7 @@ class AppointmentTest {
         // arrange
         Instructor instructor = new Instructor("firstName", "lastName", "+43 6704070789",
                 "lastName@gmail.com");
-        LocalDateTime localDateTime = LocalDateTime.now();
+        LocalDateTime localDateTime = LocalDateTime.of(2023, 5, 26, 12, 30);
         Course course = new Course("Course1", "Test Course", 90,
                 1);
         Appointment appointment = new Appointment();
@@ -79,7 +79,7 @@ class AppointmentTest {
         // arrange
         Instructor instructor = new Instructor("firstName", "lastName", "+43 6704070789",
                 "lastName@gmail.com");
-        LocalDateTime localDateTime = LocalDateTime.now();
+        LocalDateTime localDateTime = LocalDateTime.of(2023, 5, 26, 12, 30);
         Course course = new Course("Course1", "Test Course", 90,
                 1);
         Appointment appointment = new Appointment(localDateTime, instructor, course);
@@ -87,7 +87,7 @@ class AppointmentTest {
                 3);
         Instructor newInstructor = new Instructor("Theodor", "Grau", "+48 342 0323244",
                 "grauTheo@yahoomail.com");
-        LocalDateTime newDateTime = LocalDateTime.now().minusDays(4);
+        LocalDateTime newDateTime = LocalDateTime.of(2023, 5, 26, 12, 30).minusDays(4);
 
         // act
         appointment.setId(12L);
@@ -107,7 +107,7 @@ class AppointmentTest {
         // arrange
         Instructor instructor = new Instructor("firstName", "lastName", "+43 6704070789",
                 "lastName@gmail.com");
-        LocalDateTime localDateTime = LocalDateTime.now();
+        LocalDateTime localDateTime = LocalDateTime.of(2023, 5, 26, 12, 30);
         Course course = new Course("Course1", "Test Course", 90,
                 1);
         Appointment appointment = new Appointment(localDateTime, instructor, course);
