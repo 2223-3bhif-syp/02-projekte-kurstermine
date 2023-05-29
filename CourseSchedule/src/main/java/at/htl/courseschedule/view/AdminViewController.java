@@ -27,7 +27,6 @@ import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
-import java.time.chrono.ChronoLocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.time.format.TextStyle;
@@ -43,8 +42,10 @@ public class AdminViewController {
     private static final int LAST_HOUR = 20;
     private static final int DISPLAYED_HOURS = LAST_HOUR - FIRST_HOUR + 1; // +1: typical fencepost problem
     private static final double DAY_OF_WEEK_ROW_PERCENTAGE = 5.0d;
-    private static final double TIME_ROW_PERCENTAGE = (100 - DAY_OF_WEEK_ROW_PERCENTAGE) / DISPLAYED_HOURS;
-    private static final double TIME_COL_PERCENTAGE = 5.5d;
+    private static final double SPACER_ROW_PERCENTAGE = 0.5d; // HAHA More workarounds go brrrrrrr
+    private static final double TIME_ROW_PERCENTAGE = (100 - DAY_OF_WEEK_ROW_PERCENTAGE - SPACER_ROW_PERCENTAGE) / DISPLAYED_HOURS;
+    private static final double TIME_COL_PERCENTAGE = 5.0d;
+    private static final double SPACER_COL_PERCENTAGE = 0.5d; // Another workaround
     private static final double DAY_OF_WEEK_COL_PERCENTAGE = 13.5d;
 
     @FXML
@@ -63,6 +64,8 @@ public class AdminViewController {
     private Button addButton;
 
     private AnchorPane drawPane;
+    private VBox spacerRow;
+    private HBox spacerCol;
     private AppointmentService appointmentService;
     private InstructorService instructorService;
     private CourseService courseService;
@@ -81,12 +84,16 @@ public class AdminViewController {
         addWeekdayLabels();
         addHourLabels();
         drawPane = initDrawPane();
+        spacerRow = initSpacerRow(); // This is needed for my obscure workaround
+        spacerCol = initSpacerCol();
 
         appointmentService = AppointmentService.getInstance();
         instructorService = InstructorService.getInstance();
         courseService = CourseService.getInstance();
 
-        timeGrid.widthProperty().addListener((observableValue, number, t1) -> recalcComponentSizes());
+        spacerRow.heightProperty().addListener((observableValue, number, t1) -> recalcComponentSizes());
+        spacerCol.widthProperty().addListener((observableValue, number, t1) -> recalcComponentSizes());
+        drawPane.widthProperty().addListener((observableValue, number, t1) -> recalcComponentSizes());
         drawPane.heightProperty().addListener((observableValue, number, t1) -> recalcComponentSizes());
 
         filteredAppointments = new FilteredList<>(appointmentService.getAppointments());
@@ -152,7 +159,7 @@ public class AdminViewController {
     }
 
     private int dayOfWeekToInt(DayOfWeek dayOfWeek) {
-        int result = switch (dayOfWeek) {
+        return switch (dayOfWeek) {
             case TUESDAY -> 1;
             case WEDNESDAY -> 2;
             case THURSDAY -> 3;
@@ -161,8 +168,6 @@ public class AdminViewController {
             case SUNDAY -> 6;
             default -> 0;
         };
-
-        return result;
     }
 
     private void addGridConstraints() {
@@ -180,6 +185,10 @@ public class AdminViewController {
             colConstraints.add(dayCol);
         }
 
+        ColumnConstraints spacerCol = new ColumnConstraints();
+        spacerCol.setPercentWidth(SPACER_COL_PERCENTAGE);
+        colConstraints.add(spacerCol);
+
         // first column is smaller since it only contains the time
         RowConstraints labelRow = new RowConstraints();
         labelRow.setPercentHeight(DAY_OF_WEEK_ROW_PERCENTAGE);
@@ -190,6 +199,10 @@ public class AdminViewController {
             hourRow.setPercentHeight(TIME_ROW_PERCENTAGE);
             rowConstraints.add(hourRow);
         }
+
+        RowConstraints spacerRow = new RowConstraints();
+        spacerRow.setPercentHeight(SPACER_ROW_PERCENTAGE);
+        rowConstraints.add(spacerRow);
     }
 
     private void addWeekdayLabels() {
@@ -231,45 +244,68 @@ public class AdminViewController {
     private AnchorPane initDrawPane() {
         AnchorPane pane = new AnchorPane();
 
-        GridPane.setColumnSpan(pane, DAYS_PER_WEEK);
-        GridPane.setRowSpan(pane, DISPLAYED_HOURS);
+        GridPane.setColumnSpan(pane, DAYS_PER_WEEK + 1); // +1 take spacer col
+        GridPane.setRowSpan(pane, DISPLAYED_HOURS + 1); // +1 since we also want to take the spacer row
 
         timeGrid.add(pane, 1, 1);
         return pane;
     }
 
-    private double getPosXFromDayOfWeek(DayOfWeek dayOfWeek) {
-        return (dayOfWeek.getValue() - 1) * (DAY_OF_WEEK_COL_PERCENTAGE / 100 * timeGrid.getWidth());
+    private VBox initSpacerRow() {
+        VBox spacerRowBox = new VBox();
+
+        timeGrid.add(spacerRowBox, 0, 14);
+
+        return spacerRowBox;
     }
 
+    private HBox initSpacerCol() {
+        HBox spacerColBox = new HBox();
+
+        timeGrid.add(spacerColBox, 8, 0);
+
+        return spacerColBox;
+    }
+
+    private double getPosXFromDayOfWeek(DayOfWeek dayOfWeek) {
+        return (((drawPane.getWidth() - spacerCol.getWidth() - timeGrid.getHgap()) - 6 * timeGrid.getHgap()) / DAYS_PER_WEEK + timeGrid.getHgap())
+                * (dayOfWeek.getValue() - 1);
+    }
+
+
     private double getPosYFromStartTime(LocalDateTime start) {
-        return ((drawPane.getHeight() * ((start.getHour() - FIRST_HOUR) * 60 + start.getMinute()))
-                / (DISPLAYED_HOURS * MINUTES_PER_HOUR)) ;
+        return (((drawPane.getHeight() - spacerRow.getHeight()) * ((start.getHour() - FIRST_HOUR) * 60 + start.getMinute()))
+                / (DISPLAYED_HOURS * MINUTES_PER_HOUR));
     }
 
     private double getHeight(int minutesInAppointment) {
-        return ((drawPane.getHeight() * minutesInAppointment)
-                / (DISPLAYED_HOURS * MINUTES_PER_HOUR)) - timeGrid.getHgap();
+        return (((drawPane.getHeight() - spacerRow.getHeight()) * minutesInAppointment) / (DISPLAYED_HOURS * MINUTES_PER_HOUR));
     }
 
     private double getWidth() {
-        return (DAY_OF_WEEK_COL_PERCENTAGE * timeGrid.getWidth()) / 100.0d  - timeGrid.getVgap();
+        return ((drawPane.getWidth() - spacerCol.getWidth() - timeGrid.getHgap()) - 6 * timeGrid.getHgap()) / DAYS_PER_WEEK;
     }
 
     private void setCalculatedComponentSize(AppointmentComponent appointmentComponent) {
-        AnchorPane.setLeftAnchor(appointmentComponent, getPosXFromDayOfWeek(appointmentComponent
+        double posX = getPosXFromDayOfWeek(appointmentComponent
                 .getAppointment()
                 .getStart()
-                .getDayOfWeek()));
-        AnchorPane.setTopAnchor(appointmentComponent, getPosYFromStartTime(appointmentComponent
+                .getDayOfWeek());
+        double posY = getPosYFromStartTime(appointmentComponent
                 .getAppointment()
-                .getStart()));
+                .getStart());
 
-        appointmentComponent.setPrefHeight(getHeight(appointmentComponent
+        AnchorPane.setLeftAnchor(appointmentComponent, posX);
+        AnchorPane.setTopAnchor(appointmentComponent, posY);
+
+        double height = getHeight(appointmentComponent
                 .getAppointment()
                 .getCourse()
-                .getMinutesPerAppointment()));
-        appointmentComponent.setPrefWidth(getWidth());
+                .getMinutesPerAppointment());
+        double width = getWidth();
+
+        appointmentComponent.setPrefHeight(height);
+        appointmentComponent.setPrefWidth(width);
     }
 
     private void showAppointment(Appointment appointment) {
@@ -401,7 +437,7 @@ public class AdminViewController {
     }
 
     @FXML
-    public void weekBeforeBtnClicked(ActionEvent actionEvent) {
+    private void weekBeforeBtnClicked(ActionEvent actionEvent) {
         datepicker.setValue(datepicker.getValue().minusWeeks(1));
         datepicker.setValue(getDateOfDayOfWeek(DayOfWeek.MONDAY));
     }
