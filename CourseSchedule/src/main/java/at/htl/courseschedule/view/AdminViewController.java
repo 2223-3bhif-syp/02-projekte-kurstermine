@@ -206,6 +206,7 @@ public class AdminViewController {
 
             HBox labelBox = new HBox(weekday, date);
             labelBox.getStyleClass().add("bg-lighter");
+            labelBox.setStyle("-fx-border-color: #d0edf1; -fx-border-width: 0 0 2 0");
             labelBox.setAlignment(Pos.CENTER);
             labelBox.setSpacing(2);
 
@@ -221,6 +222,7 @@ public class AdminViewController {
 
             HBox labelBox = new HBox(hour);
             labelBox.getStyleClass().add("bg-lighter");
+            labelBox.setStyle("-fx-border-color: #d0edf1; -fx-border-width: 0 0 2 0");
             labelBox.setAlignment(Pos.CENTER);
 
             timeGrid.add(labelBox, 0, i - FIRST_HOUR + 1);

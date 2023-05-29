@@ -13,7 +13,7 @@
     </padding>
 
     <GridPane fx:id="timeGrid" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
-              AnchorPane.topAnchor="35.0" alignment="CENTER" hgap="3" vgap="3">
+              AnchorPane.topAnchor="35.0" alignment="CENTER" hgap="3">
     </GridPane>
 
     <HBox AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" style="-fx-spacing: 10px;">
