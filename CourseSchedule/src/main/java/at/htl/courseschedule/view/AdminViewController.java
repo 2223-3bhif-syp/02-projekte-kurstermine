@@ -13,8 +13,10 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.geometry.VPos;
 import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
@@ -42,10 +44,8 @@ public class AdminViewController {
     private static final int LAST_HOUR = 20;
     private static final int DISPLAYED_HOURS = LAST_HOUR - FIRST_HOUR + 1; // +1: typical fencepost problem
     private static final double DAY_OF_WEEK_ROW_PERCENTAGE = 5.0d;
-    private static final double SPACER_ROW_PERCENTAGE = 0.5d; // HAHA More workarounds go brrrrrrr
-    private static final double TIME_ROW_PERCENTAGE = (100 - DAY_OF_WEEK_ROW_PERCENTAGE - SPACER_ROW_PERCENTAGE) / DISPLAYED_HOURS;
-    private static final double TIME_COL_PERCENTAGE = 5.0d;
-    private static final double SPACER_COL_PERCENTAGE = 0.5d; // Another workaround
+    private static final double TIME_ROW_PERCENTAGE = (100 - DAY_OF_WEEK_ROW_PERCENTAGE) / DISPLAYED_HOURS;
+    private static final double TIME_COL_PERCENTAGE = 5.5d;
     private static final double DAY_OF_WEEK_COL_PERCENTAGE = 13.5d;
 
     @FXML
@@ -63,9 +63,7 @@ public class AdminViewController {
     @FXML
     private Button addButton;
 
-    private AnchorPane drawPane;
-    private VBox spacerRow;
-    private HBox spacerCol;
+    private Pane drawPane;
     private AppointmentService appointmentService;
     private InstructorService instructorService;
     private CourseService courseService;
@@ -84,15 +82,11 @@ public class AdminViewController {
         addWeekdayLabels();
         addHourLabels();
         drawPane = initDrawPane();
-        spacerRow = initSpacerRow(); // This is needed for my obscure workaround
-        spacerCol = initSpacerCol();
 
         appointmentService = AppointmentService.getInstance();
         instructorService = InstructorService.getInstance();
         courseService = CourseService.getInstance();
 
-        spacerRow.heightProperty().addListener((observableValue, number, t1) -> recalcComponentSizes());
-        spacerCol.widthProperty().addListener((observableValue, number, t1) -> recalcComponentSizes());
         drawPane.widthProperty().addListener((observableValue, number, t1) -> recalcComponentSizes());
         drawPane.heightProperty().addListener((observableValue, number, t1) -> recalcComponentSizes());
 
@@ -185,10 +179,6 @@ public class AdminViewController {
             colConstraints.add(dayCol);
         }
 
-        ColumnConstraints spacerCol = new ColumnConstraints();
-        spacerCol.setPercentWidth(SPACER_COL_PERCENTAGE);
-        colConstraints.add(spacerCol);
-
         // first column is smaller since it only contains the time
         RowConstraints labelRow = new RowConstraints();
         labelRow.setPercentHeight(DAY_OF_WEEK_ROW_PERCENTAGE);
@@ -199,10 +189,6 @@ public class AdminViewController {
             hourRow.setPercentHeight(TIME_ROW_PERCENTAGE);
             rowConstraints.add(hourRow);
         }
-
-        RowConstraints spacerRow = new RowConstraints();
-        spacerRow.setPercentHeight(SPACER_ROW_PERCENTAGE);
-        rowConstraints.add(spacerRow);
     }
 
     private void addWeekdayLabels() {
@@ -241,49 +227,33 @@ public class AdminViewController {
         }
     }
 
-    private AnchorPane initDrawPane() {
-        AnchorPane pane = new AnchorPane();
+    private Pane initDrawPane() {
+        Pane pane = new Pane();
 
-        GridPane.setColumnSpan(pane, DAYS_PER_WEEK + 1); // +1 take spacer col
-        GridPane.setRowSpan(pane, DISPLAYED_HOURS + 1); // +1 since we also want to take the spacer row
+        GridPane.setColumnSpan(pane, DAYS_PER_WEEK);
+        GridPane.setRowSpan(pane, DISPLAYED_HOURS);
 
         timeGrid.add(pane, 1, 1);
         return pane;
     }
 
-    private VBox initSpacerRow() {
-        VBox spacerRowBox = new VBox();
-
-        timeGrid.add(spacerRowBox, 0, 14);
-
-        return spacerRowBox;
-    }
-
-    private HBox initSpacerCol() {
-        HBox spacerColBox = new HBox();
-
-        timeGrid.add(spacerColBox, 8, 0);
-
-        return spacerColBox;
-    }
-
     private double getPosXFromDayOfWeek(DayOfWeek dayOfWeek) {
-        return (((drawPane.getWidth() - spacerCol.getWidth() - timeGrid.getHgap()) - 6 * timeGrid.getHgap()) / DAYS_PER_WEEK + timeGrid.getHgap())
+        return ((drawPane.getWidth() - 6 * timeGrid.getHgap()) / DAYS_PER_WEEK + timeGrid.getHgap())
                 * (dayOfWeek.getValue() - 1);
     }
 
 
     private double getPosYFromStartTime(LocalDateTime start) {
-        return (((drawPane.getHeight() - spacerRow.getHeight()) * ((start.getHour() - FIRST_HOUR) * 60 + start.getMinute()))
+        return ((drawPane.getHeight() * ((start.getHour() - FIRST_HOUR) * 60 + start.getMinute()))
                 / (DISPLAYED_HOURS * MINUTES_PER_HOUR));
     }
 
     private double getHeight(int minutesInAppointment) {
-        return (((drawPane.getHeight() - spacerRow.getHeight()) * minutesInAppointment) / (DISPLAYED_HOURS * MINUTES_PER_HOUR));
+        return ((drawPane.getHeight() * minutesInAppointment) / (DISPLAYED_HOURS * MINUTES_PER_HOUR));
     }
 
     private double getWidth() {
-        return ((drawPane.getWidth() - spacerCol.getWidth() - timeGrid.getHgap()) - 6 * timeGrid.getHgap()) / DAYS_PER_WEEK;
+        return (drawPane.getWidth() - 6 * timeGrid.getHgap()) / DAYS_PER_WEEK;
     }
 
     private void setCalculatedComponentSize(AppointmentComponent appointmentComponent) {
@@ -294,10 +264,6 @@ public class AdminViewController {
         double posY = getPosYFromStartTime(appointmentComponent
                 .getAppointment()
                 .getStart());
-
-        AnchorPane.setLeftAnchor(appointmentComponent, posX);
-        AnchorPane.setTopAnchor(appointmentComponent, posY);
-
         double height = getHeight(appointmentComponent
                 .getAppointment()
                 .getCourse()
@@ -306,6 +272,21 @@ public class AdminViewController {
 
         appointmentComponent.setPrefHeight(height);
         appointmentComponent.setPrefWidth(width);
+        appointmentComponent.setMaxWidth(width);
+        appointmentComponent.setMaxHeight(height);
+
+        Pane.layoutInArea(appointmentComponent,
+                posX,
+                posY,
+                width,
+                height,
+                0,
+                null,
+                true,
+                true,
+                HPos.CENTER,
+                VPos.CENTER,
+                true);
     }
 
     private void showAppointment(Appointment appointment) {
