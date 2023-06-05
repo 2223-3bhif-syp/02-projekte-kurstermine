@@ -20,12 +20,6 @@ public class AppointmentComponent extends AnchorPane {
     @FXML
     private Label courseNameLabel;
 
-    @FXML
-    private Label instructorLabel;
-
-    @FXML
-    private Label durationLabel;
-
     public AppointmentComponent(Appointment appointment) {
         FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("/appointment-component.fxml"));
         fxmlLoader.setRoot(this);
@@ -38,9 +32,7 @@ public class AppointmentComponent extends AnchorPane {
         }
         this.appointment = appointment;
 
-        courseNameLabel.setText(appointment.getCourse().getName());;
-        instructorLabel.setText(String.format("%s %s", appointment.getInstructor().getLastName(), appointment.getInstructor().getFirstName()));
-        durationLabel.setText(String.format("%d m",appointment.getCourse().getMinutesPerAppointment()));
+        courseNameLabel.setText(appointment.getCourse().getName());
 
         this.setOnMouseClicked(e -> openAppointmentDialog());
     }
