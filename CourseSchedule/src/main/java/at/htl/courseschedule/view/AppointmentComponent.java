@@ -1,17 +1,13 @@
 package at.htl.courseschedule.view;
 
 import at.htl.courseschedule.entity.Appointment;
+import at.htl.courseschedule.service.AppointmentService;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
-import javafx.scene.control.ButtonType;
-import javafx.scene.control.Dialog;
-import javafx.scene.control.Label;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
+import javafx.scene.control.*;
+import javafx.scene.layout.*;
 
-import javax.swing.text.DateFormatter;
 import java.io.IOException;
 
 public class AppointmentComponent extends AnchorPane {
@@ -70,11 +66,34 @@ public class AppointmentComponent extends AnchorPane {
         grid.add(new Label("Duration:"), 0, 4);
         grid.add(new Label(String.format("%d m", appointment.getCourse().getMinutesPerAppointment())), 1, 4);
 
-        dialog.getDialogPane().setContent(grid);
+        HBox hBox = new HBox(grid);
+        addDeleteBtn(hBox);
+
+        dialog.getDialogPane().setContent(hBox);
         dialog.getDialogPane().getButtonTypes().addAll(
                 ButtonType.CLOSE
         );
 
         dialog.show();
+    }
+
+    private void addDeleteBtn(HBox hBox){
+        Button btn = new Button();
+        btn.setText("DELETE");
+        btn.setStyle("-fx-background-color: rgba(255,0,17,0.32); -fx-font-weight: bold");
+
+        btn.setOnAction(actionEvent -> {
+            AppointmentService.getInstance().remove(this.appointment);
+
+            if (!AppointmentService.getInstance().getAppointments().contains(appointment)) {
+                btn.setDisable(true);
+            }
+        });
+
+        Region region = new Region();
+        HBox.setHgrow(region, Priority.ALWAYS);
+
+        hBox.getChildren().add(region);
+        hBox.getChildren().add(btn);
     }
 }
