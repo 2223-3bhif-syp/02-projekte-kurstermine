@@ -17,12 +17,20 @@
     </GridPane>
 
     <HBox AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" style="-fx-spacing: 10px;">
-        <Button fx:id="weekBeforeBtn" prefWidth="30" onAction="#weekBeforeBtnClicked"/>
-        <DatePicker fx:id="datepicker"/>
-        <Button fx:id="weekAfterBtn" prefWidth="30" onAction="#weekAfterBtnClicked"/>
+        <Button fx:id="weekBeforeBtn" prefWidth="30" onAction="#weekBeforeBtnClicked">
+            <tooltip><Tooltip text="Previous Week"/></tooltip>
+        </Button>
+        <DatePicker fx:id="datepicker">
+            <tooltip><Tooltip text="Choose date"/></tooltip>
+        </DatePicker>
+        <Button fx:id="weekAfterBtn" prefWidth="30" onAction="#weekAfterBtnClicked">
+            <tooltip><Tooltip text="Next Week"/></tooltip>
+        </Button>
     </HBox>
 
     <Button fx:id="addButton" onAction="#addAppointment" AnchorPane.rightAnchor="10" AnchorPane.bottomAnchor="10"
-            prefWidth="50" prefHeight="50">+
+            prefWidth="50" prefHeight="50">
+        <tooltip><Tooltip text="Add appointment"/></tooltip>
+        +
     </Button>
 </AnchorPane>
