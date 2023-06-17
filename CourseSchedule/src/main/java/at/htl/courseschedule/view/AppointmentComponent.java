@@ -5,6 +5,7 @@ import at.htl.courseschedule.service.AppointmentService;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
+import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
 
@@ -58,34 +59,47 @@ public class AppointmentComponent extends AnchorPane {
         grid.add(new Label("Duration:"), 0, 4);
         grid.add(new Label(String.format("%d m", appointment.getCourse().getMinutesPerAppointment())), 1, 4);
 
-        HBox hBox = new HBox(grid);
-        addDeleteBtn(hBox);
+        VBox vBox = new VBox(grid);
 
-        dialog.getDialogPane().setContent(hBox);
+        dialog.getDialogPane().setContent(vBox);
         dialog.getDialogPane().getButtonTypes().addAll(
-                ButtonType.CLOSE
+                ButtonType.CLOSE,
+                ButtonType.YES
         );
+
+        addDeleteButton(dialog);
 
         dialog.show();
     }
 
-    private void addDeleteBtn(HBox hBox){
-        Button btn = new Button();
-        btn.setText("DELETE");
-        btn.setStyle("-fx-background-color: rgba(255,0,17,0.32); -fx-font-weight: bold");
+    private void addDeleteButton(Dialog<Appointment> dialog) {
+        DialogPane pane = dialog.getDialogPane();
+        Button deleteButton = (Button) pane.lookupButton(ButtonType.YES);
+        String idle = "-fx-background-color: rgba(255,0,17,0.32); -fx-font-weight: bold";
+        String hover = "-fx-background-color:  rgba(255,0,17,0.64); -fx-font-weight: bold";
 
-        btn.setOnAction(actionEvent -> {
+        deleteButton.setText("DELETE");
+        deleteButton.setStyle(idle);
+        deleteButton.setOnMouseEntered(e -> {
+            deleteButton.setStyle(hover);
+        });
+        deleteButton.setOnMouseExited(e -> {
+            deleteButton.setStyle(idle);
+        });
+        deleteButton.setOnAction(e -> {
+            System.out.println(this.appointment.toString());
             AppointmentService.getInstance().remove(this.appointment);
 
             if (!AppointmentService.getInstance().getAppointments().contains(appointment)) {
-                btn.setDisable(true);
+                dialog.close();
+            }
+            else {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Error");
+                alert.setHeaderText("Could not delete appointment");
+                alert.setContentText("The appointment could not be deleted. Please try again.");
+                alert.showAndWait();
             }
         });
-
-        Region region = new Region();
-        HBox.setHgrow(region, Priority.ALWAYS);
-
-        hBox.getChildren().add(region);
-        hBox.getChildren().add(btn);
     }
 }
