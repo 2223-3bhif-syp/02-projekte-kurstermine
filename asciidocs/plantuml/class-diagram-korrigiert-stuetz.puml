@@ -1,0 +1,44 @@
+@startuml
+'left to right direction
+
+
+class Teilnehmer {
+    geburtsjahr: Integer
+    telefonNr: String
+    email: String
+}
+
+class Kurstyp {
+  id: number
+  bezeichnung: String
+}
+
+class Kurs {
+    typ: Kurstyp
+    dauer: Duration
+}
+note left of Kurs::dauer
+  Was ist das?
+  Anzahl der Termine?
+  Dauer eines Termins?
+end note
+
+class Termin  {
+    von: LocalDateTime
+    bis: LocalDateTime
+}
+
+Kurstyp "1" <-- "*" Kurs
+
+'Teilnehmer --|> Person
+'Veranstalter --|> Person
+
+'Teilnehmer "*" -- "*" Kurs : > nimmt teil
+'(Teilnehmer, Kurs) .. Termin
+'Veranstalter "1" -- "*" Kurs : > haelt ab
+
+Kurs "1" <-- "*" Termin
+Termin "*" -- "*" Teilnehmer
+(Termin,Teilnehmer) . Anmeldung
+
+@enduml

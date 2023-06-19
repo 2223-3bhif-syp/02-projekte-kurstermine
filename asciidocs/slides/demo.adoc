@@ -1,0 +1,2 @@
+= Our Slide
+ifndef::imagesdir[:imagesdir: "../images"]

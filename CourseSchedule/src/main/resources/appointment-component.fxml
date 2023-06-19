@@ -1,0 +1,14 @@
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.*?>
+<fx:root type="AnchorPane" xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            stylesheets="course-schedule.css"
+            styleClass="bg-lighter" style="-fx-cursor: hand; -fx-border-color: #d0edf1; -fx-border-width: 0 0 2 0">
+
+    <HBox fx:id="appointmentComponent" alignment="CENTER" AnchorPane.bottomAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.leftAnchor="0"
+          AnchorPane.topAnchor="0">
+        <VBox alignment="CENTER" HBox.hgrow="ALWAYS">
+            <Label fx:id="courseNameLabel" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS" alignment="CENTER"/>
+        </VBox>
+    </HBox>
+</fx:root>

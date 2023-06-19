@@ -1,0 +1,421 @@
+------------------
+--    Course    --
+------------------
+-- id = 1
+INSERT INTO CS_COURSE (C_NAME, C_DESCRIPTION, C_MINUTES_PER_APPOINTMENT, C_AMOUNT_OF_APPOINTMENTS)
+    VALUES ('Kinderschwimmen', 'Schwimmkurs fuer junge Personen', 60, 7);
+
+-- id = 2
+INSERT INTO CS_COURSE (C_NAME, C_DESCRIPTION, C_MINUTES_PER_APPOINTMENT, C_AMOUNT_OF_APPOINTMENTS)
+    VALUES ('Seniorenschwimmen', 'Schwimmkurs fuer die aelteren unter uns', 120, 1);
+
+-- id = 3
+INSERT INTO CS_COURSE (C_NAME, C_DESCRIPTION, C_MINUTES_PER_APPOINTMENT, C_AMOUNT_OF_APPOINTMENTS)
+    VALUES ('Einsteigerschwimmen', 'Schwimmkurs fuer Erwachsene', 90, 2);
+
+-- id = 4
+INSERT INTO CS_COURSE (C_NAME, C_DESCRIPTION, C_MINUTES_PER_APPOINTMENT, C_AMOUNT_OF_APPOINTMENTS)
+    VALUES ('Babyschwimmen', 'Schwimmkurs fuer Neugeborene', 30, 4);
+
+
+----------------------
+--    INSTRUCTOR    --
+----------------------
+-- id = 1
+INSERT INTO CS_INSTRUCTOR (I_FIRST_NAME, I_LAST_NAME, I_PHONE_NR, I_EMAIL)
+    VALUES ('Hans', 'Hofer', '+43 681 2274803', 'h.hofer@yahoomail.com');
+
+-- id = 2
+INSERT INTO CS_INSTRUCTOR (I_FIRST_NAME, I_LAST_NAME, I_PHONE_NR, I_EMAIL)
+    VALUES ('Iris', 'Mayr', '+43 699 21228202', 'iri.myr@fastmail.to');
+
+-- id = 3
+INSERT INTO CS_INSTRUCTOR (I_FIRST_NAME, I_LAST_NAME, I_PHONE_NR, I_EMAIL)
+    VALUES ('Franz', 'Leitner', '+43 660 093298743', 'leitner.f@gmail.com');
+
+-- id = 4
+INSERT INTO CS_INSTRUCTOR (I_FIRST_NAME, I_LAST_NAME, I_PHONE_NR, I_EMAIL)
+    VALUES ('Susanne', 'Obermaier', '+43 680 009796552', 'susi.obermaier@hotmail.net');
+
+-- id = 5
+INSERT INTO CS_INSTRUCTOR (I_FIRST_NAME, I_LAST_NAME, I_PHONE_NR, I_EMAIL)
+    VALUES ('Markus', 'Kittinger', '+43 677 66333221', 'k.markus@gmx.at');
+
+-- id = 6
+INSERT INTO CS_INSTRUCTOR (I_FIRST_NAME, I_LAST_NAME, I_PHONE_NR, I_EMAIL)
+    VALUES ('Hermine', 'Stieglbauer', '+43 665 7676323', 'stiegelbauer.h@liwest.at');
+
+-- id = 7
+INSERT INTO CS_INSTRUCTOR (I_FIRST_NAME, I_LAST_NAME, I_PHONE_NR, I_EMAIL)
+    VALUES ('Kurt', 'Wolfsgruber', '+43 670 98764332', 'kurt.wolfsgruber@icloud.com');
+
+-- id = 8
+INSERT INTO CS_INSTRUCTOR (I_FIRST_NAME, I_LAST_NAME, I_PHONE_NR, I_EMAIL)
+    VALUES ('Antonia', 'Grabmann', '+43 678 87654543', 'toni.grabmann@freemail.tk.to');
+
+-- id = 9
+INSERT INTO CS_INSTRUCTOR (I_FIRST_NAME, I_LAST_NAME, I_PHONE_NR, I_EMAIL)
+    VALUES ('Norbert', 'Kleeberger', '+43 650 20987634', 'kleeberger.norbert@zoho.com');
+
+-- id = 10
+INSERT INTO CS_INSTRUCTOR (I_FIRST_NAME, I_LAST_NAME, I_PHONE_NR, I_EMAIL)
+    VALUES ('Roswita', 'Neuhauser', '+43 660 84350982', 'neuhauser.roswi@protonmail.com');
+
+
+-----------------------
+--    APPOINTMENT    --
+-----------------------
+-- id = 1
+INSERT INTO CS_APPOINTMENT (A_START, A_I_ID, A_C_ID)
+    VALUES ('2023-06-11 08:00:00', 1, 1);
+
+-- id = 2
+INSERT INTO CS_APPOINTMENT (A_START, A_I_ID, A_C_ID)
+    VALUES ('2023-06-11 10:30:00', 1, 1);
+
+-- id = 3
+INSERT INTO CS_APPOINTMENT (A_START, A_I_ID, A_C_ID)
+    VALUES ('2023-06-12 08:00:00', 2, 1);
+
+-- id = 4
+INSERT INTO CS_APPOINTMENT (A_START, A_I_ID, A_C_ID)
+    VALUES ('2023-06-12 10:00:00', 9, 1);
+
+-- id = 5
+INSERT INTO CS_APPOINTMENT (A_START, A_I_ID, A_C_ID)
+    VALUES ('2023-06-12 12:00:00', 3, 1);
+
+-- id = 6
+INSERT INTO CS_APPOINTMENT (A_START, A_I_ID, A_C_ID)
+    VALUES ('2023-06-12 14:00:00', 8, 1);
+
+-- id = 7
+INSERT INTO CS_APPOINTMENT (A_START, A_I_ID, A_C_ID)
+    VALUES ('2023-06-13 8:00:00', 4, 1);
+
+-- id = 8
+INSERT INTO CS_APPOINTMENT (A_START, A_I_ID, A_C_ID)
+    VALUES ('2023-06-13 10:30:00', 7, 2);
+
+-- id = 9
+INSERT INTO CS_APPOINTMENT (A_START, A_I_ID, A_C_ID)
+    VALUES ('2023-06-13 13:00:00', 5, 3);
+
+-- id = 10
+INSERT INTO CS_APPOINTMENT (A_START, A_I_ID, A_C_ID)
+    VALUES ('2023-06-13 16:00:00', 6, 3);
+
+-- id = 11
+INSERT INTO CS_APPOINTMENT (A_START, A_I_ID, A_C_ID)
+    VALUES ('2023-06-14 8:00:00', 3, 4);
+
+-- id = 12
+INSERT INTO CS_APPOINTMENT (A_START, A_I_ID, A_C_ID)
+    VALUES ('2023-06-14 10:00:00', 3, 4);
+
+-- id = 13
+INSERT INTO CS_APPOINTMENT (A_START, A_I_ID, A_C_ID)
+    VALUES ('2023-06-15 10:00:00', 6, 4);
+
+-- id = 14
+INSERT INTO CS_APPOINTMENT (A_START, A_I_ID, A_C_ID)
+    VALUES ('2023-06-15 16:00:00', 4, 4);
+
+-- id = 15
+INSERT INTO CS_APPOINTMENT (A_START, A_I_ID, A_C_ID)
+VALUES ('2023-06-10 14:00:00', 3, 4);
+
+
+-----------------------
+--    PARTICIPANT    --
+-----------------------
+-- id = 1
+INSERT INTO CS_PARTICIPANT (P_FIRST_NAME, P_LAST_NAME, P_YEAR_OF_BIRTH, P_PHONE_NR, P_EMAIL)
+    VALUES ('Josef', 'Baumgartner', 2000, '+43 681 0387440179', 'j.baumgrt@gmail.com');
+
+-- id = 2
+INSERT INTO CS_PARTICIPANT (P_FIRST_NAME, P_LAST_NAME, P_YEAR_OF_BIRTH, P_PHONE_NR, P_EMAIL)
+    VALUES ('Gudrun', 'Weiss', 1997, '+43 699 34986601', 'weiss.g@gmx.at');
+
+-- id = 3
+INSERT INTO CS_PARTICIPANT (P_FIRST_NAME, P_LAST_NAME, P_YEAR_OF_BIRTH, P_PHONE_NR, P_EMAIL)
+    VALUES ('Joerg', 'Haider', 1972, '+43 686 234510972', 'j.haider@moderner-brief.de');
+
+-- id = 4
+INSERT INTO CS_PARTICIPANT (P_FIRST_NAME, P_LAST_NAME, P_YEAR_OF_BIRTH, P_PHONE_NR, P_EMAIL)
+    VALUES ('Leopoldine', 'Hofmeister', 1988, '+43 664 444234861', 'leopoldine.hofmeister@hotmail.net');
+
+-- id = 5
+INSERT INTO CS_PARTICIPANT (P_FIRST_NAME, P_LAST_NAME, P_YEAR_OF_BIRTH, P_PHONE_NR, P_EMAIL)
+    VALUES ('Leon', 'Hoefler', 2009, '+43 650 8987023411', 'leon.hoefler@icloud.com');
+
+-- id = 6
+INSERT INTO CS_PARTICIPANT (P_FIRST_NAME, P_LAST_NAME, P_YEAR_OF_BIRTH, P_PHONE_NR, P_EMAIL)
+    VALUES ('Dilan', 'Oezdemir', 2011, '+43 677 2332469031', 'd.oezdemir@gmail.com');
+
+-- id = 7
+INSERT INTO CS_PARTICIPANT (P_FIRST_NAME, P_LAST_NAME, P_YEAR_OF_BIRTH, P_PHONE_NR, P_EMAIL)
+    VALUES ('Lukas', 'Binder', 2012, '+43 690 23496551', 'lukas.binder@proton-mail.net');
+
+-- id = 8
+INSERT INTO CS_PARTICIPANT (P_FIRST_NAME, P_LAST_NAME, P_YEAR_OF_BIRTH, P_PHONE_NR, P_EMAIL)
+    VALUES ('Emma', 'Kaltenboeck', 2010, '+43 686 23585213', 'e.kaltenboeck@liwest.at');
+
+-- id = 9
+INSERT INTO CS_PARTICIPANT (P_FIRST_NAME, P_LAST_NAME, P_YEAR_OF_BIRTH, P_PHONE_NR, P_EMAIL)
+    VALUES ('Innozenz', 'Wild', 1948, '+43 678 3248877112', 'i.wild@morderner-brief.de');
+
+-- id = 10
+INSERT INTO CS_PARTICIPANT (P_FIRST_NAME, P_LAST_NAME, P_YEAR_OF_BIRTH, P_PHONE_NR, P_EMAIL)
+    VALUES ('Maria', 'Hinterbichler', 1947, '+43 677 32689874', 'm.hinterbichler@yahoomail.com');
+
+-- id = 11
+INSERT INTO CS_PARTICIPANT (P_FIRST_NAME, P_LAST_NAME, P_YEAR_OF_BIRTH, P_PHONE_NR, P_EMAIL)
+    VALUES ('Karl', 'Grossauer', 1949, '+43 681 098437256', 'grossauer.karl@gmail.com');
+
+-- id = 12
+INSERT INTO CS_PARTICIPANT (P_FIRST_NAME, P_LAST_NAME, P_YEAR_OF_BIRTH, P_PHONE_NR, P_EMAIL)
+    VALUES ('Andrea', 'Koenig', 1993, '+43 681 03874487324', 'a.koenig@gmx.at');
+
+-- id = 13
+INSERT INTO CS_PARTICIPANT (P_FIRST_NAME, P_LAST_NAME, P_YEAR_OF_BIRTH, P_PHONE_NR, P_EMAIL)
+    VALUES ('Martin', 'Egger', 1941, '+43 676 0972454358', 'martin.egger@neuland.de');
+
+-- id = 14
+INSERT INTO CS_PARTICIPANT (P_FIRST_NAME, P_LAST_NAME, P_YEAR_OF_BIRTH, P_PHONE_NR, P_EMAIL)
+    VALUES ('Lena', 'Reisinger', 2012, '+43 650 3287763432', 'lena.reisinger@gmail.com');
+
+-- id = 15
+INSERT INTO CS_PARTICIPANT (P_FIRST_NAME, P_LAST_NAME, P_YEAR_OF_BIRTH, P_PHONE_NR, P_EMAIL)
+    VALUES ('Anis', 'Zadic', 2010, '+43 664 23487743671', 'a.zadic@gmail.com');
+
+-- id = 16
+INSERT INTO CS_PARTICIPANT (P_FIRST_NAME, P_LAST_NAME, P_YEAR_OF_BIRTH, P_PHONE_NR, P_EMAIL)
+    VALUES ('Alexander', 'Kern', 2022, '+43 667 65732386', 'friedrich.kern@gmx.at');
+
+-- id = 17
+INSERT INTO CS_PARTICIPANT (P_FIRST_NAME, P_LAST_NAME, P_YEAR_OF_BIRTH, P_PHONE_NR, P_EMAIL)
+    VALUES ('Julia', 'Herr', 2021, '+43 676 293746801', 'kerstin.herr@liwest.at');
+
+-- id = 18
+INSERT INTO CS_PARTICIPANT (P_FIRST_NAME, P_LAST_NAME, P_YEAR_OF_BIRTH, P_PHONE_NR, P_EMAIL)
+    VALUES ('Leo', 'Kerbel', 2021, '+43 664 087432987', 'gregor.kerbel@yahoomail.com');
+
+-- id = 19
+INSERT INTO CS_PARTICIPANT (P_FIRST_NAME, P_LAST_NAME, P_YEAR_OF_BIRTH, P_PHONE_NR, P_EMAIL)
+    VALUES ('Elif', 'Demir', 2022, '+43 650 99877623012', 'o.demir@gmail.com');
+
+-- id = 20
+INSERT INTO CS_PARTICIPANT (P_FIRST_NAME, P_LAST_NAME, P_YEAR_OF_BIRTH, P_PHONE_NR, P_EMAIL)
+    VALUES ('Maximilian', 'Steinmayr', 2002, '+43 699 8174628091', 'max.steinmayr@gmail.com');
+
+------------------------
+--    CS_REGISTRATION    --
+------------------------
+-- id = 1
+INSERT INTO CS_REGISTRATION (R_P_ID, R_A_ID)
+    VALUES (9, 8);
+
+-- id = 2
+INSERT INTO CS_REGISTRATION (R_P_ID, R_A_ID)
+    VALUES (10, 8);
+
+-- id = 3
+INSERT INTO CS_REGISTRATION (R_P_ID, R_A_ID)
+    VALUES (11, 8);
+
+-- id = 4
+INSERT INTO CS_REGISTRATION (R_P_ID, R_A_ID)
+    VALUES (13, 8);
+
+-- id = 5
+INSERT INTO CS_REGISTRATION (R_P_ID, R_A_ID)
+    VALUES (1, 9);
+
+-- id = 6
+INSERT INTO CS_REGISTRATION (R_P_ID, R_A_ID)
+    VALUES (1, 10);
+
+-- id = 7
+INSERT INTO CS_REGISTRATION (R_P_ID, R_A_ID)
+    VALUES (2, 9);
+
+-- id = 8
+INSERT INTO CS_REGISTRATION (R_P_ID, R_A_ID)
+    VALUES (2, 10);
+
+-- id = 9
+INSERT INTO CS_REGISTRATION (R_P_ID, R_A_ID)
+    VALUES (3, 9);
+
+-- id = 10
+INSERT INTO CS_REGISTRATION (R_P_ID, R_A_ID)
+    VALUES (3, 10);
+
+-- id = 11
+INSERT INTO CS_REGISTRATION (R_P_ID, R_A_ID)
+    VALUES (4, 9);
+
+-- id = 12
+INSERT INTO CS_REGISTRATION (R_P_ID, R_A_ID)
+    VALUES (12, 10);
+
+-- id = 13
+INSERT INTO CS_REGISTRATION (R_P_ID, R_A_ID)
+    VALUES (20, 9);
+
+-- id = 14
+INSERT INTO CS_REGISTRATION (R_P_ID, R_A_ID)
+    VALUES (16, 11);
+
+-- id = 15
+INSERT INTO CS_REGISTRATION (R_P_ID, R_A_ID)
+    VALUES (16, 12);
+
+-- id = 16
+INSERT INTO CS_REGISTRATION (R_P_ID, R_A_ID)
+    VALUES (16, 13);
+
+-- id = 17
+INSERT INTO CS_REGISTRATION (R_P_ID, R_A_ID)
+    VALUES (16, 14);
+
+-- id = 18
+INSERT INTO CS_REGISTRATION (R_P_ID, R_A_ID)
+    VALUES (17, 11);
+
+-- id = 19
+INSERT INTO CS_REGISTRATION (R_P_ID, R_A_ID)
+    VALUES (17, 12);
+
+-- id = 20
+INSERT INTO CS_REGISTRATION (R_P_ID, R_A_ID)
+    VALUES (17, 14);
+
+-- id = 21
+INSERT INTO CS_REGISTRATION (R_P_ID, R_A_ID)
+    VALUES (18, 12);
+
+-- id = 22
+INSERT INTO CS_REGISTRATION (R_P_ID, R_A_ID)
+    VALUES (18, 13);
+
+-- id = 23
+INSERT INTO CS_REGISTRATION (R_P_ID, R_A_ID)
+    VALUES (18, 14);
+
+-- id = 24
+INSERT INTO CS_REGISTRATION (R_P_ID, R_A_ID)
+    VALUES (19, 11);
+
+-- id = 25
+INSERT INTO CS_REGISTRATION (R_P_ID, R_A_ID)
+    VALUES (19, 14);
+
+-- id = 26
+INSERT INTO CS_REGISTRATION (R_P_ID, R_A_ID)
+    VALUES (5, 1);
+
+-- id = 27
+INSERT INTO CS_REGISTRATION (R_P_ID, R_A_ID)
+    VALUES (5, 2);
+
+-- id = 28
+INSERT INTO CS_REGISTRATION (R_P_ID, R_A_ID)
+    VALUES (5, 3);
+
+-- id = 29
+INSERT INTO CS_REGISTRATION (R_P_ID, R_A_ID)
+    VALUES (5, 4);
+
+-- id = 30
+INSERT INTO CS_REGISTRATION (R_P_ID, R_A_ID)
+    VALUES (5, 5);
+
+-- id = 31
+INSERT INTO CS_REGISTRATION (R_P_ID, R_A_ID)
+    VALUES (5, 6);
+
+-- id = 32
+INSERT INTO CS_REGISTRATION (R_P_ID, R_A_ID)
+    VALUES (5, 7);
+
+-- id = 33
+INSERT INTO CS_REGISTRATION (R_P_ID, R_A_ID)
+    VALUES (6, 2);
+
+-- id = 34
+INSERT INTO CS_REGISTRATION (R_P_ID, R_A_ID)
+    VALUES (6, 7);
+
+-- id = 35
+INSERT INTO CS_REGISTRATION (R_P_ID, R_A_ID)
+    VALUES (6, 6);
+
+-- id = 36
+INSERT INTO CS_REGISTRATION (R_P_ID, R_A_ID)
+    VALUES (6, 5);
+
+-- id = 37
+INSERT INTO CS_REGISTRATION (R_P_ID, R_A_ID)
+    VALUES (6, 4);
+
+-- id = 38
+INSERT INTO CS_REGISTRATION (R_P_ID, R_A_ID)
+    VALUES (6, 3);
+
+-- id = 39
+INSERT INTO CS_REGISTRATION (R_P_ID, R_A_ID)
+    VALUES (7, 3);
+
+-- id = 40
+INSERT INTO CS_REGISTRATION (R_P_ID, R_A_ID)
+    VALUES (7, 4);
+
+-- id = 41
+INSERT INTO CS_REGISTRATION (R_P_ID, R_A_ID)
+    VALUES (7, 5);
+
+-- id = 42
+INSERT INTO CS_REGISTRATION (R_P_ID, R_A_ID)
+    VALUES (7, 6);
+
+-- id = 43
+INSERT INTO CS_REGISTRATION (R_P_ID, R_A_ID)
+    VALUES (7, 7);
+
+-- id = 44
+INSERT INTO CS_REGISTRATION (R_P_ID, R_A_ID)
+    VALUES (8, 1);
+
+-- id = 45
+INSERT INTO CS_REGISTRATION (R_P_ID, R_A_ID)
+    VALUES (8, 2);
+
+-- id = 46
+INSERT INTO CS_REGISTRATION (R_P_ID, R_A_ID)
+    VALUES (8, 3);
+
+-- id = 47
+INSERT INTO CS_REGISTRATION (R_P_ID, R_A_ID)
+    VALUES (8, 4);
+
+-- id = 48
+INSERT INTO CS_REGISTRATION (R_P_ID, R_A_ID)
+    VALUES (14, 4);
+
+-- id = 48
+INSERT INTO CS_REGISTRATION (R_P_ID, R_A_ID)
+    VALUES (14, 5);
+
+-- id = 49
+INSERT INTO CS_REGISTRATION (R_P_ID, R_A_ID)
+    VALUES (14, 6);
+
+-- id = 50
+INSERT INTO CS_REGISTRATION (R_P_ID, R_A_ID)
+    VALUES (15, 7);
+
+-- id = 51
+INSERT INTO CS_REGISTRATION (R_P_ID, R_A_ID)
+    VALUES (15, 6);

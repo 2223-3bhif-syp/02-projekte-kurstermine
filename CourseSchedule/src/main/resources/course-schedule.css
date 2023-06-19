@@ -1,0 +1,14 @@
+.bg-lighter {
+    -fx-background-color: white;
+}
+
+#appointmentComponent:hover {
+    -fx-background-color: #d0edf1;
+    -fx-scale-y: 1.05;
+    -fx-scale-x: 1.05;
+}
+
+.appointmentComponent:pressed {
+    -fx-scale-y: 0.9;
+    -fx-scale-x: 0.9;
+}
