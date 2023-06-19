@@ -26,7 +26,8 @@ public class RegistrationRepository implements Persistent<Registration> {
         throwExceptionOnInvalidAppointment(registration);
 
         try (Connection connection = dataSource.getConnection()) {
-            String sql = "UPDATE CS_REGISTRATION SET R_A_ID=?, R_P_ID=? WHERE R_ID=?";
+            final String sql = "UPDATE CS_REGISTRATION SET R_A_ID=?, R_P_ID=? WHERE R_ID=?";
+            connection.setAutoCommit(false);
 
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setLong(1, registration.getAppointment().getId());
@@ -34,8 +35,11 @@ public class RegistrationRepository implements Persistent<Registration> {
             statement.setLong(3, registration.getId());
 
             if (statement.executeUpdate() == 0) {
+                connection.rollback();
                 throw new SQLException("Update of CS_REGISTRATION failed, no rows affected");
             }
+
+            connection.commit();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -46,13 +50,15 @@ public class RegistrationRepository implements Persistent<Registration> {
         throwExceptionOnInvalidAppointment(registration);
 
         try (Connection connection = dataSource.getConnection()) {
-            String sql = "INSERT INTO CS_REGISTRATION (R_P_ID, R_A_ID) VALUES (?,?)";
+            final String sql = "INSERT INTO CS_REGISTRATION (R_P_ID, R_A_ID) VALUES (?,?)";
+            connection.setAutoCommit(false);
 
             PreparedStatement statement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             statement.setLong(1, registration.getAppointment().getId());
             statement.setLong(2, registration.getParticipant().getId());
 
             if (statement.executeUpdate() == 0) {
+                connection.rollback();
                 throw new SQLException("Update of CS_REGISTRATION failed, no rows affected");
             }
 
@@ -63,6 +69,8 @@ public class RegistrationRepository implements Persistent<Registration> {
                     throw new SQLException("Insert into CS_REGISTRATION failed, no ID obtained");
                 }
             }
+
+            connection.commit();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -73,15 +81,19 @@ public class RegistrationRepository implements Persistent<Registration> {
         throwExceptionOnInvalidAppointment(registration);
 
         try (Connection connection = dataSource.getConnection()) {
-            String sql = "DELETE FROM CS_REGISTRATION WHERE R_ID=?";
+            final String sql = "DELETE FROM CS_REGISTRATION WHERE R_ID=?";
+            connection.setAutoCommit(false);
 
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setLong(1, registration.getId());
 
             if (statement.executeUpdate() == 0) {
+                connection.rollback();
                 throw new SQLException("Update of CS_REGISTRATION failed, no rows affected");
             }
+
             registration.setId(null);
+            connection.commit();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -92,7 +104,7 @@ public class RegistrationRepository implements Persistent<Registration> {
         List<Registration> registrations = new ArrayList<>();
 
         try (Connection connection = dataSource.getConnection()) {
-            String sql = "SELECT R_ID, R_P_ID, R_A_ID FROM CS_REGISTRATION";
+            final String sql = "SELECT R_ID, R_P_ID, R_A_ID FROM CS_REGISTRATION";
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             ResultSet result = preparedStatement.executeQuery();
 
@@ -120,7 +132,7 @@ public class RegistrationRepository implements Persistent<Registration> {
         Registration registration = null;
 
         try (Connection connection = dataSource.getConnection()) {
-            String sql = "SELECT R_ID, R_P_ID, R_A_ID FROM CS_REGISTRATION WHERE R_ID=?";
+            final String sql = "SELECT R_ID, R_P_ID, R_A_ID FROM CS_REGISTRATION WHERE R_ID=?";
 
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setLong(1, id);

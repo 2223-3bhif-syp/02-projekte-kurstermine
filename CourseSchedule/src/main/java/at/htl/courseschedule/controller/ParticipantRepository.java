@@ -27,7 +27,8 @@ public class ParticipantRepository implements Persistent<Participant> {
         throwExceptionOnInvalidParticipant(participant);
 
         try (Connection connection = dataSource.getConnection()) {
-            String sql = "UPDATE CS_PARTICIPANT SET P_FIRST_NAME=?, P_LAST_NAME=?, P_YEAR_OF_BIRTH=?, P_PHONE_NR=?, P_EMAIL=? WHERE P_ID=?";
+            final String sql = "UPDATE CS_PARTICIPANT SET P_FIRST_NAME=?, P_LAST_NAME=?, P_YEAR_OF_BIRTH=?, P_PHONE_NR=?, P_EMAIL=? WHERE P_ID=?";
+            connection.setAutoCommit(false);
 
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setString(1, participant.getFirstName());
@@ -38,8 +39,11 @@ public class ParticipantRepository implements Persistent<Participant> {
             statement.setLong(6, participant.getId());
 
             if (statement.executeUpdate() == 0) {
+                connection.rollback();
                 throw new SQLException("Update of CS_PARTICIPANT failed, no rows affected");
             }
+
+            connection.commit();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -50,7 +54,8 @@ public class ParticipantRepository implements Persistent<Participant> {
         throwExceptionOnInvalidParticipant(participant);
 
         try (Connection connection = dataSource.getConnection()) {
-            String sql = "INSERT INTO CS_PARTICIPANT (P_FIRST_NAME, P_LAST_NAME, P_YEAR_OF_BIRTH, P_PHONE_NR, P_EMAIL) VALUES (?,?,?,?,?)";
+            final String sql = "INSERT INTO CS_PARTICIPANT (P_FIRST_NAME, P_LAST_NAME, P_YEAR_OF_BIRTH, P_PHONE_NR, P_EMAIL) VALUES (?,?,?,?,?)";
+            connection.setAutoCommit(false);
 
             PreparedStatement statement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             statement.setString(1, participant.getFirstName());
@@ -60,6 +65,7 @@ public class ParticipantRepository implements Persistent<Participant> {
             statement.setString(5, participant.getEmail());
 
             if (statement.executeUpdate() == 0) {
+                connection.rollback();
                 throw new SQLException("Update of CS_PARTICIPANT failed, no rows affected");
             }
 
@@ -70,6 +76,8 @@ public class ParticipantRepository implements Persistent<Participant> {
                     throw new SQLException("Insert into CS_PARTICIPANT failed, no ID obtained");
                 }
             }
+
+            connection.commit();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -80,15 +88,19 @@ public class ParticipantRepository implements Persistent<Participant> {
         throwExceptionOnInvalidParticipant(participant);
 
         try (Connection connection = dataSource.getConnection()) {
-            String sql = "DELETE FROM CS_PARTICIPANT WHERE P_ID=?";
+            final String sql = "DELETE FROM CS_PARTICIPANT WHERE P_ID=?";
+            connection.setAutoCommit(false);
 
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setLong(1, participant.getId());
 
             if (statement.executeUpdate() == 0) {
+                connection.rollback();
                 throw new SQLException("Update of CS_PARTICIPANT failed, no rows affected");
             }
+
             participant.setId(null);
+            connection.commit();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -99,7 +111,7 @@ public class ParticipantRepository implements Persistent<Participant> {
         List<Participant> participants = new ArrayList<>();
 
         try (Connection connection = dataSource.getConnection()) {
-            String sql = "SELECT P_ID, P_FIRST_NAME, P_LAST_NAME, P_YEAR_OF_BIRTH, P_PHONE_NR, P_EMAIL " +
+            final String sql = "SELECT P_ID, P_FIRST_NAME, P_LAST_NAME, P_YEAR_OF_BIRTH, P_PHONE_NR, P_EMAIL " +
                     "FROM CS_PARTICIPANT";
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             ResultSet result = preparedStatement.executeQuery();
@@ -125,7 +137,7 @@ public class ParticipantRepository implements Persistent<Participant> {
         Participant participant = null;
 
         try (Connection connection = dataSource.getConnection()) {
-            String sql = "SELECT P_ID, P_FIRST_NAME, P_LAST_NAME, P_YEAR_OF_BIRTH, P_PHONE_NR, P_EMAIL " +
+            final String sql = "SELECT P_ID, P_FIRST_NAME, P_LAST_NAME, P_YEAR_OF_BIRTH, P_PHONE_NR, P_EMAIL " +
                     "FROM CS_PARTICIPANT WHERE P_ID=?";
 
             PreparedStatement statement = connection.prepareStatement(sql);

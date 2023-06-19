@@ -27,7 +27,8 @@ public class InstructorRepository implements Persistent<Instructor> {
         throwExceptionOnInvalidInstructor(instructor);
 
         try (Connection connection = dataSource.getConnection()) {
-            String sql = "UPDATE CS_INSTRUCTOR SET I_FIRST_NAME=?, I_LAST_NAME=?, I_PHONE_NR=?, I_EMAIL=? WHERE I_ID=?";
+            final String sql = "UPDATE CS_INSTRUCTOR SET I_FIRST_NAME=?, I_LAST_NAME=?, I_PHONE_NR=?, I_EMAIL=? WHERE I_ID=?";
+            connection.setAutoCommit(false);
 
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setString(1, instructor.getFirstName());
@@ -37,8 +38,11 @@ public class InstructorRepository implements Persistent<Instructor> {
             statement.setLong(5, instructor.getId());
 
             if (statement.executeUpdate() == 0) {
+                connection.rollback();
                 throw new SQLException("Update of CS_INSTRUCTOR failed, no rows affected");
             }
+
+            connection.commit();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -49,7 +53,8 @@ public class InstructorRepository implements Persistent<Instructor> {
         throwExceptionOnInvalidInstructor(instructor);
 
         try (Connection connection = dataSource.getConnection()) {
-            String sql = "INSERT INTO CS_INSTRUCTOR (I_FIRST_NAME, I_LAST_NAME, I_PHONE_NR, I_EMAIL) VALUES (?,?,?,?)";
+            final String sql = "INSERT INTO CS_INSTRUCTOR (I_FIRST_NAME, I_LAST_NAME, I_PHONE_NR, I_EMAIL) VALUES (?,?,?,?)";
+            connection.setAutoCommit(false);
 
             PreparedStatement statement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             statement.setString(1, instructor.getFirstName());
@@ -58,6 +63,7 @@ public class InstructorRepository implements Persistent<Instructor> {
             statement.setString(4, instructor.getEmail());
 
             if (statement.executeUpdate() == 0) {
+                connection.rollback();
                 throw new SQLException("Update of CS_INSTRUCTOR failed, no rows affected");
             }
 
@@ -68,6 +74,8 @@ public class InstructorRepository implements Persistent<Instructor> {
                     throw new SQLException("Insert into CS_INSTRUCTOR failed, no ID obtained");
                 }
             }
+
+            connection.commit();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -78,16 +86,19 @@ public class InstructorRepository implements Persistent<Instructor> {
         throwExceptionOnInvalidInstructor(instructor);
 
         try (Connection connection = dataSource.getConnection()) {
-            String sql = "DELETE FROM CS_INSTRUCTOR WHERE I_ID=?";
+            final String sql = "DELETE FROM CS_INSTRUCTOR WHERE I_ID=?";
+            connection.setAutoCommit(false);
 
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setLong(1, instructor.getId());
 
             if (statement.executeUpdate() == 0) {
+                connection.rollback();
                 throw new SQLException("Update of CS_INSTRUCTOR failed, no rows affected");
             }
 
             instructor.setId(null);
+            connection.commit();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -98,7 +109,7 @@ public class InstructorRepository implements Persistent<Instructor> {
         List<Instructor> instructors = new ArrayList<>();
 
         try (Connection connection = dataSource.getConnection()) {
-            String sql = "SELECT I_ID, I_FIRST_NAME, I_LAST_NAME, I_PHONE_NR, I_EMAIL FROM CS_INSTRUCTOR";
+            final String sql = "SELECT I_ID, I_FIRST_NAME, I_LAST_NAME, I_PHONE_NR, I_EMAIL FROM CS_INSTRUCTOR";
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             ResultSet result = preparedStatement.executeQuery();
 
@@ -123,7 +134,7 @@ public class InstructorRepository implements Persistent<Instructor> {
         Instructor instructor = null;
 
         try (Connection connection = dataSource.getConnection()) {
-            String sql = "SELECT I_ID, I_FIRST_NAME, I_LAST_NAME, I_PHONE_NR, I_EMAIL FROM CS_INSTRUCTOR WHERE I_ID=?";
+            final String sql = "SELECT I_ID, I_FIRST_NAME, I_LAST_NAME, I_PHONE_NR, I_EMAIL FROM CS_INSTRUCTOR WHERE I_ID=?";
 
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setLong(1, id);

@@ -26,7 +26,8 @@ public class AppointmentRepository implements Persistent<Appointment> {
         throwExceptionOnInvalidAppointment(appointment);
 
         try (Connection connection = dataSource.getConnection()) {
-            String sql = "UPDATE CS_APPOINTMENT SET A_START=?, A_I_ID=?, A_C_ID=? WHERE A_ID=?";
+            final String sql = "UPDATE CS_APPOINTMENT SET A_START=?, A_I_ID=?, A_C_ID=? WHERE A_ID=?";
+            connection.setAutoCommit(false);
 
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setTimestamp(1, Timestamp.valueOf(appointment.getStart()));
@@ -35,8 +36,11 @@ public class AppointmentRepository implements Persistent<Appointment> {
             statement.setLong(4, appointment.getId());
 
             if (statement.executeUpdate() == 0) {
+                connection.rollback();
                 throw new SQLException("Update of CS_APPOINTMENT failed, no rows affected");
             }
+
+            connection.commit();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -47,7 +51,8 @@ public class AppointmentRepository implements Persistent<Appointment> {
         throwExceptionOnInvalidAppointment(appointment);
 
         try (Connection connection = dataSource.getConnection()) {
-            String sql = "INSERT INTO CS_APPOINTMENT (A_START, A_I_ID, A_C_ID) VALUES (?,?,?)";
+            final String sql = "INSERT INTO CS_APPOINTMENT (A_START, A_I_ID, A_C_ID) VALUES (?,?,?)";
+            connection.setAutoCommit(false);
 
             PreparedStatement statement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             statement.setTimestamp(1, Timestamp.valueOf(appointment.getStart()));
@@ -55,6 +60,7 @@ public class AppointmentRepository implements Persistent<Appointment> {
             statement.setLong(3, appointment.getCourse().getId());
 
             if (statement.executeUpdate() == 0) {
+                connection.rollback();
                 throw new SQLException("Update of CS_APPOINTMENT failed, no rows affected");
             }
 
@@ -65,6 +71,8 @@ public class AppointmentRepository implements Persistent<Appointment> {
                     throw new SQLException("Insert into CS_APPOINTMENT failed, no ID obtained");
                 }
             }
+
+            connection.commit();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -75,15 +83,19 @@ public class AppointmentRepository implements Persistent<Appointment> {
         throwExceptionOnInvalidAppointment(appointment);
 
         try (Connection connection = dataSource.getConnection()) {
-            String sql = "DELETE FROM CS_APPOINTMENT WHERE A_ID=?";
+            final String sql = "DELETE FROM CS_APPOINTMENT WHERE A_ID=?";
+            connection.setAutoCommit(false);
 
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setLong(1, appointment.getId());
 
             if (statement.executeUpdate() == 0) {
+                connection.rollback();
                 throw new SQLException("Update of CS_APPOINTMENT failed, no rows affected");
             }
+
             appointment.setId(null);
+            connection.commit();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -94,7 +106,7 @@ public class AppointmentRepository implements Persistent<Appointment> {
         List<Appointment> appointments = new ArrayList<>();
 
         try (Connection connection = dataSource.getConnection()) {
-            String sql = "SELECT A_ID, A_START, A_I_ID, A_C_ID FROM CS_APPOINTMENT";
+            final String sql = "SELECT A_ID, A_START, A_I_ID, A_C_ID FROM CS_APPOINTMENT";
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             ResultSet result = preparedStatement.executeQuery();
 
@@ -123,7 +135,7 @@ public class AppointmentRepository implements Persistent<Appointment> {
         Appointment appointment = null;
 
         try (Connection connection = dataSource.getConnection()) {
-            String sql = "SELECT A_ID, A_START, A_I_ID, A_C_ID FROM CS_APPOINTMENT WHERE A_ID=?";
+            final String sql = "SELECT A_ID, A_START, A_I_ID, A_C_ID FROM CS_APPOINTMENT WHERE A_ID=?";
 
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setLong(1, id);

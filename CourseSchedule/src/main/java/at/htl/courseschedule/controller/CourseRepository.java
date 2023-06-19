@@ -26,7 +26,8 @@ public class CourseRepository implements Persistent<Course> {
         throwExceptionOnInvalidCourse(course);
 
         try (Connection connection = dataSource.getConnection()) {
-            String sql = "UPDATE CS_COURSE SET C_NAME=?, C_DESCRIPTION=?, C_MINUTES_PER_APPOINTMENT=?, C_AMOUNT_OF_APPOINTMENTS=? WHERE C_ID=?";
+            final String sql = "UPDATE CS_COURSE SET C_NAME=?, C_DESCRIPTION=?, C_MINUTES_PER_APPOINTMENT=?, C_AMOUNT_OF_APPOINTMENTS=? WHERE C_ID=?";
+            connection.setAutoCommit(false);
 
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setString(1, course.getName());
@@ -36,8 +37,11 @@ public class CourseRepository implements Persistent<Course> {
             statement.setLong(5, course.getId());
 
             if (statement.executeUpdate() == 0) {
+                connection.rollback();
                 throw new SQLException("Update of CS_COURSE failed, no rows affected");
             }
+
+            connection.commit();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -48,7 +52,8 @@ public class CourseRepository implements Persistent<Course> {
         throwExceptionOnInvalidCourse(course);
 
         try (Connection connection = dataSource.getConnection()) {
-            String sql = "INSERT INTO CS_COURSE (C_NAME, C_DESCRIPTION, C_MINUTES_PER_APPOINTMENT, C_AMOUNT_OF_APPOINTMENTS) VALUES (?,?,?,?)";
+            final String sql = "INSERT INTO CS_COURSE (C_NAME, C_DESCRIPTION, C_MINUTES_PER_APPOINTMENT, C_AMOUNT_OF_APPOINTMENTS) VALUES (?,?,?,?)";
+            connection.setAutoCommit(false);
 
             PreparedStatement statement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             statement.setString(1, course.getName());
@@ -57,6 +62,7 @@ public class CourseRepository implements Persistent<Course> {
             statement.setInt(4, course.getAmountOfAppointments());
 
             if (statement.executeUpdate() == 0) {
+                connection.rollback();
                 throw new SQLException("Update of CS_COURSE failed, no rows affected");
             }
 
@@ -67,6 +73,8 @@ public class CourseRepository implements Persistent<Course> {
                     throw new SQLException("Insert into CS_COURSE failed, no ID obtained");
                 }
             }
+
+            connection.commit();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -77,15 +85,19 @@ public class CourseRepository implements Persistent<Course> {
         throwExceptionOnInvalidCourse(course);
 
         try (Connection connection = dataSource.getConnection()) {
-            String sql = "DELETE FROM CS_COURSE WHERE C_ID=?";
+            final String sql = "DELETE FROM CS_COURSE WHERE C_ID=?";
+            connection.setAutoCommit(false);
 
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setLong(1, course.getId());
 
             if (statement.executeUpdate() == 0) {
+                connection.rollback();
                 throw new SQLException("Update of CS_COURSE failed, no rows affected");
             }
+
             course.setId(null);
+            connection.commit();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -96,7 +108,7 @@ public class CourseRepository implements Persistent<Course> {
         List<Course> courses = new ArrayList<>();
 
         try (Connection connection = dataSource.getConnection()) {
-            String sql = "SELECT C_ID, C_NAME, C_DESCRIPTION, C_MINUTES_PER_APPOINTMENT, C_AMOUNT_OF_APPOINTMENTS " +
+            final String sql = "SELECT C_ID, C_NAME, C_DESCRIPTION, C_MINUTES_PER_APPOINTMENT, C_AMOUNT_OF_APPOINTMENTS " +
                     "FROM CS_COURSE";
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             ResultSet result = preparedStatement.executeQuery();
@@ -122,7 +134,7 @@ public class CourseRepository implements Persistent<Course> {
         Course course = null;
 
         try (Connection connection = dataSource.getConnection()) {
-            String sql = "SELECT C_ID, C_NAME, C_DESCRIPTION, C_MINUTES_PER_APPOINTMENT, C_AMOUNT_OF_APPOINTMENTS " +
+            final String sql = "SELECT C_ID, C_NAME, C_DESCRIPTION, C_MINUTES_PER_APPOINTMENT, C_AMOUNT_OF_APPOINTMENTS " +
                     "FROM CS_COURSE WHERE C_ID=?";
 
             PreparedStatement statement = connection.prepareStatement(sql);
