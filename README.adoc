@@ -16,6 +16,38 @@ https://github.com/2223-3bhif-syp/02-projekte-kurstermine/blob/main/asciidocs/sy
 
 https://vm81.htl-leonding.ac.at/agiles/99-370/current[Product Backlog]
 
+== Quickstart
+
+=== Prequisites
+
+[source, bash]
+----
+cd CourseSchedule/
+----
+
+==== Create Databse
+
+[source, bash]
+----
+./derbydb-create.sh
+----
+
+=== Start Application
+
+==== Start Backend
+
+[source, bash]
+----
+./derbydb-start.sh
+----
+
+==== Start Frontend
+
+[source, bash]
+----
+mvn clean javafx:run
+----
+
 == Wireframes
 
 .Anmeldeseite
